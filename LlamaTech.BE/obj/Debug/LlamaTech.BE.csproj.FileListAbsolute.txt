@@ -1,0 +1,6 @@
+C:\Users\mcour\source\repos\LlamaTech.BE\bin\Debug\LlamaTech.BE.dll
+C:\Users\mcour\source\repos\LlamaTech.BE\bin\Debug\LlamaTech.BE.pdb
+C:\Users\mcour\source\repos\LlamaTech.BE\obj\Debug\LlamaTech.BE.csprojAssemblyReference.cache
+C:\Users\mcour\source\repos\LlamaTech.BE\obj\Debug\LlamaTech.BE.csproj.CoreCompileInputs.cache
+C:\Users\mcour\source\repos\LlamaTech.BE\obj\Debug\LlamaTech.BE.dll
+C:\Users\mcour\source\repos\LlamaTech.BE\obj\Debug\LlamaTech.BE.pdb

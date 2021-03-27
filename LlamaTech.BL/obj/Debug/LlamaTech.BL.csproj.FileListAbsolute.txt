@@ -1,0 +1,11 @@
+C:\Users\mcour\source\repos\LlamaTech.BL\bin\Debug\LlamaTech.BL.dll
+C:\Users\mcour\source\repos\LlamaTech.BL\bin\Debug\LlamaTech.BL.pdb
+C:\Users\mcour\source\repos\LlamaTech.BL\bin\Debug\LlamaTech.BE.dll
+C:\Users\mcour\source\repos\LlamaTech.BL\bin\Debug\LlamaTech.DA.dll
+C:\Users\mcour\source\repos\LlamaTech.BL\bin\Debug\LlamaTech.BE.pdb
+C:\Users\mcour\source\repos\LlamaTech.BL\bin\Debug\LlamaTech.DA.pdb
+C:\Users\mcour\source\repos\LlamaTech.BL\obj\Debug\LlamaTech.BL.csprojAssemblyReference.cache
+C:\Users\mcour\source\repos\LlamaTech.BL\obj\Debug\LlamaTech.BL.csproj.CoreCompileInputs.cache
+C:\Users\mcour\source\repos\LlamaTech.BL\obj\Debug\LlamaTech.BL.csproj.CopyComplete
+C:\Users\mcour\source\repos\LlamaTech.BL\obj\Debug\LlamaTech.BL.dll
+C:\Users\mcour\source\repos\LlamaTech.BL\obj\Debug\LlamaTech.BL.pdb
