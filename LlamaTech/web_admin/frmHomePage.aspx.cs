@@ -1,13 +1,8 @@
 ﻿using LlamaTech.BE;
 using LlamaTech.BL;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.IO;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Web.Services;
 
 namespace LlamaTech.web_admin
 {
@@ -15,7 +10,7 @@ namespace LlamaTech.web_admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             if (!IsPostBack)
             {
                 verDatosAbout();
@@ -39,8 +34,11 @@ namespace LlamaTech.web_admin
 
             if (ds.Tables.Count > 0)
             {
-                rpAbout.DataSource = ds.Tables[0];
-                rpAbout.DataBind();
+                txtId.Text = ds.Tables[0].Rows[0]["ID"].ToString();
+                txtTitulo.Text = ds.Tables[0].Rows[0]["Titulo"].ToString();
+                txtDesc.Text = ds.Tables[0].Rows[0]["Descripcion"].ToString();
+                imgLogo.ImageUrl = ds.Tables[0].Rows[0]["Logo"].ToString();
+                imgBg.ImageUrl = ds.Tables[0].Rows[0]["ImagenFondo"].ToString();
             }
 
         }
@@ -78,7 +76,6 @@ namespace LlamaTech.web_admin
         {
             AboutBE aboutBE = new AboutBE();
             HomePageBL homePageBL = new HomePageBL();
-
             try
             {
                 aboutBE.IdAbout = Convert.ToInt32(txtId.Text);
@@ -107,7 +104,6 @@ namespace LlamaTech.web_admin
         {
             AboutBE aboutBE = new AboutBE();
             HomePageBL homePageBL = new HomePageBL();
-
             try
             {
                 aboutBE.IdAbout = Convert.ToInt32(txtId.Text);
@@ -131,7 +127,6 @@ namespace LlamaTech.web_admin
         {
             AboutBE aboutBE = new AboutBE();
             HomePageBL homePageBL = new HomePageBL();
-
             try
             {
                 aboutBE.IdAbout = Convert.ToInt32(txtId.Text);
@@ -156,7 +151,6 @@ namespace LlamaTech.web_admin
         {
             AboutBE aboutBE = new AboutBE();
             HomePageBL homePageBL = new HomePageBL();
-
             try
             {
                 aboutBE.IdAbout = Convert.ToInt32(txtId.Text);
@@ -250,6 +244,7 @@ namespace LlamaTech.web_admin
             imgLogo.ImageUrl = "";
             imgBg.ImageUrl = "";
             verDatosAbout();
+            Response.Redirect("frmHomePage.aspx");
         }
 
         //END ABOUT US
@@ -268,7 +263,6 @@ namespace LlamaTech.web_admin
                 rpContacto.DataBind();
             }
         }
-
         private void iconoContacto()
         {
             HomePageBL homePageBL = new HomePageBL();
@@ -284,113 +278,149 @@ namespace LlamaTech.web_admin
                 ddlIconoContacto.DataBind();
             }
         }
-        private void limpiarCamposContacto()
-        {
-            txtIdContacto.Text = "";
-            txtDescContacto.Text = "";
-            iconoContacto();
-            verDatosContacto();
-        }
 
-        protected void btnAgregarContacto_Click(object sender, EventArgs e)
+        [WebMethod]
+        public static bool AgregarContacto(string nombre, string icono)
         {
-            if(txtDescContacto.Text != "")
+            HomePageBL homePageBL = new HomePageBL();
+            bool ok = false;
+
+            if (nombre == "" && icono == "")
             {
-                HomePageBL homePageBL = new HomePageBL();
-                ContactoBE contactoBE = new ContactoBE();
-                try
-                {
-                    contactoBE.Nombre = txtDescContacto.Text;
-                    contactoBE.IdIcono = Convert.ToInt32(ddlIconoContacto.SelectedItem.Value);
-
-                    homePageBL.addContacto(contactoBE);
-                }
-                catch (Exception ex)
-                {
-                    ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertError('" + ex.Message + "')", true);
-                }
-                finally
-                {
-                    ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertAddSuccess('El contacto se agrego con exito')", true);
-                    limpiarCamposContacto();
-                }
+                ok = false;
             }
             else
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertError('Todos los campos son obligatorios')", true);
+                ContactoBE objContacto = new ContactoBE
+                {
+                    Nombre = nombre,
+                    IdIcono = Convert.ToInt32(icono)
+                };
+
+                bool resp = homePageBL.addContacto(objContacto);
+
+                ok = true;
             }
+
+            return ok;
         }
 
-        protected void btnModificarContacto_Click(object sender, EventArgs e)
+        [WebMethod]
+        public static bool ActualizarContacto(string id, string nombre, string icono)
         {
-            if (txtIdContacto.Text != "")
-            {
-                HomePageBL homePageBL = new HomePageBL();
-                ContactoBE contactoBE = new ContactoBE();
-                try
-                {
-                    contactoBE.IdContacto = Convert.ToInt32(txtIdContacto.Text);
-                    contactoBE.Nombre = txtDescContacto.Text;
-                    contactoBE.IdIcono = Convert.ToInt32(ddlIconoContacto.SelectedItem.Value);
+            HomePageBL homePageBL = new HomePageBL();
+            bool ok = false;
 
-                    homePageBL.updateContacto(contactoBE);
-                }
-                catch (Exception ex)
-                {
-                    ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertError('" + ex.Message + "')", true);
-                }
-                finally
-                {
-                    ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertUpdateSuccess('El contacto se modifico con exito')", true);
-                    limpiarCamposContacto();
-                }
+            if (id == "")
+            {
+                ok = false;
             }
             else
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertError('El campo ID es obligatorio')", true);
+
+                ContactoBE objContacto = new ContactoBE
+                {
+                    IdContacto = Convert.ToInt32(id),
+                    Nombre = nombre,
+                    IdIcono = Convert.ToInt32(icono)
+                };
+
+                bool resp = homePageBL.updateContacto(objContacto);
+
+                ok = true;
             }
+
+            return ok;
         }
 
-        protected void btnEliminarContacto_Click(object sender, EventArgs e)
+        [WebMethod]
+        public static bool DeleteContacto(string id)
         {
-            if (txtIdContacto.Text != "")
-            {
-                HomePageBL homePageBL = new HomePageBL();
-                ContactoBE contactoBE = new ContactoBE();
-                try
-                {
-                    contactoBE.IdContacto = Convert.ToInt32(txtIdContacto.Text);
+            HomePageBL homePageBL = new HomePageBL();
 
-                    homePageBL.deleteContacto(contactoBE.IdContacto);
-                }
-                catch (Exception ex)
-                {
-                    ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertError('" + ex.Message + "')", true);
-                }
-                finally
-                {
-                    ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertUpdateSuccess('El contacto se elimino con exito')", true);
-                    limpiarCamposContacto();
-                }
-            }
-            else
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertError('El campo ID es obligatorio')", true);
-            }
+
+            bool resp = homePageBL.deleteContacto(Convert.ToInt32(id));
+            return true;
         }
 
         // END CONTACTO
 
         // REDES SOCIALES
-
-        private void limpiarCampoRS()
+        [WebMethod]
+        public static bool AgregarRedSocial(string nombre, string url, string icono, bool status)
         {
-            txtIdrs.Text = "";
-            txtRS.Text = "";
-            txtURL.Text = "";
-            iconoContactoRs();
-            verDatosRS();
+            HomePageBL homePageBL = new HomePageBL();
+            bool ok = false;
+
+            if(nombre == "" && url == "")
+            {
+                ok = false;
+            }
+            else
+            {
+                RedSocialBE objRS = new RedSocialBE
+                {
+                    Nombre = nombre,
+                    Url = url,
+                    IdIcono = Convert.ToInt32(icono),
+                    Activo = status
+                };
+
+                ok = homePageBL.addRS(objRS);
+            }
+
+            return ok;
+
         }
+
+        [WebMethod]
+        public static bool ModificarRedSocial(string id, string nombre, string url, string icono, bool status)
+        {
+            HomePageBL homePageBL = new HomePageBL();
+            bool ok = false;
+
+            if (id == "")
+            {
+                ok = false;
+            }
+            else
+            {
+                RedSocialBE objRS = new RedSocialBE
+                {
+                    IdRedSocial = Convert.ToInt32(id),
+                    Nombre = nombre,
+                    Url = url,
+                    IdIcono = Convert.ToInt32(icono),
+                    Activo = status
+                };
+
+                ok = homePageBL.updateRS(objRS);
+            }
+
+            return ok;
+
+        }
+
+        [WebMethod]
+        public static bool EliminarRedSocial(string id)
+        {
+
+            HomePageBL homePageBL = new HomePageBL();
+            bool ok = false;
+
+            if (id == "")
+            {
+                ok = false;
+            }
+            else
+            {
+                ok = homePageBL.deleteRS(Convert.ToInt32(id));
+            }
+
+            return ok;
+
+        }
+
         private void verDatosRS()
         {
             DataSet ds = new DataSet();
@@ -419,98 +449,6 @@ namespace LlamaTech.web_admin
                 ddlIcon.DataBind();
             }
         }
-
-        protected void btnAgregarRS_Click(object sender, EventArgs e)
-        {
-            if (txtRS.Text != "")
-            {
-                HomePageBL homePageBL = new HomePageBL();
-                RedSocialBE redSocialBE = new RedSocialBE();
-                try
-                {
-                    redSocialBE.Nombre = txtRS.Text;
-                    redSocialBE.Url = txtURL.Text;
-                    redSocialBE.IdIcono = Convert.ToInt32(ddlIcon.SelectedValue);
-                    redSocialBE.Activo = chkStatus.Checked;
-
-                    homePageBL.addRS(redSocialBE);
-                }
-                catch (Exception ex)
-                {
-                    ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertError('" + ex.Message + "')", true);
-                }
-                finally
-                {
-                    ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertAddSuccess('La Red Social se agrego con exito')", true);
-                    limpiarCampoRS();
-                }
-            }
-            else
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertError('Todos los campos son obligatorios')", true);
-            }
-        }
-
-        protected void btnModificarRS_Click(object sender, EventArgs e)
-        {
-            if (txtIdrs.Text != "")
-            {
-                HomePageBL homePageBL = new HomePageBL();
-                RedSocialBE redSocialBE = new RedSocialBE();
-                try
-                {
-                    redSocialBE.IdRedSocial = Convert.ToInt32(txtIdrs.Text);
-                    redSocialBE.Nombre = txtRS.Text;
-                    redSocialBE.Url = txtURL.Text;
-                    redSocialBE.IdIcono = Convert.ToInt32(ddlIcon.SelectedValue);
-                    redSocialBE.Activo = chkStatus.Checked;
-
-                    homePageBL.updateRS(redSocialBE);
-                }
-                catch (Exception ex)
-                {
-                    ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertError('" + ex.Message + "')", true);
-                }
-                finally
-                {
-                    ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertUpdateSuccess('La Red Social se modifico con exito')", true);
-                    limpiarCampoRS();
-                }
-            }
-            else
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertError('Todos los campos son obligatorios')", true);
-            }
-        }
-
-        protected void btnEliminarRS_Click(object sender, EventArgs e)
-        {
-            if (txtIdrs.Text != "")
-            {
-                HomePageBL homePageBL = new HomePageBL();
-                RedSocialBE redSocialBE = new RedSocialBE();
-                try
-                {
-                    redSocialBE.IdRedSocial = Convert.ToInt32(txtIdrs.Text);
-
-                    homePageBL.deleteRS(redSocialBE.IdRedSocial);
-                }
-                catch (Exception ex)
-                {
-                    ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertError('" + ex.Message + "')", true);
-                }
-                finally
-                {
-                    ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertUpdateSuccess('La Red Social se elimino con exito')", true);
-                    limpiarCampoRS();
-                }
-            }
-            else
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertError('Todos los campos son obligatorios')", true);
-            }
-        }
-
 
         // END REDES SOCIALES
     }

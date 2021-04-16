@@ -1,11 +1,6 @@
 ﻿using LlamaTech.BE;
 using LlamaTech.DA;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LlamaTech.BL
 {
@@ -26,18 +21,18 @@ namespace LlamaTech.BL
         //CONTACTO
         public DataSet allContactos() => homePageDA.getContactos();
         public DataSet allContactosRp() => homePageDA.getContactosRP();
-        public void updateContacto(ContactoBE contactoBE) => homePageDA.updateContacto(contactoBE);
-        public void addContacto(ContactoBE contactoBE) => homePageDA.addContacto(contactoBE);
-        public void deleteContacto(int id) => homePageDA.deleteContacto(id);
+        public bool updateContacto(ContactoBE contactoBE) => homePageDA.updateContacto(contactoBE);
+        public bool addContacto(ContactoBE contactoBE) => homePageDA.addContacto(contactoBE);
+        public bool deleteContacto(int id) => homePageDA.deleteContacto(id);
 
         //END CONTACTO
 
         // RED SOCIAL
         public DataSet allRS() => homePageDA.getRS();
         public DataSet allRSActive() => homePageDA.getRSActivo();
-        public void updateRS(RedSocialBE redSocialBE) => homePageDA.updateRS(redSocialBE);
-        public void addRS(RedSocialBE redSocialBE) => homePageDA.addRS(redSocialBE);
-        public void deleteRS(int id) => homePageDA.deleteRS(id);
+        public bool updateRS(RedSocialBE redSocialBE) => homePageDA.updateRS(redSocialBE);
+        public bool addRS(RedSocialBE redSocialBE) => homePageDA.addRS(redSocialBE);
+        public bool deleteRS(int id) => homePageDA.deleteRS(id);
 
         //END RED SOCIAL
 

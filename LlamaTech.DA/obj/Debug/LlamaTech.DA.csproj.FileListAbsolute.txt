@@ -7,3 +7,12 @@ C:\Users\mcour\source\repos\LlamaTech.DA\obj\Debug\LlamaTech.DA.csproj.CoreCompi
 C:\Users\mcour\source\repos\LlamaTech.DA\obj\Debug\LlamaTech.DA.csproj.CopyComplete
 C:\Users\mcour\source\repos\LlamaTech.DA\obj\Debug\LlamaTech.DA.dll
 C:\Users\mcour\source\repos\LlamaTech.DA\obj\Debug\LlamaTech.DA.pdb
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.DA\bin\Debug\LlamaTech.DA.dll
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.DA\bin\Debug\LlamaTech.DA.pdb
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.DA\bin\Debug\LlamaTech.BE.dll
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.DA\bin\Debug\LlamaTech.BE.pdb
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.DA\obj\Debug\LlamaTech.DA.csprojAssemblyReference.cache
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.DA\obj\Debug\LlamaTech.DA.csproj.CoreCompileInputs.cache
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.DA\obj\Debug\LlamaTech.DA.csproj.CopyComplete
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.DA\obj\Debug\LlamaTech.DA.dll
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.DA\obj\Debug\LlamaTech.DA.pdb

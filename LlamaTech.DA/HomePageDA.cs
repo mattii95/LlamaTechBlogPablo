@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using LlamaTech.BE;
+using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LlamaTech.BE;
 
 namespace LlamaTech.DA
 {
@@ -17,7 +13,6 @@ namespace LlamaTech.DA
 
 
         // ABOUT US
-
         public DataSet getAboutUs()
         {
             const string sqlQuery = "SELECT IdAbout as 'ID', Titulo, Descripcion, Logo, ImagenFondo FROM AboutUs ORDER BY IdAbout ASC";
@@ -203,11 +198,9 @@ namespace LlamaTech.DA
                 con.Close();
             }
         }
-
         // END ABOUT US
 
         // CONTACTO
-
         public DataSet getContactos()
         {
             const string sqlQuery = "SELECT C.IdContacto, C.Nombre, I.Nombre as 'Icono' FROM Contactos C " +
@@ -262,8 +255,10 @@ namespace LlamaTech.DA
 
             return ds;
         }
-        public void addContacto(ContactoBE contactoBE)
+        public bool addContacto(ContactoBE contactoBE)
         {
+            bool res = false;
+
             const string sqlQuery = @"
                 INSERT INTO Contactos (Nombre, IdIcono)
                 VALUES (@Nombre, @IdIcono)
@@ -273,12 +268,13 @@ namespace LlamaTech.DA
             SqlCommand cmd = new SqlCommand(sqlQuery, con);
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@Nombre", contactoBE.Nombre);
-            cmd.Parameters.AddWithValue("@IdIcono", contactoBE.IdContacto);
+            cmd.Parameters.AddWithValue("@IdIcono", contactoBE.IdIcono);
 
             try
             {
                 con.Open();
                 cmd.ExecuteNonQuery();
+                res = true;
             }
             catch (Exception ex)
             {
@@ -290,12 +286,15 @@ namespace LlamaTech.DA
                 con.Close();
             }
 
-        }
+            return res;
 
-        public void updateContacto(ContactoBE contactoBE)
+        }
+        public bool updateContacto(ContactoBE contactoBE)
         {
+            bool res = false;
+
             const string sqlQuery = @"
-                UPDATE Contacto
+                UPDATE Contactos
                 SET Nombre = @Nombre, IdIcono = @IdIcono
                 WHERE IdContacto = @IdContacto
             ";
@@ -311,6 +310,7 @@ namespace LlamaTech.DA
             {
                 con.Open();
                 cmd.ExecuteNonQuery();
+                res = true;
             }
             catch (Exception ex)
             {
@@ -321,10 +321,13 @@ namespace LlamaTech.DA
                 cmd.Parameters.Clear();
                 con.Close();
             }
-        }
 
-        public void deleteContacto(int id)
+            return res;
+        }
+        public bool deleteContacto(int id)
         {
+            bool res = false;
+
             const string sqlQuery = @"
                 DELETE FROM Contactos
                 WHERE IdContacto = @IdContacto
@@ -339,6 +342,7 @@ namespace LlamaTech.DA
             {
                 con.Open();
                 cmd.ExecuteNonQuery();
+                res = true;
             }
             catch (Exception ex)
             {
@@ -349,8 +353,9 @@ namespace LlamaTech.DA
                 cmd.Parameters.Clear();
                 con.Close();
             }
-        }
 
+            return res;
+        }
         //END CONTACTO
 
         //RED SOCIAL
@@ -408,8 +413,10 @@ namespace LlamaTech.DA
 
             return ds;
         }
-        public void addRS(RedSocialBE redSocialBE)
+        public bool addRS(RedSocialBE redSocialBE)
         {
+            bool res = false;
+
             const string sqlQuery = @"
                 INSERT INTO RedesSociales (Nombre, Url, IdIcono, Activo)
                 VALUES (@Nombre, @Url, @IdIcono, @Activo)
@@ -427,10 +434,12 @@ namespace LlamaTech.DA
             {
                 con.Open();
                 cmd.ExecuteNonQuery();
+                res = true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                res = false;
             }
             finally
             {
@@ -438,10 +447,13 @@ namespace LlamaTech.DA
                 con.Close();
             }
 
-        }
+            return res;
 
-        public void updateRS(RedSocialBE redSocialBE)
+        }
+        public bool updateRS(RedSocialBE redSocialBE)
         {
+            bool res = false;
+
             const string sqlQuery = @"
                 UPDATE RedesSociales
                 SET Nombre = @Nombre, Url = @Url, IdIcono = @IdIcono, Activo = @Activo
@@ -461,20 +473,27 @@ namespace LlamaTech.DA
             {
                 con.Open();
                 cmd.ExecuteNonQuery();
+                res = true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                res = false;
             }
             finally
             {
                 cmd.Parameters.Clear();
                 con.Close();
             }
-        }
 
-        public void deleteRS(int id)
+            return res;
+
+        }
+        public bool deleteRS(int id)
         {
+
+            bool res = false;
+
             const string sqlQuery = @"
                 DELETE FROM RedesSociales
                 WHERE IdRedSocial = @IdRedSocial
@@ -489,18 +508,22 @@ namespace LlamaTech.DA
             {
                 con.Open();
                 cmd.ExecuteNonQuery();
+                res = true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                res = false;
             }
             finally
             {
                 cmd.Parameters.Clear();
                 con.Close();
             }
-        }
 
+            return res;
+
+        }
         //END RED SOCIAL
 
         //ICONOS

@@ -29,7 +29,7 @@
 
     <!-- Sweet Alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <!-- Alerts -->
+
     <script src="../js/alerts.js"></script>
 
 </head>
@@ -112,15 +112,10 @@
                     <!-- /.row -->
                     <!-- Form -->
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>ID</label>
-                                <asp:TextBox ID="txtId" runat="server" CssClass="form-control" Width="150px"></asp:TextBox>
-                            </div>
-                        </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Titulo</label>
+                                <asp:Label ID="txtId" runat="server" Visible="false"></asp:Label>
                                 <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
@@ -154,59 +149,13 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <asp:Button ID="btnModificarAbout" runat="server" CssClass="btn btn-warning" Text="Modificar" OnClick="btnModificarAbout_Click" />
-                                <asp:Button ID="btnLimpiar" runat="server" CssClass="btn btn-info" Text="Limpiar" />
+                                <input type="button" id="btnModificar" class="btn btn-warning" value="Modificar" />
+                                <asp:Button ID="btnModificarAbout" runat="server" CssClass="btn btn-success" Text="Guardar" OnClick="btnModificarAbout_Click" />
+                                <asp:Button ID="btnCancelarAbout" runat="server" CssClass="btn btn-danger" Text="Cancelar" />
                             </div>
                         </div>
                     </div>
                     <!-- End Form -->
-                    <hr>
-                    <!-- Table -->
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    About Us
-                                </div>
-                                <!-- /.panel-heading -->
-                                <div class="panel-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped table-bordered table-hover" id="dtAbout">
-                                            <thead>
-                                                <tr>
-                                                    <th></th>
-                                                    <th>ID</th>
-                                                    <th>Titulo</th>
-                                                    <th>Descripcion</th>
-                                                    <th>Logo</th>
-                                                    <th>ImagenFondo</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <asp:Repeater ID="rpAbout" runat="server">
-                                                    <ItemTemplate>
-                                                        <tr class="odd gradeX">
-                                                            <td><a href="#" class="select">Seleccionar</a></td>
-                                                            <td><%# Eval("ID") %></td>
-                                                            <td><%# Eval("Titulo") %></td>
-                                                            <td><%# Eval("Descripcion") %></td>
-                                                            <td><%# Eval("Logo") %></td>
-                                                            <td><%# Eval("ImagenFondo") %></td>
-                                                        </tr>
-                                                    </ItemTemplate>
-                                                </asp:Repeater>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- /.table-responsive -->
-                                </div>
-                                <!-- /.panel-body -->
-                            </div>
-                            <!-- /.panel -->
-                        </div>
-                        <!-- /.col-lg-12 -->
-                    </div>
-                    <!-- End Table -->
                 </div>
                 <!-- /.container-fluid -->
 
@@ -224,7 +173,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>ID</label>
-                                <asp:TextBox ID="txtIdContacto" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox ID="txtIdContacto" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -241,9 +190,9 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <asp:Button ID="btnAgregarContacto" runat="server" CssClass="btn btn-success" Text="Agregar" OnClick="btnAgregarContacto_Click" />
-                                <asp:Button ID="btnModificarContacto" runat="server" CssClass="btn btn-warning" Text="Modificar" OnClick="btnModificarContacto_Click" />
-                                <asp:Button ID="btnEliminarContacto" runat="server" CssClass="btn btn-danger" Text="Eliminar" OnClick="btnEliminarContacto_Click" />
+                                <asp:Button ID="btnGuardarContacto" runat="server" CssClass="btn btn-success" Text="Guardar" />
+                                <asp:Button ID="btnEliminarContacto" runat="server" CssClass="btn btn-danger" Text="Eliminar" />
+                                <asp:Button ID="btnCancelarContacto" runat="server" CssClass="btn btn-danger" Text="Cancelar" />
                                 <asp:Button ID="btnLimpiarContacto" runat="server" CssClass="btn btn-info" Text="Limpiar" />
                             </div>
                         </div>
@@ -308,7 +257,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>ID</label>
-                                <asp:TextBox ID="txtIdrs" runat="server" CssClass="form-control" Width="150px"></asp:TextBox>
+                                <asp:TextBox ID="txtIdrs" runat="server" CssClass="form-control" Width="150px" Enabled="false"></asp:TextBox>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -332,15 +281,15 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Status</label>
-                                <asp:CheckBox ID="chkStatus" runat="server" CssClass="form-control" />
+                                <input type="checkbox" name="status" value="¿Quieres que aparezca la red social en la página?" class="checkbox" id="chkStatus"/>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <asp:Button ID="btnAgregarRS" runat="server" CssClass="btn btn-success" Text="Agregar" OnClick="btnAgregarRS_Click" />
-                                <asp:Button ID="btnModificarRS" runat="server" CssClass="btn btn-warning" Text="Modificar" OnClick="btnModificarRS_Click" />
-                                <asp:Button ID="btnEliminarRS" runat="server" CssClass="btn btn-danger" Text="Eliminar" OnClick="btnEliminarRS_Click" />
+                                <asp:Button ID="btnGuardarRS" runat="server" CssClass="btn btn-success" Text="Guardar" />
+                                <asp:Button ID="btnEliminarRS" runat="server" CssClass="btn btn-danger" Text="Eliminar" />
                                 <asp:Button ID="btnLimpiarRS" runat="server" CssClass="btn btn-info" Text="Limpiar" />
+                                <asp:Button ID="btnCancelarRS" runat="server" CssClass="btn btn-danger" Text="Cancelar" />
                             </div>
                         </div>
                     </div>
@@ -396,6 +345,113 @@
             </div>
             <!-- /#page-wrapper -->
 
+
+            <!-- Modal Alerta editar about us -->
+            <div class="modal" tabindex="-1" role="dialog" id="modalEditar" runat="server" style="overflow-y: auto;">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modificar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>¿Estas seguro que quieres editar?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <asp:Button ID="btnAceptarMod" runat="server" Text="Aceptar" CssClass="btn btn-success" />
+                            <asp:Button ID="btnCancelarMod" runat="server" Text="Cancelar" CssClass="btn btn-danger" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End modal Alerta editar about us -->
+
+            <!-- Modal Alerta editar Contacto / Red social -->
+            <div class="modal" tabindex="-1" role="dialog" id="modalEditarCR" runat="server" style="overflow-y: auto;">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modificar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>¿Estas seguro que quieres editar?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <asp:Button ID="btnAceptarModCR" runat="server" Text="Aceptar" CssClass="btn btn-success" />
+                            <asp:Button ID="btnCancelarModCR" runat="server" Text="Cancelar" CssClass="btn btn-danger" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal" tabindex="-1" role="dialog" id="modalEditarRS" runat="server" style="overflow-y: auto;">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modificar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>¿Estas seguro que quieres editar?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <asp:Button ID="btnAceptarModRS" runat="server" Text="Aceptar" CssClass="btn btn-success" />
+                            <asp:Button ID="btnCancelarModRS" runat="server" Text="Cancelar" CssClass="btn btn-danger" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End modal Alerta editar Contacto / Red social -->
+
+            <!-- Modal Alerta eliminar Contacto / Red Social -->
+            <div class="modal" tabindex="-1" role="dialog" id="modalEliminar" runat="server" style="overflow-y: auto;">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Eliminar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>¿Estas seguro que quieres eliminar la publicación?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <asp:Button ID="btnAceptarEliminar" runat="server" Text="Aceptar" CssClass="btn btn-success" />
+                            <asp:Button ID="btnCancelarEliminar" runat="server" Text="Cancelar" CssClass="btn btn-warning" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal" tabindex="-1" role="dialog" id="modalEliminarRS" runat="server" style="overflow-y: auto;">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Eliminar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>¿Estas seguro que quieres eliminar la publicación?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <asp:Button ID="btnAceptarEliminarRS" runat="server" Text="Aceptar" CssClass="btn btn-success" />
+                            <asp:Button ID="btnCancelarEliminarRS" runat="server" Text="Cancelar" CssClass="btn btn-warning" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Modal Alerta Eliminar -->
+
         </div>
     </form>
     <!-- jQuery -->
@@ -414,77 +470,7 @@
     <!-- Custom Theme JavaScript -->
     <script src="js/startmin.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            $('#dtAbout').DataTable({
-                responsive: true
-            });
-            $('#dtContacto').DataTable({
-                responsive: true
-            });
-            $('#dtRs').DataTable({
-                responsive: true
-            });
 
-            $('#dtAbout tbody').on('click', '.select', function () {
-                var id = $(this).closest('tr').find('td:eq(1)').text();
-                var titulo = $(this).closest('tr').find('td:eq(2)').text();
-                var descripcion = $(this).closest('tr').find('td:eq(3)').text();
-                var logo = $(this).closest('tr').find('td:eq(4)').text();
-                var bg = $(this).closest('tr').find('td:eq(5)').text();
-
-                $('#txtId').val(id);
-                $('#txtTitulo').val(titulo);
-                $('#txtDesc').val(descripcion);
-                $('#imgLogo').prop('src', logo);
-                $('#imgBg').prop('src', bg);
-
-            });
-
-            $('#dtContacto tbody').on('click', '.select', function () {
-                var id = $(this).closest('tr').find('td:eq(1)').text();
-                var contacto = $(this).closest('tr').find('td:eq(2)').text();
-                var icono = $(this).closest('tr').find('td:eq(3)').text();
-
-                $('#txtIdContacto').val(id);
-                $('#txtDescContacto').val(contacto);
-                $('#ddlIconoContacto').val(icono);
-
-                var cbo = document.getElementById('<%=ddlIconoContacto.ClientID%>');
-                for (i = 0; i < cbo.length; i++) {
-                    if (cbo[i].innerText == icono)
-                        $('#<%=ddlIconoContacto.ClientID%>').val(cbo[i].value);
-                }
-
-            });
-
-            $('#dtRs tbody').on('click', '.select', function () {
-                var id = $(this).closest('tr').find('td:eq(1)').text();
-                var nombre = $(this).closest('tr').find('td:eq(2)').text();
-                var url = $(this).closest('tr').find('td:eq(3)').text();
-                var icono = $(this).closest('tr').find('td:eq(4)').text();
-                var activo = $(this).closest('tr').find('td:eq(5)').text();
-
-                $('#txtIdrs').val(id);
-                $('#txtRS').val(nombre);
-                $('#txtURL').val(url);
-                $('#ddlIcon').val(icono);
-                $('#chkStatus').val(activo);
-
-                var cbo = document.getElementById('<%=ddlIcon.ClientID%>');
-                for (i = 0; i < cbo.length; i++) {
-                    if (cbo[i].innerText == icono)
-                        $('#<%=ddlIcon.ClientID%>').val(cbo[i].value);
-                }
-
-                if (activo == 'True') {
-                    $('#chkStatus').prop('checked', true);
-                } else {
-                    $('#chkStatus').prop('checked', false);
-                }
-
-            });
-        });
-    </script>
+    <script src="js/homePage.js"></script>
 </body>
 </html>

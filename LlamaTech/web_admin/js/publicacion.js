@@ -129,6 +129,7 @@ $(function () {
     }
 
     // MODAL ELIMINAR
+
     function showModalEliminar() {
         $('#modalEliminar').modal('show');
         eliminar();

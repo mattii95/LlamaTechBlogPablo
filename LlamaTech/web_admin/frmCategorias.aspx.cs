@@ -18,7 +18,6 @@ namespace LlamaTech.web_admin
         {
             if (!IsPostBack)
             {
-                MaintainScrollPositionOnPostBack = true;
                 verDatos();
                 verDatosSC();
                 verCategorias();
