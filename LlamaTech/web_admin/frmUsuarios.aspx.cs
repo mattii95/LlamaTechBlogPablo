@@ -15,17 +15,7 @@ namespace LlamaTech.web_admin
             {
                 verDatos();
                 cargarRol();
-                estadoLimpio();
             }
-        }
-
-        public enum FormEstados
-        {
-            eAgregar = 1,
-            eModificar = 2,
-            eModificarPass = 3,
-            eEliminar = 4,
-            eLimpiar = 5
         }
 
 
@@ -42,87 +32,6 @@ namespace LlamaTech.web_admin
                 rpGrid.DataBind();
             }
 
-        }
-        protected void btnAceptar_Click(object sender, EventArgs e)
-        {
-
-            if (HiddenField1.Value != "")
-            {
-                if (FormEstados.eAgregar.ToString() == HiddenField1.Value)
-                {
-                    if (txtEmail.Text != "" && txtContrasenia.Text != "" && txtNombre.Text != "")
-                    {
-                        agregaUsuario();
-                        estadoLimpio();
-                    } else
-                    {
-                        ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertError('Debe llenar todos los campos.')", true);
-                    }
-                    return;
-                }
-                else if (FormEstados.eModificar.ToString() == HiddenField1.Value)
-                {
-                    if (txtId.Text != "")
-                    {
-                        if (fileImg.HasFile)
-                        {
-                            modifica();
-                            estadoLimpio();
-                        }
-                        else
-                        {
-                            modificaSinImg();
-                            estadoLimpio();
-                        }
-                    }
-                    else
-                    {
-                        ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertError('El ID es obligatorio')", true);
-                    }
-                    return;
-                }
-                else if (FormEstados.eModificarPass.ToString() == HiddenField1.Value)
-                {
-                    if (txtId.Text != "")
-                    {
-                        modificarPass();
-                        estadoLimpio();
-                    }
-                    else
-                    {
-                        ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertError('El ID es obligatorio')", true);
-                    }
-                    return;
-                }
-                else if (FormEstados.eEliminar.ToString() == HiddenField1.Value)
-                {
-                    if (txtId.Text != "")
-                    {
-                        elimina();
-                        estadoLimpio();
-                    }
-                    else
-                    {
-                        ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertError('El ID es obligatorio')", true);
-                    }
-                    return;
-                }
-            }
-        }
-
-        protected void btnCancelar_Click(object sender, EventArgs e)
-        {
-            estadoLimpio();
-        }
-
-        protected void btnLimpiar_Click(object sender, EventArgs e)
-        {
-            estadoLimpio();
-        }
-
-        protected void btnAgregar_Click(object sender, EventArgs e)
-        {
-            estadoAgregar();
         }
 
         private void agregaUsuario()
@@ -188,11 +97,6 @@ namespace LlamaTech.web_admin
 
         }
 
-        protected void btnModificar_Click(object sender, EventArgs e)
-        {
-            estadoModificar();
-        }
-
         private void modifica()
         {
             UsuarioBL usuarioBL = new UsuarioBL();
@@ -235,6 +139,7 @@ namespace LlamaTech.web_admin
 
             }
         }
+
         private void modificaSinImg()
         {
             UsuarioBL usuarioBL = new UsuarioBL();
@@ -262,10 +167,6 @@ namespace LlamaTech.web_admin
             }
         }
 
-        protected void btnEliminar_Click(object sender, EventArgs e)
-        {
-            estadoEliminar();
-        }
         private void elimina()
         {
             UsuarioBL usuarioBL = new UsuarioBL();
@@ -286,10 +187,6 @@ namespace LlamaTech.web_admin
                 ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertDelSuccess('El usuario se elimino con exito')", true);
 
             }
-        }
-        protected void btnModificarPass_Click(object sender, EventArgs e)
-        {
-            estadoModificarPass();
         }
 
         private void modificarPass()
@@ -390,140 +287,6 @@ namespace LlamaTech.web_admin
                 return returnImagen = "";
             }
 
-        }
-
-        
-
-        // ESTADOS
-        private void estadoAgregar()
-        {
-            HiddenField1.Value = FormEstados.eAgregar.ToString();
-            txtId.Text = "";
-            txtId.Enabled = false;
-            txtNombre.Text = "";
-            txtNombre.Enabled = true;
-            txtApellido.Text = "";
-            txtApellido.Enabled = true;
-            txtEmail.Text = "";
-            txtEmail.Enabled = true;
-            txtContrasenia.Text = "";
-            txtContrasenia.Enabled = true;
-            txtTelefono.Text = "";
-            txtTelefono.Enabled = true;
-            fileImg.DataBind();
-            ddlRol.SelectedIndex = 0;
-            ddlRol.Enabled = true;
-            imgUser.ImageUrl = "";
-            chkStatus.Checked = false;
-            chkStatus.Enabled = true;
-
-            btnAgregar.Enabled = false;
-            btnModificar.Enabled = false;
-            btnEliminar.Enabled = false;
-
-            btnModificarPass.Enabled = false;
-
-            btnAceptar.Enabled = true;
-            btnCancelar.Enabled = true;
-        }
-
-        private void estadoModificar()
-        {
-            HiddenField1.Value = FormEstados.eModificar.ToString();
-            txtId.Enabled = true;
-            txtNombre.Enabled = true;
-            txtApellido.Enabled = true;
-            txtEmail.Enabled = true;
-            txtContrasenia.Enabled = false;
-            txtTelefono.Enabled = true;
-            ddlRol.Enabled = true;
-            chkStatus.Enabled = true;
-
-            btnAgregar.Enabled = false;
-            btnModificar.Enabled = false;
-            btnEliminar.Enabled = false;
-
-            btnModificarPass.Enabled = false;
-
-            btnAceptar.Enabled = true;
-            btnCancelar.Enabled = true;
-        }
-        private void estadoModificarPass()
-        {
-            HiddenField1.Value = FormEstados.eModificarPass.ToString();
-            txtId.Enabled = true;
-            txtNombre.Enabled = false;
-            txtApellido.Enabled = false;
-            txtEmail.Enabled = false;
-            txtContrasenia.Enabled = true;
-            txtTelefono.Enabled = false;
-            ddlRol.Enabled = false;
-            chkStatus.Enabled = false;
-
-            btnAgregar.Enabled = false;
-            btnModificar.Enabled = false;
-            btnEliminar.Enabled = false;
-
-            btnModificarPass.Enabled = false;
-
-            btnAceptar.Enabled = true;
-            btnCancelar.Enabled = true;
-        }
-
-        private void estadoEliminar()
-        {
-            HiddenField1.Value = FormEstados.eEliminar.ToString();
-            txtId.Enabled = true;
-            txtNombre.Enabled = false;
-            txtApellido.Enabled = false;
-            txtEmail.Enabled = false;
-            txtContrasenia.Enabled = false;
-            txtTelefono.Enabled = false;
-            ddlRol.Enabled = false;
-            chkStatus.Enabled = false;
-
-            btnAgregar.Enabled = false;
-            btnModificar.Enabled = false;
-            btnEliminar.Enabled = false;
-
-            btnModificarPass.Enabled = false;
-
-            btnAceptar.Enabled = true;
-            btnCancelar.Enabled = true;
-        }
-
-        private void estadoLimpio()
-        {
-            HiddenField1.Value = FormEstados.eLimpiar.ToString();
-            txtId.Text = "";
-            txtId.Enabled = false;
-            txtNombre.Text = "";
-            txtNombre.Enabled = false;
-            txtApellido.Text = "";
-            txtApellido.Enabled = false;
-            txtEmail.Text = "";
-            txtEmail.Enabled = false;
-            txtContrasenia.Text = "";
-            txtContrasenia.Enabled = false;
-            txtTelefono.Text = "";
-            txtTelefono.Enabled = false;
-            fileImg.DataBind();
-            ddlRol.SelectedIndex = 0;
-            ddlRol.Enabled = false;
-            imgUser.ImageUrl = "";
-            chkStatus.Checked = false;
-            chkStatus.Enabled = false;
-
-            btnAgregar.Enabled = true;
-            btnModificar.Enabled = true;
-            btnEliminar.Enabled = true;
-
-            btnModificarPass.Enabled = true;
-
-            btnAceptar.Enabled = false;
-            btnCancelar.Enabled = false;
-
-            verDatos();
         }
 
         

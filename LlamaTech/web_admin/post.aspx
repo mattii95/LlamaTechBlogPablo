@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" validateRequest="false" enableEventValidation="false" CodeBehind="post.aspx.cs" Inherits="LlamaTech.web_admin.post" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" ValidateRequest="false" EnableEventValidation="false" CodeBehind="post.aspx.cs" Inherits="LlamaTech.web_admin.post" %>
 
 <!DOCTYPE html>
 
@@ -146,7 +146,9 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>ID</label>
-                                <input id="txtId" class="form-control" style="width: 100px;"/>
+                                <input id="txtId" runat="server" class="form-control" style="width: 50%" disabled="disabled" />
+                                <br />
+                                <asp:Button ID="btnPublicar" runat="server" CssClass="btn btn-success" Text="Publicar" />
                             </div>
                             <div class="form-group">
                                 <label>Imagen Portada</label>
@@ -167,27 +169,11 @@
                                 </asp:DropDownList>
                             </div>
 
-                            <div class="form-group">
-                                <label>Seleccionar Estado</label>
-                                <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-control" AppendDataBoundItems="true">
-                                    <asp:ListItem Value="0">&lt;Seleccione un Estado&gt;</asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
                             <hr>
-                            <%--<div class="form-group">
-                                <label>Subir imagenes</label>
-                                <input type="file" id="fuImg" class="btnn" />
-                                <asp:TextBox ID="txtDesc" runat="server" CssClass="form-control"></asp:TextBox>
-                                <label id="tamanioImg"></label>
-                            </div>
-                            <div class="form-group">
-                                <asp:Button ID="btnGuardarImagen" runat="server" CssClass="btn btn-success" Text="Guardar" />
-                                <asp:Button ID="btnCancelarImg" runat="server" CssClass="btn btn-danger" Text="Cancelar" />
-                            </div>--%>
                             <div class="form-group">
                                 <asp:Button ID="btnVerImg" runat="server" CssClass="btn btn-info" Text="Ver imagenes" />
                             </div>
-                            <hr>
+                            <%--                            <hr>
                             <div class="form-group">
                                 <label>Agregar categorias</label>
                                 <asp:TextBox ID="txtAgregarCategoria" runat="server" CssClass="form-control"></asp:TextBox>
@@ -195,23 +181,7 @@
                             <div class="form-group">
                                 <asp:Button ID="btnAgregarCategoria" runat="server" CssClass="btn btn-success" Text="Agregar" />
                                 <asp:Button ID="btnCancelarCategoria" runat="server" CssClass="btn btn-danger" Text="Cancelar" />
-                            </div>
-                            <hr>
-                            <div class="form-group">
-                                <label>Agregar subcategorias</label>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <asp:DropDownList ID="ddlCategorias" runat="server" CssClass="form-control"></asp:DropDownList>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <asp:TextBox ID="txtSubCategorias" runat="server" CssClass="form-control"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <asp:Button ID="btnAgregarSubCategoria" runat="server" CssClass="btn btn-success" Text="Agregar" />
-                                <asp:Button ID="btnCancelarSubCategoria" runat="server" CssClass="btn btn-danger" Text="Cancelar" />
-                            </div>
+                            </div>--%>
                         </div>
                     </div>
                     <!-- End Form -->
@@ -246,6 +216,7 @@
                                                     <th>Publicado</th>
                                                     <th class="ocultar">Slug</th>
                                                     <th>Categoria</th>
+                                                    <th style="display: none;">ID SubCategoria</th>
                                                     <th>SubCategoria</th>
                                                     <th>Status</th>
                                                     <th>Usuario</th>
@@ -267,6 +238,7 @@
                                                             <td><%# Eval("Publicado") %></td>
                                                             <td><%# Eval("Slug") %></td>
                                                             <td><%# Eval("Categoria") %></td>
+                                                            <td><%# Eval("ID SubCategoria") %></td>
                                                             <td><%# Eval("SubCategoria") %></td>
                                                             <td><%# Eval("Estado") %></td>
                                                             <td><%# Eval("IdUsuario") %></td>
@@ -313,6 +285,26 @@
             </div>
         </div>
 
+        <div class="modal" tabindex="-1" role="dialog" id="modalPublicar" runat="server" style="overflow-y: auto;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modificar</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Estas seguro que quieres publicar?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <asp:Button ID="btnAceptarPubli" runat="server" Text="Aceptar" CssClass="btn btn-success" />
+                        <asp:Button ID="btnCancelarPubli" runat="server" Text="Cancelar" CssClass="btn btn-warning" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="modal" tabindex="-1" role="dialog" id="modalEliminar" runat="server" style="overflow-y: auto;">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -337,7 +329,7 @@
 
         <!-- MODAL IMAGENES -->
 
-        <div class="modal" tabindex="-1" role="dialog" id="modalImg" >
+        <div class="modal" tabindex="-1" role="dialog" id="modalImg">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -346,20 +338,20 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body" >
+                    <div class="modal-body">
                         <div class="row form-inline">
                             <div class="col-md-12" style="text-align: right;">
-                                <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control" Width="200px"></asp:TextBox>
-                                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary" />
+                                <asp:TextBox ID="filter" runat="server" CssClass="form-control" Width="200px"></asp:TextBox>
                             </div>
                         </div>
                         <br />
-                        <div class="row modal-image" id="divImages">
+                        <div class="row modal-image" id="divImages" >
                             <asp:Repeater ID="rpImgServer" runat="server">
                                 <ItemTemplate>
-                                    <div class="col-md-4" id='<%# Eval("ALT") %>'>
-                                        <a href="#">
+                                    <div class="col-md-4 images" id='<%# Eval("ALT") %>'>
+                                        <a id="aImg" href="#">
                                             <img id='<%# Eval("ID") %>' onclick="copyTextImg('<%# Eval("ID") %>')" style="object-fit: cover; height: 100px; width: 100%;" src='<%# Eval("Ruta") %>' class="img-responsive" alt='<%# Eval("ALT") %>' /></a>
+                                        <p style="text-transform:uppercase"><%# Eval("ALT") %></p>
                                         <br />
                                     </div>
                                 </ItemTemplate>
@@ -417,11 +409,30 @@
                 }
             });
 
-            
+            $("aImg").click(function (e) {
+                e.preventDefault();
+            });
+
+            $("#filter").keyup(function () {
+
+                var value = $("#filter").val().toLowerCase();
+
+                $(".images").each(function () {
+                    var _this = $(this);
+                    var title = _this.find('p').text().toLowerCase();
+
+                    if (title.indexOf(value) < 0) {
+                        _this.hide();
+                    } else
+                        _this.show();
+
+
+                });
+
+
+            });
 
         });
-
-
 
 
     </script>

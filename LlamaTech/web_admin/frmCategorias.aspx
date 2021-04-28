@@ -369,44 +369,5 @@
     <script src="js/categorias.js"></script>
     <script src="js/subcategorias.js"></script>
 
-    <script>
-        $(function () {
-            $('#dt').DataTable({
-                responsive: true
-            });
-
-            $('#dtSC').DataTable({
-                responsive: true
-            });
-
-            $('#dt tbody').on('click', '.select', function (e) {
-                e.preventDefault();
-                var id = $(this).closest('tr').find('td:eq(1)').text();
-                var nombre = $(this).closest('tr').find('td:eq(2)').text();
-
-                $('#txtId').val(id);
-                $('#txtCategoria').val(nombre);
-
-            });
-
-            $('#dtSC tbody').on('click', '.select', function (e) {
-                e.preventDefault();
-                var id = $(this).closest('tr').find('td:eq(1)').text();
-                var nombre = $(this).closest('tr').find('td:eq(2)').text();
-                var categoria = $(this).closest('tr').find('td:eq(3)').text();
-
-                $('#txtIdSC').val(id);
-                $('#txtSubCategoria').val(nombre);
-                $('#ddlCategoria').val(categoria);
-
-                var cbo = document.getElementById('<%=ddlCategoria.ClientID%>');
-                for (i = 0; i < cbo.length; i++) {
-                    if (cbo[i].innerText == categoria)
-                        $('#<%=ddlCategoria.ClientID%>').val(cbo[i].value);
-                }   
-
-            });
-        });
-    </script>
 </body>
 </html>

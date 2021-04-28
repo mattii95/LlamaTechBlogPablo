@@ -1,18 +1,47 @@
-﻿$(document).ready(function () {
+﻿var id = null;
 
-    var id = $("#txtId").val();
+$(document).ready(function () {
+
+    $("#txtId").val("");
+    $("#txtId").change();
+
+});
+
+$(function () {
+
+    
 
     // MOSTRAR / OCULTAR BOTON BORRAR
-    if (id == "")
+    if ($("#txtId").val() == "")
         $("#btnEliminar").hide();
-    else
+    else {
         $("#btnEliminar").show();
+        id = $("#txtId").val();
+    }
+
+    $("#txtId").val("");
+    $("#txtId").change();
+
+    $('#dt').DataTable({
+        responsive: true
+    });
+
+    $('#dt tbody').on('click', '.select', function (e) {
+        e.preventDefault();
+        var id = $(this).closest('tr').find('td:eq(1)').text();
+        var nombre = $(this).closest('tr').find('td:eq(2)').text();
+
+        $('#txtId').val(id);
+        $("#txtId").change();
+        $('#txtCategoria').val(nombre);
+
+    });
 
     // GUARDAR CATEGORIA
     $(document).on('click', '#btnGuardar', function (e) {
         e.preventDefault();
 
-        if (id == "") {
+        if (id == "" || id == 0 || $("#txtId").val() == "" || $("#txtId").val() == 0) {
 
             if (validar() == false) {
                 alertError('Todos los campos son obligatorios.');
@@ -30,7 +59,7 @@
     $(document).on('click', '#btnEliminar', function (e) {
         e.preventDefault();
 
-        if (id == "") {
+        if (id == "" || id == 0 || $("#txtId").val() == "" || $("#txtId").val() == 0) {
             alertError('Debes seleccionar el ID de una publicación');
         } else {
             showModalEliminar();
@@ -190,6 +219,9 @@
 
     // Limpiar campos
     function limpiar() {
+        id = "";
+        $("#txtId").val("");
+        $("#txtId").change();
         $("#txtId").val("");
         $("#txtCategoria").val("");
 

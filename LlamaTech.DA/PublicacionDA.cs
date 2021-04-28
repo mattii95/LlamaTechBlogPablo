@@ -113,7 +113,7 @@ namespace LlamaTech.DA
         }
 
         //  AGREGAR POSTS
-        public bool addPost(PublicacionBE publicacionBE, PublicacionCategoriaBE publicacionCategoriaBE)
+        public bool addPost(PublicacionBE publicacionBE, PublicacionCategoriaBE publicacionCategoriaBE, PublicacionSubCategoriaBE publicacionSubCategoriaBE)
         {
             bool res = false;
 
@@ -121,11 +121,13 @@ namespace LlamaTech.DA
                 BEGIN TRY
 	                BEGIN TRAN
 	                DECLARE @IdPublicacion int
-	                INSERT INTO Publicaciones (Titulo, Descripcion, Imagen, Contenido, FechaCreacion, FechaPublicacion, Slug, IdUsuario, SubCategoria, IdEstado)
-	                VALUES (@Titulo, @Descripcion, @Imagen, @Contenido, GETDATE(), @FechaPublicacion, @Slug, @IdUsuario, @SubCategoria, @IdEstado)
+	                INSERT INTO Publicaciones (Titulo, Descripcion, Imagen, Contenido, FechaCreacion, FechaPublicacion, Slug, IdUsuario, IdEstado)
+	                VALUES (@Titulo, @Descripcion, @Imagen, @Contenido, GETDATE(), @FechaPublicacion, @Slug, @IdUsuario, @IdEstado)
 	                SELECT @IdPublicacion = SCOPE_IDENTITY()
 	                INSERT INTO PublicacionCategoria(IdPublicacion, IdCategoria)
 	                VALUES (@IdPublicacion, @IdCategoria)
+					INSERT INTO PublicacionesSubCategorias(IdPublicacion, IdSubCategoria)
+					VALUES (@IdPublicacion, @IdSubCategoria)
 	                COMMIT
                 END TRY
                 BEGIN CATCH
@@ -150,8 +152,8 @@ namespace LlamaTech.DA
             }
             cmd.Parameters.AddWithValue("@Slug", publicacionBE.Slug);
             cmd.Parameters.AddWithValue("@IdUsuario", 1);
-            cmd.Parameters.AddWithValue("@SubCategoria", publicacionBE.SubCategoria);
             cmd.Parameters.AddWithValue("@IdCategoria", publicacionCategoriaBE.IdCategoria);
+            cmd.Parameters.AddWithValue("@IdSubCategoria", publicacionSubCategoriaBE.IdSubCategoria);
             cmd.Parameters.AddWithValue("@IdEstado", publicacionBE.idEstado);
 
             try
@@ -175,7 +177,7 @@ namespace LlamaTech.DA
         }
 
         //  MODIFICAR POSTS
-        public bool updatePost(PublicacionBE publicacionBE, PublicacionCategoriaBE publicacionCategoriaBE)
+        public bool updatePost(PublicacionBE publicacionBE, PublicacionCategoriaBE publicacionCategoriaBE, PublicacionSubCategoriaBE publicacionSubCategoriaBE)
         {
 
             bool res = false;
@@ -191,12 +193,13 @@ namespace LlamaTech.DA
                         FechaModificacion = GETDATE(), 
                         FechaPublicacion = @FechaPublicacion,
                         Slug = @Slug, 
-                        SubCategoria = @SubCategoria,
                         IdEstado = @IdEstado
                         WHERE IdPublicacion = @IdPublicacion
                         SELECT @IdPublicacion = SCOPE_IDENTITY()
                         UPDATE PublicacionCategoria set IdPublicacion = @Id, IdCategoria = @IdCategoria
                         WHERE IdPublicacion = @Id
+                        UPDATE PublicacionesSubCategorias set IdPublicacion = @IdPSC, IdSubCategoria = @IdSubCategoria
+                        WHERE IdPublicacion = @IdPSC
                         COMMIT
                         END TRY
                         BEGIN CATCH
@@ -221,10 +224,11 @@ namespace LlamaTech.DA
                 cmd.Parameters.AddWithValue("@FechaPublicacion", DBNull.Value);
             }
             cmd.Parameters.AddWithValue("@Slug", publicacionBE.Slug);
-            cmd.Parameters.AddWithValue("@SubCategoria", publicacionBE.SubCategoria);
             cmd.Parameters.AddWithValue("@IdEstado", publicacionBE.idEstado);
             cmd.Parameters.AddWithValue("@Id", publicacionCategoriaBE.IdPublicacion);
             cmd.Parameters.AddWithValue("@IdCategoria", publicacionCategoriaBE.IdCategoria);
+            cmd.Parameters.AddWithValue("@IdPSC", publicacionSubCategoriaBE.IdPublicacion);
+            cmd.Parameters.AddWithValue("@IdSubCategoria", publicacionSubCategoriaBE.IdSubCategoria);
 
             try
             {
@@ -259,6 +263,8 @@ namespace LlamaTech.DA
                 WHERE IdPublicacion = @IdPublicacion
                 SELECT @IdPublicacion = SCOPE_IDENTITY()
                 DELETE FROM PublicacionCategoria
+                WHERE IdPublicacion = @Id
+                DELETE FROM PublicacionesSubCategorias
                 WHERE IdPublicacion = @Id
                 COMMIT
                 END TRY
@@ -335,10 +341,12 @@ namespace LlamaTech.DA
                 SELECT P.IdPublicacion, P.Titulo, P.Descripcion, P.Imagen, P.Contenido, FORMAT(P.FechaCreacion, 'dd/MM/yyyy, hh:mm') as 'Creado', 
                 FORMAT(P.FechaModificacion, 'dd/MM/yyyy, hh:mm') as 'Modificado',
                 FORMAT(P.FechaPublicacion, 'dd/MM/yyyy, hh:mm') as 'Publicado',
-                P.Slug, C.Nombre as 'Categoria', P.SubCategoria, E.Estado, P.IdUsuario
+                P.Slug, C.Nombre as 'Categoria', SC.IdSubCategoria as 'ID SubCategoria', SC.Nombre as 'SubCategoria', E.Estado, P.IdUsuario
                 FROM Publicaciones P
                 INNER JOIN PublicacionCategoria PC on P.IdPublicacion = PC.IdPublicacion
 				INNER JOIN Categorias C on PC.IdCategoria = C.IdCategoria
+				INNER JOIN PublicacionesSubCategorias PSC on P.IdPublicacion = PSC.IdPublicacion
+				INNER JOIN SubCategorias SC on PSC.IdSubCategoria = SC.IdSubCategoria
                 INNER JOIN Estados E on P.IdEstado = E.IdEstado
                 ORDER BY IdPublicacion ASC
             ";

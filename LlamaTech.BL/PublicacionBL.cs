@@ -20,13 +20,13 @@ namespace LlamaTech.BL
         public DataSet top9Posts() => _publicacionDA.getTop9Posts();
         public DataSet countEntradas() => _publicacionDA.countEntradas();
         public DataSet verDataGrilla() => _publicacionDA.getEntradas();
-        public bool addPost(PublicacionBE publicacionBE, PublicacionCategoriaBE publicacionCategoriaBE)
+        public bool addPost(PublicacionBE publicacionBE, PublicacionCategoriaBE publicacionCategoriaBE, PublicacionSubCategoriaBE publicacionSubCategoriaBE)
         {
-            return _publicacionDA.addPost(publicacionBE, publicacionCategoriaBE);
+            return _publicacionDA.addPost(publicacionBE, publicacionCategoriaBE, publicacionSubCategoriaBE);
         }
-        public bool editarPost(PublicacionBE publicacionBE, PublicacionCategoriaBE publicacionCategoriaBE)
+        public bool editarPost(PublicacionBE publicacionBE, PublicacionCategoriaBE publicacionCategoriaBE, PublicacionSubCategoriaBE publicacionSubCategoriaBE)
         {
-            return _publicacionDA.updatePost(publicacionBE, publicacionCategoriaBE);
+            return _publicacionDA.updatePost(publicacionBE, publicacionCategoriaBE, publicacionSubCategoriaBE);
         }
 
         public bool deletePost(int id)

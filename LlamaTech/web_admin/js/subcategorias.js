@@ -1,18 +1,53 @@
-﻿$(document).ready(function () {
+﻿var id = null;
 
-    var id = $("#txtIdSC").val();
+$(document).ready(function () {
+
+    $("#txtIdSC").val("");
+    $("#txtIdSC").change();
+
+});
+
+$(function () {
 
     // MOSTRAR / OCULTAR BOTON BORRAR
-    if (id == "")
+    if ($("#txtIdSC").val() == "")
         $("#btnEliminarSC").hide();
-    else
+    else {
         $("#btnEliminarSC").show();
+        id = $("#txtId").val();
+    }
+
+    $("#txtIdSC").val("");
+    $("#txtIdSC").change();
+
+    $('#dtSC').DataTable({
+        responsive: true
+    });
+
+    $('#dtSC tbody').on('click', '.select', function (e) {
+        e.preventDefault();
+        var id = $(this).closest('tr').find('td:eq(1)').text();
+        var nombre = $(this).closest('tr').find('td:eq(2)').text();
+        var categoria = $(this).closest('tr').find('td:eq(3)').text();
+
+        $('#txtIdSC').val(id);
+        $("#txtIdSC").change();
+        $('#txtSubCategoria').val(nombre);
+        $('#ddlCategoria').val(categoria);
+
+        var cbo = document.getElementById('<%=ddlCategoria.ClientID%>');
+        for (i = 0; i < cbo.length; i++) {
+            if (cbo[i].innerText == categoria)
+                $('#<%=ddlCategoria.ClientID%>').val(cbo[i].value);
+        }
+
+    });
 
     // GUARDAR 
     $(document).on('click', '#btnGuardarSC', function (e) {
         e.preventDefault();
 
-        if (id == "") {
+        if (id == "" || id == 0 || $("#txtIdSC").val() == "" || $("#txtIdSC").val() == 0) {
 
             if (validar() == false) {
                 alertError('Todos los campos son obligatorios.');
@@ -30,7 +65,7 @@
     $(document).on('click', '#btnEliminarSC', function (e) {
         e.preventDefault();
 
-        if (id == "") {
+        if (id == "" || id == 0 || $("#txtIdSC").val() == "" || $("#txtIdSC").val() == 0) {
             alertError('Debes seleccionar el ID de una publicación');
         } else {
             showModalEliminar();
@@ -200,7 +235,9 @@
 
     // Limpiar campos
     function limpiar() {
+        id = "";
         $("#txtIdSC").val("");
+        $("#txtIdSC").change();
         $("#txtSubCategoria").val("");
         $("#ddlCategoria").val(0);
 

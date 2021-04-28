@@ -17,7 +17,6 @@ namespace LlamaTech.web_admin
             if (!IsPostBack)
             {
                 verPublicaciones();
-                verEstados();
                 verImagenes();
             }
         }
@@ -33,22 +32,6 @@ namespace LlamaTech.web_admin
             {
                 rpPublicacion.DataSource = ds.Tables[0];
                 rpPublicacion.DataBind();
-            }
-        }
-
-        private void verEstados()
-        {
-            DataSet ds = new DataSet();
-            EstadoBL estadoBL = new EstadoBL();
-
-            ds = estadoBL.allEstados();
-
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                ddlEstado.DataSource = ds.Tables[0];
-                ddlEstado.DataTextField = "Estado";
-                ddlEstado.DataValueField = "idEstado";
-                ddlEstado.DataBind();
             }
         }
 
@@ -131,8 +114,7 @@ namespace LlamaTech.web_admin
                 Contenido = contenido,
                 FechaPublicacion = fechaPublicacion,
                 idEstado = Convert.ToInt32(status),
-                Slug = slug,
-                SubCategoria = subcategoria
+                Slug = slug
             };
 
             PublicacionCategoriaBE publicacionCategoriaBE = new PublicacionCategoriaBE()
@@ -141,9 +123,13 @@ namespace LlamaTech.web_admin
                 IdCategoria = Convert.ToInt32(categoria)
             };
 
-            bool resp = publicacionBL.editarPost(publicacionBE, publicacionCategoriaBE);
+            PublicacionSubCategoriaBE publicacionSubCategoriaBE = new PublicacionSubCategoriaBE()
+            {
+                IdPublicacion = Convert.ToInt32(id),
+                IdSubCategoria = Convert.ToInt32(subcategoria)
+            };
 
-            return true;
+            return publicacionBL.editarPost(publicacionBE, publicacionCategoriaBE, publicacionSubCategoriaBE);
         }
 
         [WebMethod]
@@ -168,8 +154,7 @@ namespace LlamaTech.web_admin
                 Contenido = contenido,
                 FechaPublicacion = fechaPublicacion,
                 idEstado = Convert.ToInt32(status),
-                Slug = slug,
-                SubCategoria = subcategoria
+                Slug = slug
             };
 
             PublicacionCategoriaBE publicacionCategoriaBE = new PublicacionCategoriaBE()
@@ -177,9 +162,12 @@ namespace LlamaTech.web_admin
                 IdCategoria = Convert.ToInt32(categoria)
             };
 
-            bool resp = publicacionBL.addPost(publicacionBE, publicacionCategoriaBE);
+            PublicacionSubCategoriaBE publicacionSubCategoriaBE = new PublicacionSubCategoriaBE()
+            {
+                IdSubCategoria = Convert.ToInt32(subcategoria)
+            };
 
-            return true;
+            return publicacionBL.addPost(publicacionBE, publicacionCategoriaBE, publicacionSubCategoriaBE);
         }
 
         [WebMethod]

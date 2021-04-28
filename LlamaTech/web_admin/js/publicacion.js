@@ -1,13 +1,23 @@
 ﻿
 var path = null;
 var id = null;
+
+$(document).ready(function () {
+
+    $("#txtId").val("");
+    $("#txtId").change();
+
+});
+
 $(function () {
+
 
     $("#txtId").change(function () {
         // MOSTRAR / OCULTAR BOTON BORRAR
-        if ($("#txtId").val() == "")
+        if ($("#txtId").val() == "") {
             $("#btnEliminarPost").hide();
-        else { 
+        }
+        else {
             $("#btnEliminarPost").show();
             id = $("#txtId").val();
         }
@@ -25,6 +35,7 @@ $(function () {
     $('td:nth-child(5)').hide();
     $('td:nth-child(6)').hide();
     $('td:nth-child(10)').hide();
+    $('td:nth-child(12)').hide();
 
     $('#btnOcultarMostar').on('click', function (e) {
         e.preventDefault();
@@ -46,9 +57,10 @@ $(function () {
         var publicado = $(this).closest('tr').find('td:eq(8)').text();
         var slug = $(this).closest('tr').find('td:eq(9)').text();
         var categoria = $(this).closest('tr').find('td:eq(10)').text();
-        var subcategoria = $(this).closest('tr').find('td:eq(11)').text();
-        var activo = $(this).closest('tr').find('td:eq(12)').text();
-        var usuario = $(this).closest('tr').find('td:eq(13)').text();
+        var idSubcategoria = $(this).closest('tr').find('td:eq(11)').text();
+        var subcategoria = $(this).closest('tr').find('td:eq(12)').text();
+        var activo = $(this).closest('tr').find('td:eq(13)').text();
+        var usuario = $(this).closest('tr').find('td:eq(14)').text();
 
         $('#txtId').val(id);
         $('#txtId').change();
@@ -60,30 +72,26 @@ $(function () {
         $('#txtSlug').val(slug);
         $('#ddlCateg').val(categoria);
         $('#ddlSubCategoria').val(subcategoria);
-        $('#ddlEstado').val(activo);
 
-        var cboStatus = document.getElementById('ddlEstado');
-        for (i = 0; i < cboStatus.length; i++) {
-            if (cboStatus[i].innerText == activo)
-                $('#ddlEstado').val(cboStatus[i].value);
-        }
 
         var cbo = document.getElementById('ddlCateg');
-        var ddlSC = document.getElementById('ddlSubCategoria')
         for (i = 0; i < cbo.length; i++) {
             if (cbo[i].innerText == categoria) {
                 $('#ddlCateg').val(cbo[i].value);
-                llenarSubCategorias(cbo[i].value)
-                return true;
-            }
-            for (j = 0; j < ddlSC.length; j++) {
-                if (ddlSC[j].innerText == subcategoria) {
-                    $('#ddlSubCategoria').val(ddlSC[j].value);
-                    llenarSubCategorias(ddlSC[j].value)
-                    return true;
+                llenarSubCategorias(cbo[i].value);
+
+                var ddlSC = document.getElementById('ddlSubCategoria');
+                if (ddlSC.length > 1) {
+                    for (j = 0; j < ddlSC.length; j++) {
+                        if (ddlSC[j].value == idSubcategoria) {
+                            $('#ddlSubCategoria').val(ddlSC[j].val);
+                        }
+                    }
                 }
             }
         }
+
+
 
 
     });
@@ -91,17 +99,27 @@ $(function () {
     var ddlCategoria = $("#ddlCateg");
     var ddlSubCategoria = $("#ddlSubCategoria");
 
+
+
     // GUARDAR POST
     $(document).on('click', '#btnGuardarPost', function (e) {
         e.preventDefault();
 
-        if (id == "") {
+        if (id == "" || id == 0 || $("#txtId").val() == "" || $("#txtId").val() == 0) {
 
             if (validar() == false) {
                 alertError('Todos los campos son obligatorios.');
                 return false;
             } else {
-                addDataAjax();
+                var _txtTitulo = $("#txtTitulo").val();
+                var _txtDescripcion = $("#txtDescripcion").val();
+                var _txtImagen = $("#txtImgPortada").val();
+                var _txtContenido = $("#txtContenido").val();
+                var _categoria = $("#ddlCateg").val();
+                var _subCategoria = $("#ddlSubCategoria").val();
+                var _txtSlug = $("#txtSlug").val();
+                var _status = 2;
+                addDataAjax(_txtTitulo, _txtDescripcion, _txtImagen, _txtContenido, _status, _txtSlug, _subCategoria, _categoria);
             }
 
         } else {
@@ -109,11 +127,37 @@ $(function () {
         }
     });
 
+    // Publicar POST
+    $(document).on('click', '#btnPublicar', function (e) {
+        e.preventDefault();
+
+        if (id == "" || id == 0 || $("#txtId").val() == "" || $("#txtId").val() == 0) {
+
+            if (validar() == false) {
+                alertError('Todos los campos son obligatorios.');
+                return false;
+            } else {
+                var _txtTitulo = $("#txtTitulo").val();
+                var _txtDescripcion = $("#txtDescripcion").val();
+                var _txtImagen = $("#txtImgPortada").val();
+                var _txtContenido = $("#txtContenido").val();
+                var _categoria = $("#ddlCateg").val();
+                var _subCategoria = $("#ddlSubCategoria").val();
+                var _txtSlug = $("#txtSlug").val();
+                var _status = 1;
+                addDataAjax(_txtTitulo, _txtDescripcion, _txtImagen, _txtContenido, _status, _txtSlug, _subCategoria, _categoria);
+            }
+
+        } else {
+            showModalEditarPublicar();
+        }
+    });
+
     // ELIMINAR POST
     $(document).on('click', '#btnEliminarPost', function (e) {
         e.preventDefault();
 
-        if (id == "") {
+        if (id == "" || id == 0 || $("#txtId").val() == "" || $("#txtId").val() == 0) {
             alertError('Debes seleccionar el ID de una publicación');
         } else {
             showModalEliminar();
@@ -128,6 +172,12 @@ $(function () {
 
     }
 
+    function showModalEditarPublicar() {
+        $('#modalPublicar').modal('show');
+        publicar();
+
+    }
+
     // MODAL ELIMINAR
 
     function showModalEliminar() {
@@ -136,11 +186,56 @@ $(function () {
 
     }
 
-    // BOTON MODIFICAR
+    // BOTON PUBLICAR
+    function publicar() {
+        $("#btnAceptarPubli").click(function (e) {
+            e.preventDefault();
+
+            if (validar() == false) {
+                $('#modalEliminar').modal('hide');
+                alertError('Todos los campos son obligatorios.');
+                return false;
+            } else {
+
+                var _txtIdPub = $("#txtId").val();
+                var _txtTitulo = $("#txtTitulo").val();
+                var _txtDescripcion = $("#txtDescripcion").val();
+                var _txtImagen = $("#txtImgPortada").val();
+                var _txtContenido = $("#txtContenido").val();
+                var _categoria = $("#ddlCateg").val();
+                var _subCategoria = $("#ddlSubCategoria").val();
+                var _txtSlug = $("#txtSlug").val();
+                var _status = 1;
+
+                updateDataAjax(_txtIdPub, _txtTitulo, _txtDescripcion, _txtImagen, _txtContenido, _status, _txtSlug, _subCategoria, _categoria);
+            }
+
+        });
+    }
+
     function modificar() {
         $("#btnAceptarMod").click(function (e) {
             e.preventDefault();
-            updateDataAjax();
+
+            if (validar() == false) {
+                $('#modalEliminar').modal('hide');
+                alertError('Todos los campos son obligatorios.');
+                return false;
+            } else {
+
+                var _txtIdPub = $("#txtId").val();
+                var _txtTitulo = $("#txtTitulo").val();
+                var _txtDescripcion = $("#txtDescripcion").val();
+                var _txtImagen = $("#txtImgPortada").val();
+                var _txtContenido = $("#txtContenido").val();
+                var _categoria = $("#ddlCateg").val();
+                var _subCategoria = $("#ddlSubCategoria").val();
+                var _txtSlug = $("#txtSlug").val();
+                var _status = "2";
+
+                updateDataAjax(_txtIdPub, _txtTitulo, _txtDescripcion, _txtImagen, _txtContenido, _status, _txtSlug, _subCategoria, _categoria);
+            }
+
         });
     }
 
@@ -153,16 +248,16 @@ $(function () {
     }
 
     // AJAX AGREGAR POST
-    function addDataAjax() {
+    function addDataAjax(titulo, descripcion, imagen, contenido, status, slug, subcategoria, categoria) {
         var obj = {
-            titulo: $("#txtTitulo").val(),
-            descripcion: $("#txtDescripcion").val(),
-            imagen: $("#txtImgPortada").val(),
-            contenido: $("#txtContenido").val(),
-            status: $("#ddlEstado").val(),
-            subcategoria: $("#ddlSubCategoria option:selected").text(),
-            categoria: $('#ddlCateg').val(),
-            slug: $("#txtSlug").val()
+            titulo: titulo,
+            descripcion: descripcion,
+            imagen: imagen,
+            contenido: contenido,
+            status: status,
+            slug: slug,
+            subcategoria: subcategoria,
+            categoria: categoria
         };
 
         $.ajax({
@@ -180,6 +275,7 @@ $(function () {
                     limpiar();
                     setTimeout(function () {
                         realizarPostBack();
+                        limpiar();
                     }, 1500);
                 } else {
                     alertError('No se pudo realizar el registro');
@@ -190,19 +286,18 @@ $(function () {
     }
 
     // AJAX MODIFICAR POST
-    function updateDataAjax() {
+    function updateDataAjax(id, titulo, descripcion, imagen, contenido, status, slug, subcategoria, categoria) {
 
         var obj = {
-            id: $("#txtId").val(),
-            titulo: $("#txtTitulo").val(),
-            descripcion: $("#txtDescripcion").val(),
-            imagen: $("#txtImgPortada").val(),
-            contenido: $("#txtContenido").val(),
-            status: $("#ddlEstado").val(),
-            slug: $("#txtSlug").val(),
-            subcategoria: $("#ddlSubCategoria").text(),
-            categoria: $('#ddlCateg').val(),
-            status: $("#ddlEstado").val()
+            id: id,
+            titulo: titulo,
+            descripcion: descripcion,
+            imagen: imagen,
+            contenido: contenido,
+            status: status,
+            slug: slug,
+            subcategoria: subcategoria,
+            categoria: categoria
         };
 
         $.ajax({
@@ -351,9 +446,30 @@ $(function () {
         limpiar();
     });
 
+    $("#btnCancelarPubli").click(function (e) {
+        e.preventDefault();
+        limpiar();
+    });
+
     // VALIDAR CAMPOS
     function validar() {
         var valido;
+
+        if ($("#ddlCateg").val().trim() == "0") {
+            $("#ddlCateg").css("border", "2px solid red");
+            valido = false;
+        } else {
+            $("#ddlCateg").css("border", "");
+            valido = true;
+        }
+
+        if ($("#ddlSubCategoria option:selected").val().trim() == "0") {
+            $("#ddlSubCategoria").css("border", "2px solid red");
+            valido = false;
+        } else {
+            $("#ddlSubCategoria").css("border", "");
+            valido = true;
+        }
 
         if ($("#txtTitulo").val() == "") {
             $("#txtTitulo").css("border", "2px solid red");
@@ -370,6 +486,8 @@ $(function () {
             $("#txtDescripcion").css("border", "");
             valido = true;
         }
+
+
 
         if ($("#txtSlug").val() == "") {
             $("#txtSlug").css("border", "2px solid red");
@@ -397,7 +515,7 @@ $(function () {
         $("#txtId").change();
         $("#txtTitulo").val("");
         $("#txtDescripcion").val("");
-        $("#txtContenido").val("");
+        $("#txtContenido").trumbowyg("html", "");
         $("#txtSlug").val("");
         $("#txtImgPortada").val("");
 
@@ -405,13 +523,16 @@ $(function () {
 
         $("#txtTitulo").css("border", "");
         $("#txtDescripcion").css("border", "");
+        $("#ddlCateg").css("border", "");
+        $("#ddlSubCategoria").css("border", "");
         $("#txtSlug").css("border", "");
         $("#txtImgPortada").css("border", "");
 
         $('#modalEditar').modal('hide');
         $('#modalEliminar').modal('hide');
+        $('#modalPublicar').modal('hide');
 
-        
+
 
     }
 
@@ -485,6 +606,7 @@ $(function () {
     // recargar página
     function realizarPostBack() {
         location.reload();
+
     }
 
 

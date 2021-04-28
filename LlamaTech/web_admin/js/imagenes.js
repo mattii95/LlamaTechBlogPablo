@@ -87,6 +87,10 @@ $(document).ready(function () {
             processData: false,
             complete: function () {
                 alertSuccess('La imagen fue agregada con exito!');
+                limpiar();
+                setTimeout(function () {
+                    realizarPostBack();
+                }, 1500);
             }
         });
 

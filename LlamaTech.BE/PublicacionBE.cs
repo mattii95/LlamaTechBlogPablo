@@ -18,7 +18,6 @@ namespace LlamaTech.BE
         public DateTime? FechaPublicacion { get; set; }
         public string Slug { get; set; }
         public int IdUsuario { get; set; }
-        public string SubCategoria { get; set; }
         public int idEstado { get; set; }
 
     }

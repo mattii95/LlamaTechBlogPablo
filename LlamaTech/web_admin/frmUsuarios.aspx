@@ -112,7 +112,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>ID</label>
-                                <asp:TextBox ID="txtId" runat="server" CssClass="form-control" Width="100px"></asp:TextBox>
+                                <asp:TextBox ID="txtId" runat="server" CssClass="form-control" Width="100px" Enabled="false"></asp:TextBox>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -131,20 +131,6 @@
                             <div class="form-group">
                                 <label>Email</label>
                                 <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control"></asp:TextBox>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Contraseña</label>
-                                <asp:TextBox ID="txtContrasenia" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label>Cambiar contraseña</label>
-                                <div class="form-group">
-                                    <asp:Button ID="btnModificarPass" runat="server" CssClass="btn btn-warning" Text="Modificar" OnClick="btnModificarPass_Click" />
-                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -178,16 +164,8 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <asp:Button ID="btnAgregar" runat="server" CssClass="btn btn-success" Text="Agregar" OnClick="btnAgregar_Click" />
-                                <asp:Button ID="btnModificar" runat="server" CssClass="btn btn-warning" Text="Modificar" OnClick="btnModificar_Click" />
-                                <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-danger" Text="Eliminar" OnClick="btnEliminar_Click" />
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <asp:Button ID="btnAceptar" runat="server" CssClass="btn btn-success" Text="Aceptar" OnClick="btnAceptar_Click" />
-                                <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="btnCancelar_Click"  />
-                                <asp:Button ID="btnLimpiar" runat="server" CssClass="btn btn-info" Text="Limpiar" OnClick="btnLimpiar_Click" />
+                                <asp:Button ID="btnAceptar" runat="server" CssClass="btn btn-success" Text="Guardar" />
+                                <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-danger" Text="Cancelar" />
                             </div>
                         </div>
                     </div>
@@ -230,7 +208,6 @@
                                                             <td><%# Eval("Apellido") %></td>
                                                             <td><%# Eval("Telefono") %></td>
                                                             <td><%# Eval("Email") %></td>
-                                                            <td><%# Eval("Contraseña") %></td>
                                                             <td><%# Eval("FotoPerfil") %></td>
                                                             <td><%# Eval("FechaCreacion") %></td>
                                                             <td><%# Eval("UltimaConexion") %></td>
@@ -250,12 +227,45 @@
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
+                    <label id="decode"></label>
                     <!-- End Table -->
                 </div>
                 <!-- /.container-fluid -->
             </div>
-            <!-- /#page-wrapper -->
-            <asp:HiddenField ID="HiddenField1" runat="server" />
+
+            <!-- CONFIRMAR CONTRASEÑA -->
+            <div class="modal" tabindex="-1" role="dialog" id="modalContraseñaGuardar" runat="server" style="overflow-y: auto;">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Agregar contraseña</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputPass">Contraseña</label>
+                                        <input type="password" class="form-control" id="inputPass" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputPassRp">Confirmar Contraseña</label>
+                                        <input type="password" class="form-control" id="inputPassRp" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <asp:Button ID="btnAceptarGuardar" runat="server" Text="Aceptar" CssClass="btn btn-success" />
+                            <asp:Button ID="btnCancelarGuardar" runat="server" Text="Cancelar" CssClass="btn btn-warning" />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
     <!-- jQuery -->
@@ -274,45 +284,7 @@
     <!-- Custom Theme JavaScript -->
     <script src="js/startmin.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            $('#dt').DataTable({
-                responsive: true
-            });
+    <script src="js/usuarios.js"></script>
 
-            $('#dt tbody').on('click', '.select', function () {
-                var id = $(this).closest('tr').find('td:eq(1)').text();
-                var nombre = $(this).closest('tr').find('td:eq(2)').text();
-                var apellido = $(this).closest('tr').find('td:eq(3)').text();
-                var telefono = $(this).closest('tr').find('td:eq(4)').text();
-                var email = $(this).closest('tr').find('td:eq(5)').text();
-                var contraseña = $(this).closest('tr').find('td:eq(6)').text();
-                var foto = $(this).closest('tr').find('td:eq(7)').text();
-                var rol = $(this).closest('tr').find('td:eq(10)').text();
-                var activo = $(this).closest('tr').find('td:eq(11)').text();
-
-                $('#txtId').val(id);
-                $('#txtNombre').val(nombre);
-                $('#txtApellido').val(apellido);
-                $('#txtTelefono').val(telefono);
-                $('#txtEmail').val(email);
-                $('#txtContrasenia').val(contraseña);
-                $('#imgUser').prop('src', foto);
-                $('#ddlRol').val(rol);
-
-                var cbo = document.getElementById('<%=ddlRol.ClientID%>');
-                for (i = 0; i < cbo.length; i++) {
-                    if (cbo[i].innerText == rol)
-                        $('#<%=ddlRol.ClientID%>').val(cbo[i].value);
-                }
-
-                if (activo == 'True') {
-                    $('#chkStatus').prop('checked', true);
-                } else {
-                    $('#chkStatus').prop('checked', false);
-                }
-            });
-        });
-    </script>
 </body>
 </html>
