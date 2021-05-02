@@ -1,9 +1,13 @@
 ﻿using LlamaTech.BE;
 using LlamaTech.BL;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Text;
+using System.Web;
+using System.Web.Script.Serialization;
+using System.Web.Services;
 
 namespace LlamaTech.web_admin
 {
@@ -15,6 +19,7 @@ namespace LlamaTech.web_admin
             {
                 verDatos();
                 cargarRol();
+                lblUser.Text = Session["Nombre"].ToString();
             }
         }
 
@@ -34,190 +39,75 @@ namespace LlamaTech.web_admin
 
         }
 
-        private void agregaUsuario()
+        [WebMethod]
+        public static bool ModificarUsuarioSinImagen(string id, string nombre, string apellido, string telefono, string email, string rol, string status)
         {
-            DataSet ds = new DataSet();
+
             UsuarioBL usuarioBL = new UsuarioBL();
-            UsuarioBE usuarioBE = new UsuarioBE();
-            Security security = new Security();
-            string hash = security.generarHash(txtContrasenia.Text);
-            DateTime time = DateTime.Now;
 
-            ds = usuarioBL.getEmail(txtEmail.Text);
-
-            if (ds.Tables[0].Rows.Count > 0)
+            UsuarioBE objUsuario = new UsuarioBE()
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertError('El correo ya existe!')", true);
-            }
-            else
-            {
-                try
-                {
+                IdUsuario = Convert.ToInt32(id),
+                Nombre = nombre,
+                Apellido = apellido,
+                Telefono = telefono,
+                Email = email,
+                IdRol = Convert.ToInt32(rol),
+                Status = Convert.ToBoolean(status)
+            };
 
-                    usuarioBE.Nombre = txtNombre.Text;
-                    usuarioBE.Apellido = txtApellido.Text;
-                    usuarioBE.Email = txtEmail.Text;
-                    usuarioBE.Contraseña = hash;
-                    usuarioBE.Telefono = txtTelefono.Text;
-                    usuarioBE.FechaCreacion = time;
-                    if (validarImagen(subirImagen()) == "")
-                    {
-                        usuarioBE.FotoPerfil = subirImagen();
-                    }
-                    else
-                    {
-                        string path = "../images/users/" + fileImg.FileName;
-                        DirectoryInfo di = new DirectoryInfo(path);
-
-                        foreach (FileInfo item in di.GetFiles())
-                        {
-                            item.Delete();
-                        }
-
-                        usuarioBE.FotoPerfil = subirImagen();
-                    }
-                    usuarioBE.IdRol = Convert.ToInt32(ddlRol.SelectedItem.Value);
-                    usuarioBE.Status = chkStatus.Checked;
-
-                    usuarioBL.agregarUser(usuarioBE);
-
-                }
-                catch (Exception ex)
-                {
-                    ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertError('" + ex.Message + "')", true);
-                }
-                finally
-                {
-                    ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertAddSuccess('El usuario se agrego con exito')", true);
-
-                }
-            }
-
-
-
+            return usuarioBL.modificarUserSinFoto(objUsuario);
         }
 
-        private void modifica()
+        [WebMethod]
+        public static bool UpdatePassword(string id, string pass)
         {
             UsuarioBL usuarioBL = new UsuarioBL();
-            UsuarioBE usuarioBE = new UsuarioBE();
 
+            UsuarioBE objUsuario = new UsuarioBE()
+            {
+                IdUsuario = Convert.ToInt32(id),
+                Contraseña = pass,
+            };
+
+            return usuarioBL.modificarUserPass(objUsuario);
+        }
+
+        [WebMethod]
+        public static bool Eliminar(string id)
+        {
+            UsuarioBL usuarioBL = new UsuarioBL();
+
+            return usuarioBL.eliminarUser(Convert.ToInt32(id));
+        }
+
+
+        [WebMethod]
+        public static string GetEmail(string email)
+        {
             try
             {
-                usuarioBE.IdUsuario = Convert.ToInt32(txtId.Text);
-                usuarioBE.Nombre = txtNombre.Text;
-                usuarioBE.Apellido = txtApellido.Text;
-                usuarioBE.Email = txtEmail.Text;
-                usuarioBE.Telefono = txtTelefono.Text;
-                if (validarImagen(subirImagen()) == "")
-                {
-                    usuarioBE.FotoPerfil = subirImagen();
-                }
-                else
-                {
-                    string path = "../images/users/" + fileImg.FileName;
-                    DirectoryInfo di = new DirectoryInfo(path);
-
-                    foreach (FileInfo item in di.GetFiles())
-                    {
-                        item.Delete();
-                    }
-
-                    usuarioBE.FotoPerfil = subirImagen();
-                }
-                usuarioBE.IdRol = Convert.ToInt32(ddlRol.SelectedItem.Value);
-
-                usuarioBL.modificarUser(usuarioBE);
-            }
-            catch (Exception ex)
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertError('" + ex.Message + "')", true);
-            }
-            finally
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertUpdateSuccess('El usuario se modifico con exito')", true);
-
-            }
-        }
-
-        private void modificaSinImg()
-        {
-            UsuarioBL usuarioBL = new UsuarioBL();
-            UsuarioBE usuarioBE = new UsuarioBE();
-
-            try
-            {
-                usuarioBE.IdUsuario = Convert.ToInt32(txtId.Text);
-                usuarioBE.Nombre = txtNombre.Text;
-                usuarioBE.Apellido = txtApellido.Text;
-                usuarioBE.Email = txtEmail.Text;
-                usuarioBE.Telefono = txtTelefono.Text;
-                usuarioBE.IdRol = Convert.ToInt32(ddlRol.SelectedItem.Value);
-
-                usuarioBL.modificarUserSinFoto(usuarioBE);
-            }
-            catch (Exception ex)
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertError('" + ex.Message + "')", true);
-            }
-            finally
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertUpdateSuccess('El usuario se modifico con exito')", true);
-
-            }
-        }
-
-        private void elimina()
-        {
-            UsuarioBL usuarioBL = new UsuarioBL();
-            UsuarioBE usuarioBE = new UsuarioBE();
-
-            try
-            {
-                usuarioBE.IdUsuario = Convert.ToInt32(txtId.Text);
-
-                usuarioBL.eliminarUser(usuarioBE.IdUsuario);
-            }
-            catch (Exception ex)
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertError('" + ex.Message + "')", true);
-            }
-            finally
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertDelSuccess('El usuario se elimino con exito')", true);
-
-            }
-        }
-
-        private void modificarPass()
-        {
-            if (txtId.Text != "" && txtContrasenia.Text != "")
-            {
+                List<UsuarioBE> lista = null;
                 UsuarioBL usuarioBL = new UsuarioBL();
-                UsuarioBE usuarioBE = new UsuarioBE();
-                Security security = new Security();
-                string hash = security.generarHash(txtContrasenia.Text);
+                UsuarioBE objUsuario = new UsuarioBE();
 
-                try
-                {
-                    usuarioBE.IdUsuario = Convert.ToInt32(txtId.Text);
-                    usuarioBE.Contraseña = hash;
+                lista = usuarioBL.getEmail(email);
 
-                    usuarioBL.modificarUserPass(usuarioBE);
-                }
-                catch (Exception ex)
+                for (int i = 0; i < lista.Count; i++)
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertError('" + ex.Message + "')", true);
+                    objUsuario.Email = lista[i].Email.ToString();
                 }
-                finally
-                {
-                    ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "alertUpdateSuccess('La contraseña se modifico con exito')", true);
 
-                }
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                return serializer.Serialize(lista);
+
+            }
+            catch (Exception ex)
+            {
+
+                return ex.Message;
             }
         }
-
-
 
 
         // LLENAR DDL ROLES
@@ -237,74 +127,12 @@ namespace LlamaTech.web_admin
             }
         }
 
-
-        // SUBIR IMAGEN
-        private string subirImagen()
+        protected void btnCerrarSesion_Click(object sender, EventArgs e)
         {
-            var ruta = "";
-
-            if (fileImg.HasFile)
-            {
-                string extensionArchivo = System.IO.Path.GetExtension(fileImg.FileName).ToLower();
-                string[] extensionPermitida = { ".jpg", ".jpeg", ".png", ".gif" };
-
-                bool fileOk = false;
-
-                for (int i = 0; i < extensionPermitida.Length; i++)
-                {
-                    if (extensionArchivo == extensionPermitida[i])
-                    {
-                        fileOk = true;
-                    }
-                }
-
-
-                if (fileOk)
-                {
-                    string nombreImg = fileImg.FileName;
-                    string codNombre = generarCodigo();
-                    ruta = "../images/users/" + codNombre + nombreImg;
-                    fileImg.SaveAs(Server.MapPath(ruta));
-                    return ruta;
-                }
-            }
-
-            return ruta;
-        }
-        private string validarImagen(string ruta)
-        {
-            string imagen = fileImg.FileName;
-            string rutaImagen = ruta;
-            string returnImagen;
-
-
-            if (imagen == Path.GetFileName(rutaImagen))
-            {
-                return returnImagen = rutaImagen;
-            }
-            else
-            {
-                return returnImagen = "";
-            }
-
-        }
-
-        
-
-        // GENERAR CODIGO ALEATORIO 
-        private string generarCodigo()
-        {
-            string s = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            Random r = new Random();
-            StringBuilder sb = new StringBuilder();
-
-            for (int i = 1; i < 20; i++)
-            {
-                int count = r.Next(0, s.Length - 1);
-                sb.Append(s.Substring(count, 1));
-            }
-
-            return sb.ToString();
+            Session.Abandon();
+            HttpCookie cookie = new HttpCookie("LoginSimple");
+            Response.Cookies.Add(cookie);
+            Response.Redirect("login.aspx");
         }
     }
 }

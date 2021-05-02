@@ -103,7 +103,6 @@
   <ItemGroup>
     <Content Include="article.aspx" />
     <Content Include="Blog.aspx" />
-    <Content Include="blog.html" />
     <Content Include="css\main.css" />
     <Content Include="Global.asax" />
     <Content Include="images\Background.png" />
@@ -176,6 +175,7 @@
     <Content Include="web_admin\js\raphael.min.js" />
     <Content Include="web_admin\js\startmin.js" />
     <Content Include="web_admin\js\subcategorias.js" />
+    <Content Include="web_admin\js\usuarios.js" />
     <Content Include="web_admin\login.aspx" />
     <Content Include="web_admin\post.aspx" />
   </ItemGroup>
@@ -211,6 +211,12 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateAvatarUser.ashx.cs">
+      <DependentUpon>UpdateAvatarUser.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="UploadAvatarUser.ashx.cs">
+      <DependentUpon>UploadAvatarUser.ashx</DependentUpon>
     </Compile>
     <Compile Include="UploadImages.ashx.cs">
       <DependentUpon>UploadImages.ashx</DependentUpon>
@@ -276,6 +282,8 @@
     <None Include="packages.config" />
     <Content Include="Site.Mobile.Master" />
     <Content Include="UploadImages.ashx" />
+    <Content Include="UploadAvatarUser.ashx" />
+    <Content Include="UpdateAvatarUser.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

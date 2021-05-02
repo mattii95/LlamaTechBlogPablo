@@ -31,9 +31,9 @@
     <script src="../js/alerts.js"></script>
 </head>
 <body>
-    <form id="form1" runat="server">
-        <div id="wrapper">
+    <div id="wrapper">
 
+        <form method="post" enctype="multipart/form-data" runat="server">
             <!-- Navigation -->
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="navbar-header">
@@ -54,15 +54,13 @@
                 <ul class="nav navbar-right navbar-top-links">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i>srcorru <b class="caret"></b>
+                            <i class="fa fa-user fa-fw"></i>
+                            <asp:Label ID="lblUser" runat="server" Text=""></asp:Label>
+                            <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                            <li>
+                                <asp:Button ID="btnCerrarSesion" CssClass="btn btn-link" runat="server" Text="Cerrar Sesión" OnClick="btnCerrarSesion_Click" />
                             </li>
                         </ul>
                     </li>
@@ -108,6 +106,7 @@
                     </div>
                     <!-- /.row -->
                     <!-- Form -->
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
@@ -142,7 +141,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Foto perfil</label>
-                                <asp:FileUpload ID="fileImg" runat="server" CssClass="form-control" />
+                                <input type="file" id="fileImg" class="btnn" />
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -160,15 +159,88 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <asp:Image ID="imgUser" runat="server" CssClass="img-responsive" />
+                                <label id="tamanioImg"></label>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <asp:Button ID="btnAceptar" runat="server" CssClass="btn btn-success" Text="Guardar" />
                                 <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-danger" Text="Cancelar" />
+                                <asp:Button ID="btnUpdatePass" runat="server" CssClass="btn btn-warning" Text="Modificar Contraseña" />
+                                <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-danger" Text="Eliminar" />
                             </div>
                         </div>
                     </div>
+
+
+                    <!-- CONFIRMAR CONTRASEÑA -->
+                    <div class="modal" tabindex="-1" role="dialog" id="modalContraseñaGuardar" runat="server" style="overflow-y: auto;">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Agregar contraseña</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="inputPass">Contraseña</label>
+                                                <input type="password" class="form-control" id="inputPass" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="inputPassRp">Confirmar Contraseña</label>
+                                                <input type="password" class="form-control" id="inputPassRp" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <asp:Button ID="btnAceptarGuardar" runat="server" Text="Aceptar" CssClass="btn btn-success" />
+                                    <asp:Button ID="btnCancelarGuardar" runat="server" Text="Cancelar" CssClass="btn btn-warning" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MODIFICAR CONTRASEÑA -->
+                    <div class="modal" tabindex="-1" role="dialog" id="modalContraseniaModificar" runat="server" style="overflow-y: auto;">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Modificar contraseña</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="inputUpdatePass">Contraseña</label>
+                                                <input type="password" class="form-control" id="inputUpdatePass" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="inputUpdatePassRp">Confirmar Contraseña</label>
+                                                <input type="password" class="form-control" id="inputUpdatePassRp" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <asp:Button ID="btnAceptarEditarPass" runat="server" Text="Aceptar" CssClass="btn btn-success" />
+                                    <asp:Button ID="btnAceptarCancelarPass" runat="server" Text="Cancelar" CssClass="btn btn-warning" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- End Form -->
                     <hr>
                     <!-- Table -->
@@ -190,31 +262,28 @@
                                                     <th>Apellido</th>
                                                     <th>Telefono</th>
                                                     <th>Email</th>
-                                                    <th>Contraseña</th>
                                                     <th>Foto de Perfil</th>
                                                     <th>Fecha Creación</th>
-                                                    <th>Ultima Conexión</th>
                                                     <th>Rol</th>
                                                     <th>Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <asp:Repeater ID="rpGrid" runat="server">
-                                                    <ItemTemplate>
-                                                        <tr class="odd gradeX">
-                                                            <td><a href="#" class="select">Seleccionar</a></td>
-                                                            <td><%# Eval("ID") %></td>
-                                                            <td><%# Eval("Nombre") %></td>
-                                                            <td><%# Eval("Apellido") %></td>
-                                                            <td><%# Eval("Telefono") %></td>
-                                                            <td><%# Eval("Email") %></td>
-                                                            <td><%# Eval("FotoPerfil") %></td>
-                                                            <td><%# Eval("FechaCreacion") %></td>
-                                                            <td><%# Eval("UltimaConexion") %></td>
-                                                            <td><%# Eval("Rol") %></td>
-                                                            <td><%# Eval("Status") %></td>
-                                                        </tr>
-                                                    </ItemTemplate>
+                                                    <itemtemplate>
+                                                    <tr class="odd gradeX">
+                                                        <td><a href="#" class="select">Seleccionar</a></td>
+                                                        <td><%# Eval("ID") %></td>
+                                                        <td><%# Eval("Nombre") %></td>
+                                                        <td><%# Eval("Apellido") %></td>
+                                                        <td><%# Eval("Telefono") %></td>
+                                                        <td><%# Eval("Email") %></td>
+                                                        <td><%# Eval("FotoPerfil") %></td>
+                                                        <td><%# Eval("FechaCreacion") %></td>
+                                                        <td><%# Eval("Rol") %></td>
+                                                        <td><%# Eval("Status") %></td>
+                                                    </tr>
+                                                </itemtemplate>
                                                 </asp:Repeater>
                                             </tbody>
                                         </table>
@@ -227,47 +296,56 @@
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
-                    <label id="decode"></label>
                     <!-- End Table -->
                 </div>
                 <!-- /.container-fluid -->
             </div>
 
-            <!-- CONFIRMAR CONTRASEÑA -->
-            <div class="modal" tabindex="-1" role="dialog" id="modalContraseñaGuardar" runat="server" style="overflow-y: auto;">
+
+            <!-- modal alertas -->
+            <div class="modal" tabindex="-1" role="dialog" id="modalEditar" runat="server" style="overflow-y: auto;">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Agregar contraseña</h5>
+                            <h5 class="modal-title">Modificar</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="inputPass">Contraseña</label>
-                                        <input type="password" class="form-control" id="inputPass" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="inputPassRp">Confirmar Contraseña</label>
-                                        <input type="password" class="form-control" id="inputPassRp" />
-                                    </div>
-                                </div>
-                            </div>
+                            <p>¿Estas seguro que quieres editar?</p>
                         </div>
                         <div class="modal-footer">
-                            <asp:Button ID="btnAceptarGuardar" runat="server" Text="Aceptar" CssClass="btn btn-success" />
-                            <asp:Button ID="btnCancelarGuardar" runat="server" Text="Cancelar" CssClass="btn btn-warning" />
+                            <input type="button" id="btnAceptarMod" value="Aceptar" class="btn btn-success" />
+                            <input type="button" id="btnCancelarMod" value="Aceptar" class="btn btn-danger" />
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
+
+            <!-- MODAL ELIMINAR -->
+            <div class="modal" tabindex="-1" role="dialog" id="modalEliminar" runat="server" style="overflow-y: auto;">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Eliminar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>¿Estas seguro que quieres eliminar la publicación?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="button" id="btnAceptarEliminar" value="Aceptar" class="btn btn-success" />
+                            <input type="button" id="btnCancelarEliminar" value="Aceptar" class="btn btn-danger" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
     <!-- jQuery -->
     <script src="js/jquery.min.js"></script>
 
@@ -284,6 +362,7 @@
     <!-- Custom Theme JavaScript -->
     <script src="js/startmin.js"></script>
 
+    <!-- JS USERS -->
     <script src="js/usuarios.js"></script>
 
 </body>

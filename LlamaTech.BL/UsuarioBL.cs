@@ -16,11 +16,11 @@ namespace LlamaTech.BL
         public DataSet allUsers() => usuarioDA.getUsers();
         public DataSet countUsers() => usuarioDA.countUsers();
         public DataSet login(string email, string pass) => usuarioDA.login(email, pass);
-        public DataSet getEmail(string email) => usuarioDA.getEmail(email);
+        public List<UsuarioBE> getEmail(string email) => usuarioDA.getEmail(email);
         public void agregarUser(UsuarioBE usuarioBE) => usuarioDA.addUser(usuarioBE);
         public void modificarUser(UsuarioBE usuarioBE) => usuarioDA.updateUser(usuarioBE);
-        public void modificarUserSinFoto(UsuarioBE usuarioBE) => usuarioDA.updateUserSinFoto(usuarioBE);
-        public void modificarUserPass(UsuarioBE usuarioBE) => usuarioDA.updatePass(usuarioBE);
-        public void eliminarUser(int id) => usuarioDA.deleteUser(id);
+        public bool modificarUserSinFoto(UsuarioBE usuarioBE) => usuarioDA.updateUserSinFoto(usuarioBE);
+        public bool modificarUserPass(UsuarioBE usuarioBE) => usuarioDA.updatePass(usuarioBE);
+        public bool eliminarUser(int id) => usuarioDA.deleteUser(id);
     }
 }

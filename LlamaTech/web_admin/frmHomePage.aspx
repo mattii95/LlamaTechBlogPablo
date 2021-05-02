@@ -57,15 +57,12 @@
                 <ul class="nav navbar-right navbar-top-links">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i>srcorru <b class="caret"></b>
+                            <i class="fa fa-user fa-fw"></i>
+                            <asp:Label ID="lblUser" runat="server" Text=""></asp:Label> <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                            <li>
+                                <asp:Button ID="btnCerrarSesion" CssClass="btn btn-link" runat="server" Text="Cerrar Sesión" OnClick="btnCerrarSesion_Click" />
                             </li>
                         </ul>
                     </li>

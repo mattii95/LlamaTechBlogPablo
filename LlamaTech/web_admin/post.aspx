@@ -61,15 +61,13 @@
                 <ul class="nav navbar-right navbar-top-links">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i>srcorru <b class="caret"></b>
+                            <i class="fa fa-user fa-fw"></i>
+                            <asp:Label ID="lblUser" runat="server" Text=""></asp:Label>
+                            <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                            <li>
+                                <asp:Button ID="btnCerrarSesion" CssClass="btn btn-link" runat="server" Text="Cerrar Sesión" OnClick="btnCerrarSesion_Click" />
                             </li>
                         </ul>
                     </li>
@@ -163,25 +161,16 @@
                                 <asp:DropDownList ID="ddlCateg" runat="server" CssClass="form-control">
                                 </asp:DropDownList>
                             </div>
-                            <div class="form-group">
+                            <%--<div class="form-group">
                                 <label>Seleccionar subcategoria</label>
                                 <asp:DropDownList ID="ddlSubCategoria" runat="server" CssClass="form-control">
                                 </asp:DropDownList>
-                            </div>
+                            </div>--%>
 
                             <hr>
                             <div class="form-group">
                                 <asp:Button ID="btnVerImg" runat="server" CssClass="btn btn-info" Text="Ver imagenes" />
                             </div>
-                            <%--                            <hr>
-                            <div class="form-group">
-                                <label>Agregar categorias</label>
-                                <asp:TextBox ID="txtAgregarCategoria" runat="server" CssClass="form-control"></asp:TextBox>
-                            </div>
-                            <div class="form-group">
-                                <asp:Button ID="btnAgregarCategoria" runat="server" CssClass="btn btn-success" Text="Agregar" />
-                                <asp:Button ID="btnCancelarCategoria" runat="server" CssClass="btn btn-danger" Text="Cancelar" />
-                            </div>--%>
                         </div>
                     </div>
                     <!-- End Form -->
@@ -345,13 +334,13 @@
                             </div>
                         </div>
                         <br />
-                        <div class="row modal-image" id="divImages" >
+                        <div class="row modal-image" id="divImages">
                             <asp:Repeater ID="rpImgServer" runat="server">
                                 <ItemTemplate>
                                     <div class="col-md-4 images" id='<%# Eval("ALT") %>'>
                                         <a id="aImg" href="#">
                                             <img id='<%# Eval("ID") %>' onclick="copyTextImg('<%# Eval("ID") %>')" style="object-fit: cover; height: 100px; width: 100%;" src='<%# Eval("Ruta") %>' class="img-responsive" alt='<%# Eval("ALT") %>' /></a>
-                                        <p style="text-transform:uppercase"><%# Eval("ALT") %></p>
+                                        <p style="text-transform: uppercase"><%# Eval("ALT") %></p>
                                         <br />
                                     </div>
                                 </ItemTemplate>

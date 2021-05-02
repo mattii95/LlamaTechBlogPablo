@@ -18,7 +18,7 @@ namespace LlamaTech.DA
         public DataSet getUsers()
         {
             const string sqlQuery = @"
-                SELECT IdUsuario as 'ID', U.Nombre, Apellido, Telefono, Email, Contraseña, FotoPerfil, FechaCreacion, UltimaConexion, R.Nombre as 'Rol', Status
+                SELECT IdUsuario as 'ID', U.Nombre, Apellido, Telefono, Email, Contraseña, FotoPerfil, FechaCreacion, R.Nombre as 'Rol', Status
                 FROM Usuarios U
                 INNER JOIN Roles R ON U.IdRol = R.IdRol
                 ORDER BY U.IdUsuario ASC
@@ -51,7 +51,7 @@ namespace LlamaTech.DA
         {
             const string sqlQuery = @"
                 INSERT INTO Usuarios(Nombre, Apellido, Telefono, Email, Contraseña, FotoPerfil, FechaCreacion, IdRol, Status)
-                VALUES (@Nombre, @Apellido, @Telefono, @Email, @Contraseña, @FotoPerfil, GETDATE(), @IdRol, @Status)
+                VALUES (@Nombre, @Apellido, @Telefono, @Email, @Contraseña, @FotoPerfil, @FechaCreacion, @IdRol, @Status)
             ";
 
             SqlConnection con = new SqlConnection(connectionString);
@@ -125,8 +125,11 @@ namespace LlamaTech.DA
             }
 
         }
-        public void updateUserSinFoto(UsuarioBE usuarioBE)
+        public bool updateUserSinFoto(UsuarioBE usuarioBE)
         {
+
+            bool res = false;
+
             const string sqlQuery = @"
                 UPDATE Usuarios
                 SET Nombre = @Nombre, 
@@ -153,10 +156,12 @@ namespace LlamaTech.DA
             {
                 con.Open();
                 cmd.ExecuteNonQuery();
+                res = true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                res = false;
             }
             finally
             {
@@ -164,12 +169,17 @@ namespace LlamaTech.DA
                 con.Close();
             }
 
+            return res;
+
         }
-        public void updatePass(UsuarioBE usuarioBE)
+        public bool updatePass(UsuarioBE usuarioBE)
         {
+
+            bool res = false;
+
             const string sqlQuery = @"
                 UPDATE Usuarios
-                SET Contraseña = @Contraseña,
+                SET Contraseña = @Contraseña
                 WHERE IdUsuario = @IdUsuario
             ";
 
@@ -183,19 +193,27 @@ namespace LlamaTech.DA
             {
                 con.Open();
                 cmd.ExecuteNonQuery();
+                res = true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                res = false;
             }
             finally
             {
                 cmd.Parameters.Clear();
                 con.Close();
             }
+
+            return res;
+
         }
-        public void deleteUser(int id)
+        public bool deleteUser(int id)
         {
+
+            bool res = false;
+
             const string sqlQuery = @"
                 DELETE FROM Usuarios
                 WHERE IdUsuario = @IdUsuario
@@ -210,16 +228,20 @@ namespace LlamaTech.DA
             {
                 con.Open();
                 cmd.ExecuteNonQuery();
+                res = true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                res = false;
             }
             finally
             {
                 cmd.Parameters.Clear();
                 con.Close();
             }
+
+            return res;
 
         }
 
@@ -257,7 +279,9 @@ namespace LlamaTech.DA
             return ds;
 
         }
-        public DataSet getEmail(string email)
+
+        // BUSCAR EMAIL
+        public List<UsuarioBE> getEmail(string email)
         {
             const string sqlQuery = @"
                 SELECT Email
@@ -265,17 +289,27 @@ namespace LlamaTech.DA
                 WHERE Email = @Email
             ";
 
-            DataSet ds = new DataSet();
+            List<UsuarioBE> lista = new List<UsuarioBE>();
+
             SqlConnection conn = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand(sqlQuery, conn);
-            SqlDataAdapter adp = new SqlDataAdapter(cmd);
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@Email", email);
+
+            SqlDataReader dr = null;
 
             try
             {
                 conn.Open();
-                adp.Fill(ds, "Usuarios");
+                dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    UsuarioBE objUsuario = new UsuarioBE();
+                    objUsuario.Email = dr["Email"].ToString();
+
+                    lista.Add(objUsuario);
+                }
             }
             catch (Exception ex)
             {
@@ -286,7 +320,7 @@ namespace LlamaTech.DA
                 conn.Close();
             }
 
-            return ds;
+            return lista;
 
         }
 

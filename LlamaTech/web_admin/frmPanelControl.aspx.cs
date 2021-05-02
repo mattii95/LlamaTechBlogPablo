@@ -31,7 +31,18 @@ namespace LlamaTech.web_admin
                 {
                     lblUsers.Text = ds.Tables[0].Rows[0]["Usuarios"].ToString();
                 }
+
+
+                lblUser.Text = Session["Nombre"].ToString();
             }
+        }
+
+        protected void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            HttpCookie cookie = new HttpCookie("LoginSimple");
+            Response.Cookies.Add(cookie);
+            Response.Redirect("login.aspx");
         }
     }
 }

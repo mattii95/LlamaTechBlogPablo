@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Services;
 using System.Web.UI;
@@ -18,6 +19,7 @@ namespace LlamaTech.web_admin
             {
                 verPublicaciones();
                 verImagenes();
+                lblUser.Text = Session["Nombre"].ToString();
             }
         }
 
@@ -295,6 +297,14 @@ namespace LlamaTech.web_admin
             }
 
 
+        }
+
+        protected void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            HttpCookie cookie = new HttpCookie("LoginSimple");
+            Response.Cookies.Add(cookie);
+            Response.Redirect("login.aspx");
         }
 
     }

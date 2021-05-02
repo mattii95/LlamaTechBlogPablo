@@ -36,6 +36,7 @@ $(function () {
     $('td:nth-child(6)').hide();
     $('td:nth-child(10)').hide();
     $('td:nth-child(12)').hide();
+    $('td:nth-child(13)').hide();
 
     $('#btnOcultarMostar').on('click', function (e) {
         e.preventDefault();
@@ -71,23 +72,23 @@ $(function () {
         $('#txtContenido').trumbowyg('html', contenido);
         $('#txtSlug').val(slug);
         $('#ddlCateg').val(categoria);
-        $('#ddlSubCategoria').val(subcategoria);
+        //$('#ddlSubCategoria').val(subcategoria);
 
 
         var cbo = document.getElementById('ddlCateg');
         for (i = 0; i < cbo.length; i++) {
             if (cbo[i].innerText == categoria) {
                 $('#ddlCateg').val(cbo[i].value);
-                llenarSubCategorias(cbo[i].value);
+                //llenarSubCategorias(cbo[i].value);
 
-                var ddlSC = document.getElementById('ddlSubCategoria');
-                if (ddlSC.length > 1) {
-                    for (j = 0; j < ddlSC.length; j++) {
-                        if (ddlSC[j].value == idSubcategoria) {
-                            $('#ddlSubCategoria').val(ddlSC[j].val);
-                        }
-                    }
-                }
+                //var ddlSC = document.getElementById('ddlSubCategoria');
+                //if (ddlSC.length > 0) {
+                //    for (j = 0; j < ddlSC.length; j++) {
+                //        if (ddlSC[j].innerText == subcategoria) {
+                //            $('#ddlSubCategoria').val(ddlSC[j].value);
+                //        }
+                //    }
+                //}
             }
         }
 
@@ -116,7 +117,7 @@ $(function () {
                 var _txtImagen = $("#txtImgPortada").val();
                 var _txtContenido = $("#txtContenido").val();
                 var _categoria = $("#ddlCateg").val();
-                var _subCategoria = $("#ddlSubCategoria").val();
+                var _subCategoria = 1;
                 var _txtSlug = $("#txtSlug").val();
                 var _status = 2;
                 addDataAjax(_txtTitulo, _txtDescripcion, _txtImagen, _txtContenido, _status, _txtSlug, _subCategoria, _categoria);
@@ -142,7 +143,7 @@ $(function () {
                 var _txtImagen = $("#txtImgPortada").val();
                 var _txtContenido = $("#txtContenido").val();
                 var _categoria = $("#ddlCateg").val();
-                var _subCategoria = $("#ddlSubCategoria").val();
+                var _subCategoria = 1;
                 var _txtSlug = $("#txtSlug").val();
                 var _status = 1;
                 addDataAjax(_txtTitulo, _txtDescripcion, _txtImagen, _txtContenido, _status, _txtSlug, _subCategoria, _categoria);
@@ -203,7 +204,7 @@ $(function () {
                 var _txtImagen = $("#txtImgPortada").val();
                 var _txtContenido = $("#txtContenido").val();
                 var _categoria = $("#ddlCateg").val();
-                var _subCategoria = $("#ddlSubCategoria").val();
+                var _subCategoria = 1;
                 var _txtSlug = $("#txtSlug").val();
                 var _status = 1;
 
@@ -229,7 +230,7 @@ $(function () {
                 var _txtImagen = $("#txtImgPortada").val();
                 var _txtContenido = $("#txtContenido").val();
                 var _categoria = $("#ddlCateg").val();
-                var _subCategoria = $("#ddlSubCategoria").val();
+                var _subCategoria = 1;
                 var _txtSlug = $("#txtSlug").val();
                 var _status = "2";
 
@@ -463,14 +464,6 @@ $(function () {
             valido = true;
         }
 
-        if ($("#ddlSubCategoria option:selected").val().trim() == "0") {
-            $("#ddlSubCategoria").css("border", "2px solid red");
-            valido = false;
-        } else {
-            $("#ddlSubCategoria").css("border", "");
-            valido = true;
-        }
-
         if ($("#txtTitulo").val() == "") {
             $("#txtTitulo").css("border", "2px solid red");
             valido = false;
@@ -531,8 +524,6 @@ $(function () {
         $('#modalEditar').modal('hide');
         $('#modalEliminar').modal('hide');
         $('#modalPublicar').modal('hide');
-
-
 
     }
 

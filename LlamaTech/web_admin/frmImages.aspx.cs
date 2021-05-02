@@ -19,6 +19,7 @@ namespace LlamaTech.web_admin
             if (!IsPostBack)
             {
                 mostrarDatos();
+                lblUser.Text = Session["Nombre"].ToString();
             }
         }
 
@@ -69,6 +70,14 @@ namespace LlamaTech.web_admin
             {
                 return ex.Message;
             }
+        }
+
+        protected void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            HttpCookie cookie = new HttpCookie("LoginSimple");
+            Response.Cookies.Add(cookie);
+            Response.Redirect("login.aspx");
         }
 
     }

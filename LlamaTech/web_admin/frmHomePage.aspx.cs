@@ -2,6 +2,7 @@
 using LlamaTech.BL;
 using System;
 using System.Data;
+using System.Web;
 using System.Web.Services;
 
 namespace LlamaTech.web_admin
@@ -19,6 +20,7 @@ namespace LlamaTech.web_admin
 
                 verDatosRS();
                 iconoContactoRs();
+                lblUser.Text = Session["Nombre"].ToString();
             }
         }
 
@@ -451,5 +453,12 @@ namespace LlamaTech.web_admin
         }
 
         // END REDES SOCIALES
+        protected void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            HttpCookie cookie = new HttpCookie("LoginSimple");
+            Response.Cookies.Add(cookie);
+            Response.Redirect("login.aspx");
+        }
     }
 }

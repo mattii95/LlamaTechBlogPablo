@@ -36,6 +36,8 @@ namespace LlamaTech.web_admin
                 txtEmail.Text = ds.Tables[0].Rows[0]["Email"].ToString();
                 hash = ds.Tables[0].Rows[0]["Contraseña"].ToString();
 
+                Session["Nombre"] = ds.Tables[0].Rows[0]["Nombre"].ToString(); ;
+
                 RolBL rolBL = new RolBL();
                 int rol = 0;
 
@@ -53,7 +55,7 @@ namespace LlamaTech.web_admin
 
                 Response.Cookies.Add(autCookie);
 
-                Response.Redirect("frmHomePage.aspx");
+                Response.Redirect("frmPanelControl.aspx");
 
                 lblError.Visible = false;
 
