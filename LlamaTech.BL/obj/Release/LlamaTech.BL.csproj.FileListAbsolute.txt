@@ -1,0 +1,11 @@
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.BL\bin\Release\LlamaTech.BL.dll
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.BL\bin\Release\LlamaTech.BL.pdb
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.BL\bin\Release\LlamaTech.BE.dll
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.BL\bin\Release\LlamaTech.DA.dll
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.BL\bin\Release\LlamaTech.BE.pdb
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.BL\bin\Release\LlamaTech.DA.pdb
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.BL\obj\Release\LlamaTech.BL.csprojAssemblyReference.cache
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.BL\obj\Release\LlamaTech.BL.csproj.CoreCompileInputs.cache
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.BL\obj\Release\LlamaTech.BL.csproj.CopyComplete
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.BL\obj\Release\LlamaTech.BL.dll
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.BL\obj\Release\LlamaTech.BL.pdb

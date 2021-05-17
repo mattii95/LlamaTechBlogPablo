@@ -49,14 +49,10 @@ namespace LlamaTech.DA
 
         public void addUser(UsuarioBE usuarioBE)
         {
-            const string sqlQuery = @"
-                INSERT INTO Usuarios(Nombre, Apellido, Telefono, Email, Contraseña, FotoPerfil, FechaCreacion, IdRol, Status)
-                VALUES (@Nombre, @Apellido, @Telefono, @Email, @Contraseña, @FotoPerfil, @FechaCreacion, @IdRol, @Status)
-            ";
 
             SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(sqlQuery, con);
-            cmd.CommandType = CommandType.Text;
+            SqlCommand cmd = new SqlCommand("Usuarios_Agregar", con);
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Nombre", usuarioBE.Nombre);
             cmd.Parameters.AddWithValue("@Apellido", usuarioBE.Apellido);
             cmd.Parameters.AddWithValue("@Telefono", usuarioBE.Telefono);

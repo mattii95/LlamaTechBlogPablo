@@ -13,13 +13,21 @@ namespace LlamaTech.web_admin
 {
     public partial class post : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 verPublicaciones();
                 verImagenes();
-                lblUser.Text = Session["Nombre"].ToString();
+                if (Session["Nombre"] != null)
+                {
+                    lblUser.Text = Session["Nombre"].ToString();
+                }
+                else
+                {
+                    Response.Redirect("login.aspx");
+                }
             }
         }
 
@@ -58,6 +66,9 @@ namespace LlamaTech.web_admin
         {
             PublicacionBL publicacionBL = new PublicacionBL();
 
+            string idUser = HttpContext.Current.Session["IdUsuario"].ToString();
+
+
             DateTime hoy = DateTime.Now;
             DateTime? fechaPublicacion = null;
 
@@ -80,7 +91,7 @@ namespace LlamaTech.web_admin
                     }
                     else
                     {
-                        fechaPublicacion = DateTime.Parse(hoy.ToString("dd/MM/yyyy HH:mm"));
+                        fechaPublicacion = DateTime.Parse(hoy.ToString("yyyy/MM/dd HH:mm"));
                     }
                 }
                 else if (Convert.ToInt32(row["IdEstado"].ToString()) == 2 && Convert.ToInt32(status) == 2)
@@ -96,7 +107,7 @@ namespace LlamaTech.web_admin
                 }
                 else if (Convert.ToInt32(row["IdEstado"].ToString()) == 2 && Convert.ToInt32(status) == 1)
                 {
-                    fechaPublicacion = DateTime.Parse(hoy.ToString("dd/MM/yyyy HH:mm"));
+                    fechaPublicacion = DateTime.Parse(hoy.ToString("yyyy/MM/dd HH:mm"));
                 }
                 else
                 {
@@ -116,7 +127,8 @@ namespace LlamaTech.web_admin
                 Contenido = contenido,
                 FechaPublicacion = fechaPublicacion,
                 idEstado = Convert.ToInt32(status),
-                Slug = slug
+                Slug = slug,
+                IdUsuario = Convert.ToInt32(idUser)
             };
 
             PublicacionCategoriaBE publicacionCategoriaBE = new PublicacionCategoriaBE()
@@ -140,11 +152,14 @@ namespace LlamaTech.web_admin
         {
             PublicacionBL publicacionBL = new PublicacionBL();
 
+            string idUser = HttpContext.Current.Session["IdUsuario"].ToString();
+            
+
             DateTime hoy = DateTime.Now;
             DateTime? fechaPublicacion = null;
 
             if (Convert.ToInt32(status) == 1)
-                fechaPublicacion = DateTime.Parse(hoy.ToString("dd/MM/yyyy HH:mm"));
+                fechaPublicacion = DateTime.Parse(hoy.ToString("yyyy/MM/dd HH:mm"));
             else
                 fechaPublicacion = null;
 
@@ -156,7 +171,8 @@ namespace LlamaTech.web_admin
                 Contenido = contenido,
                 FechaPublicacion = fechaPublicacion,
                 idEstado = Convert.ToInt32(status),
-                Slug = slug
+                Slug = slug,
+                IdUsuario = Convert.ToInt32(idUser)
             };
 
             PublicacionCategoriaBE publicacionCategoriaBE = new PublicacionCategoriaBE()

@@ -21,7 +21,14 @@ namespace LlamaTech.web_admin
                 verDatos();
                 verDatosSC();
                 verCategorias();
-                lblUser.Text = Session["Nombre"].ToString();
+                if (Session["Nombre"] != null)
+                {
+                    lblUser.Text = Session["Nombre"].ToString();
+                }
+                else
+                {
+                    Response.Redirect("login.aspx");
+                }
             }
         }
 

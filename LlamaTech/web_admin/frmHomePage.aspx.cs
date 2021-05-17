@@ -20,7 +20,14 @@ namespace LlamaTech.web_admin
 
                 verDatosRS();
                 iconoContactoRs();
-                lblUser.Text = Session["Nombre"].ToString();
+                if (Session["Nombre"] != null)
+                {
+                    lblUser.Text = Session["Nombre"].ToString();
+                }
+                else
+                {
+                    Response.Redirect("login.aspx");
+                }
             }
         }
 

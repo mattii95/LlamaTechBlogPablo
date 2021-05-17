@@ -19,7 +19,14 @@ namespace LlamaTech.web_admin
             {
                 verDatos();
                 cargarRol();
-                lblUser.Text = Session["Nombre"].ToString();
+                if (Session["Nombre"] != null)
+                {
+                    lblUser.Text = Session["Nombre"].ToString();
+                }
+                else
+                {
+                    Response.Redirect("login.aspx");
+                }
             }
         }
 

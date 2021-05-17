@@ -23,7 +23,7 @@ namespace LlamaTech
 
             UsuarioBL usuarioBL = new UsuarioBL();
 
-            string path = "../images/users/";
+            string path = "https://" + HttpContext.Current.Request.Url.Authority + "/images/users/";
             string archive = null;
             string idUsuario = context.Request.QueryString["id"];
             string nombre = context.Request.QueryString["name"];

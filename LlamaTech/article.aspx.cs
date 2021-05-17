@@ -51,6 +51,8 @@ namespace LlamaTech
                 pDesc.InnerText = ods.Tables[0].Rows[0]["Descripcion"].ToString();
                 //imgPortada.Src = ods.Tables[0].Rows[0]["Imagen"].ToString();
                 pContent.InnerHtml = ods.Tables[0].Rows[0]["Contenido"].ToString();
+                imgUser.Src = ods.Tables[0].Rows[0]["FotoPerfil"].ToString();
+                user.InnerText = ods.Tables[0].Rows[0]["Usuario"].ToString();
 
                 string slug = ods.Tables[0].Rows[0]["Slug"].ToString();
                 string titulo = ods.Tables[0].Rows[0]["Titulo"].ToString();

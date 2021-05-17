@@ -23,9 +23,9 @@ namespace LlamaTech
             UsuarioBL usuarioBL = new UsuarioBL();
             Security security = new Security();
             DateTime dateTime = DateTime.Now;
-            DateTime time = DateTime.Parse(dateTime.ToString("dd/MM/yyyy HH:mm"));
+            DateTime time = DateTime.Parse(dateTime.ToString("yyyy/MM/dd HH:mm"));
 
-            string path = "../images/users/";
+            string path = "https://" + HttpContext.Current.Request.Url.Authority + "/images/users/";
             string archive = null;
             string nombre = context.Request.QueryString["name"];
             string apellido = context.Request.QueryString["surname"];

@@ -1,0 +1,6 @@
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.BE\bin\Release\LlamaTech.BE.dll
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.BE\bin\Release\LlamaTech.BE.pdb
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.BE\obj\Release\LlamaTech.BE.csprojAssemblyReference.cache
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.BE\obj\Release\LlamaTech.BE.csproj.CoreCompileInputs.cache
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.BE\obj\Release\LlamaTech.BE.dll
+C:\Users\mcour\Documents\GitHub\LlamaTechBlogPablo\LlamaTech.BE\obj\Release\LlamaTech.BE.pdb

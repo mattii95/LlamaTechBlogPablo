@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -34,6 +35,8 @@ namespace LlamaTech
                 hTitle.InnerText = ds.Tables[0].Rows[0]["Titulo"].ToString();
                 pDesc.InnerText = ds.Tables[0].Rows[0]["Descripcion"].ToString();
                 imgLogo.Src = ds.Tables[0].Rows[0]["Logo"].ToString();
+                string imgFondo = ds.Tables[0].Rows[0]["ImagenFondo"].ToString();
+                about.Attributes.Add("style", "background: url(" + imgFondo + ") no-repeat center center fixed;");
             }
         }
 
@@ -91,6 +94,38 @@ namespace LlamaTech
             DataSet ds = homePageBL.allContactosRp();
             rpContacto.DataSource = ds.Tables[0];
             rpContacto.DataBind();
+        }
+
+        private void EnviarMail(string email, string asunto, string mensaje)
+        {
+            MailMessage msg = new MailMessage(email, "pnarvaja.21@gmail.com", asunto, "Remitente: " + email);
+
+            string smptHost;
+            smptHost = "smtp.gmail.com";
+
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+            SmtpClient client = new SmtpClient(smptHost, 587);
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.Port = 587;
+            client.Credentials = new System.Net.NetworkCredential("pnarvaja.21@gmail.com", "");
+            client.EnableSsl = true;
+
+            client.Send(msg);
+
+        }
+
+        protected void btnEnviar_Click(object sender, EventArgs e)
+        {
+            EnviarMail(txtEmail.Text, txtAsunto.Text, txtMensaje.InnerText);
+            Limpiar();
+        }
+
+        private void Limpiar()
+        {
+            txtEmail.Text = "";
+            txtAsunto.Text = "";
+            txtMensaje.InnerText = "";
         }
     }
 }

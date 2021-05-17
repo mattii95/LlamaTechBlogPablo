@@ -38,8 +38,8 @@
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="https://localhost:44347/index.aspx">
-                    <img src="https://localhost:44347/images/LlamaTech_Alpha.png" alt="" class="img-fluid"
+                <a class="navbar-brand" href="https://llamatech.com.ar/index.aspx">
+                    <img src="https://llamatech.com.ar/images/LlamaTech_Alpha.png" alt="" class="img-fluid"
                         width="200px"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -49,13 +49,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="https://localhost:44347/index.aspx">Inicio</a>
+                            <a class="nav-link" href="https://llamatech.com.ar/index.aspx">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="https://localhost:44347/Blog.aspx">Blog</a>
+                            <a class="nav-link" href="https://llamatech.com.ar/Blog.aspx">Blogs</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="https://localhost:44347/index.aspx#contact">Contacto</a>
+                            <a class="nav-link" href="https://llamatech.com.ar/index.aspx#contact">Contact Me</a>
                         </li>
                     </ul>
                 </div>
@@ -72,7 +72,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-9">
+                                    <div class="col">
                                         <h1 runat="server" id="hTitle"></h1>
                                     </div>
                                     <div runat="server" id="divDate" class="col-md-3 date">
@@ -115,9 +115,9 @@
                             <div class="col-md-6">
                             </div>
                             <div class="col-md-6 admin">
-                                <h5>by Pablo</h5>
+                                <h5 runat="server" id="user"></h5>
                                 <div class="admin__img">
-                                    <img src="images/retrato-joven-sonriente-gafas_171337-4842.jpg" class="img-fluid" alt="">
+                                    <img src="" runat="server" id="imgUser" class="img-fluid" alt="">
                                 </div>
                             </div>
                         </div>
@@ -132,19 +132,19 @@
                             </div>
                             <div class="col-md-4 mt-3">
                                 <div class="card__category">
-                                    <img src="images/pexels-djordje-petrovic-2102416.jpg" alt="" class="img-fluid">
+                                    <img src="images/" alt="" class="img-fluid">
                                     <p>JavaScript</p>
                                 </div>
                             </div>
                             <div class="col-md-4 mt-3">
                                 <div class="card__category">
-                                    <img src="images/pexels-djordje-petrovic-2102416.jpg" alt="" class="img-fluid">
+                                    <img src="images/" alt="" class="img-fluid">
                                     <p>C#</p>
                                 </div>
                             </div>
                             <div class="col-md-4 mt-3">
                                 <div class="card__category">
-                                    <img src="images/pexels-djordje-petrovic-2102416.jpg" alt="" class="img-fluid">
+                                    <img src="images/" alt="" class="img-fluid">
                                     <p>Sql</p>
                                 </div>
                             </div>
@@ -153,19 +153,19 @@
                             </div>
                             <div class="col-md-4 mt-3">
                                 <div class="card__category">
-                                    <img src="images/pexels-djordje-petrovic-2102416.jpg" alt="" class="img-fluid">
+                                    <img src="images/" alt="" class="img-fluid">
                                     <p>JavaScript</p>
                                 </div>
                             </div>
                             <div class="col-md-4 mt-3">
                                 <div class="card__category">
-                                    <img src="images/pexels-djordje-petrovic-2102416.jpg" alt="" class="img-fluid">
+                                    <img src="images/" alt="" class="img-fluid">
                                     <p>C#</p>
                                 </div>
                             </div>
                             <div class="col-md-4 mt-3">
                                 <div class="card__category">
-                                    <img src="images/pexels-djordje-petrovic-2102416.jpg" alt="" class="img-fluid">
+                                    <img src="images/" alt="" class="img-fluid">
                                     <p>Sql</p>
                                 </div>
                             </div>
@@ -187,11 +187,11 @@
                     </div>
                     <div class="col-md-4">
                         <a href="#">
-                            <img src="https://localhost:44347/images/LlamaTech_Alpha.png" class="img-fluid" width="150px" alt=""></a>
+                            <img src="https://llamatech.com.ar/images/LlamaTech_Alpha.png" class="img-fluid" width="150px" alt=""></a>
                     </div>
                     <div class="col-md-4">
-                        <a href="#">
-                            <img src="https://localhost:44347/images/logoCD-white.png" alt="" class="img-fluid" width="60px"></a>
+                        <a href="https://courrouxdigital.com/" target="_blank">
+                            <img src="https://llamatech.com.ar/images/logoCD-white.png" alt="" class="img-fluid" width="60px"></a>
                     </div>
                 </div>
             </div>

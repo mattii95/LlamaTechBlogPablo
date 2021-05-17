@@ -36,7 +36,8 @@ namespace LlamaTech.web_admin
                 txtEmail.Text = ds.Tables[0].Rows[0]["Email"].ToString();
                 hash = ds.Tables[0].Rows[0]["Contraseña"].ToString();
 
-                Session["Nombre"] = ds.Tables[0].Rows[0]["Nombre"].ToString(); ;
+                Session["Nombre"] = ds.Tables[0].Rows[0]["Nombre"].ToString();
+                Session["IdUsuario"] = ds.Tables[0].Rows[0]["IdUsuario"].ToString();
 
                 RolBL rolBL = new RolBL();
                 int rol = 0;

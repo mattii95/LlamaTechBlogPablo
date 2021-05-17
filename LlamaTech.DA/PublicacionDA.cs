@@ -45,8 +45,12 @@ namespace LlamaTech.DA
         {
 
             const string sqlQuery = @"
-            SELECT IdPublicacion, Titulo, Descripcion, Imagen, FORMAT( FechaPublicacion, 'dd/MM/yyyy', 'en-US' ) AS 'Date',
-                FORMAT( FechaPublicacion, 'dd', 'en-US' ) AS 'Day', DATENAME(MONTH, FechaPublicacion) AS 'Month', Slug, IdUsuario FROM Publicaciones
+            SELECT P.IdPublicacion, Titulo, Descripcion, Imagen, FORMAT( FechaPublicacion, 'dd/MM/yyyy', 'en-US' ) AS 'Date',
+                FORMAT( FechaPublicacion, 'dd', 'en-US' ) AS 'Day', DATENAME(MONTH, FechaPublicacion) AS 'Month', Slug, U.Nombre as 'Usuario' , U.FotoPerfil
+                FROM Publicaciones P
+                inner join PublicacionCategoria PC on P.IdPublicacion = PC.IdPublicacion
+                inner join Categorias C on PC.IdCategoria = C.IdCategoria
+                INNER JOIN Usuarios U on P.IdUsuario = U.IdUsuario
                 WHERE IdEstado = 1 ORDER BY IdPublicacion DESC
             ";
 
@@ -80,10 +84,11 @@ namespace LlamaTech.DA
         {
 
             const string sqlQuery = @"
-                SELECT P.IdPublicacion, P.Titulo, P.Descripcion, P.Imagen, P.Contenido, FORMAT( P.FechaPublicacion, 'dd/MM/yyyy HH:mm', 'en-US' ) AS 'Publicado', P.Slug, C.Nombre
+                SELECT P.IdPublicacion, P.Titulo, P.Descripcion, P.Imagen, P.Contenido, FORMAT( P.FechaPublicacion, 'dd/MM/yyyy HH:mm', 'en-US' ) AS 'Publicado', P.Slug, C.Nombre, U.Nombre as 'Usuario', U.FotoPerfil
                 FROM Publicaciones P
                 INNER JOIN PublicacionCategoria PC ON P.IdPublicacion = PC.IdPublicacion
                 INNER JOIN Categorias C ON PC.IdCategoria = C.IdCategoria
+                INNER JOIN Usuarios U on P.IdUsuario = U.IdUsuario
                 WHERE P.IdPublicacion = @IdPublicacion
             ";
 
@@ -151,7 +156,7 @@ namespace LlamaTech.DA
                 cmd.Parameters.AddWithValue("@FechaPublicacion", DBNull.Value);
             }
             cmd.Parameters.AddWithValue("@Slug", publicacionBE.Slug);
-            cmd.Parameters.AddWithValue("@IdUsuario", 1);
+            cmd.Parameters.AddWithValue("@IdUsuario", publicacionBE.IdUsuario);
             cmd.Parameters.AddWithValue("@IdCategoria", publicacionCategoriaBE.IdCategoria);
             cmd.Parameters.AddWithValue("@IdSubCategoria", publicacionSubCategoriaBE.IdSubCategoria);
             cmd.Parameters.AddWithValue("@IdEstado", publicacionBE.idEstado);
@@ -305,7 +310,9 @@ namespace LlamaTech.DA
 
             const string sqlQuery = @"
             SELECT TOP 9 IdPublicacion, Titulo, Descripcion, Imagen, FORMAT( FechaPublicacion, 'dd/MM/yyyy', 'en-US' ) AS 'Date',
-                FORMAT( FechaPublicacion, 'dd', 'en-US' ) AS 'Day', DATENAME(MONTH, FechaPublicacion) AS 'Month', Slug, IdUsuario FROM Publicaciones
+                FORMAT( FechaPublicacion, 'dd', 'en-US' ) AS 'Day', DATENAME(MONTH, FechaPublicacion) AS 'Month', Slug, U.Nombre as 'Usuario', U.FotoPerfil
+                FROM Publicaciones P
+                INNER JOIN Usuarios U on P.IdUsuario = U.IdUsuario
                 WHERE idEstado = 1 ORDER BY IdPublicacion DESC
             ";
 
@@ -341,13 +348,13 @@ namespace LlamaTech.DA
                 SELECT P.IdPublicacion, P.Titulo, P.Descripcion, P.Imagen, P.Contenido, FORMAT(P.FechaCreacion, 'dd/MM/yyyy, hh:mm') as 'Creado', 
                 FORMAT(P.FechaModificacion, 'dd/MM/yyyy, hh:mm') as 'Modificado',
                 FORMAT(P.FechaPublicacion, 'dd/MM/yyyy, hh:mm') as 'Publicado',
-                P.Slug, C.Nombre as 'Categoria', SC.IdSubCategoria as 'ID SubCategoria', SC.Nombre as 'SubCategoria', E.Estado, P.IdUsuario
+                P.Slug, C.Nombre as 'Categoria', E.Estado, U.Nombre as 'Usuario'
                 FROM Publicaciones P
                 INNER JOIN PublicacionCategoria PC on P.IdPublicacion = PC.IdPublicacion
 				INNER JOIN Categorias C on PC.IdCategoria = C.IdCategoria
 				INNER JOIN PublicacionesSubCategorias PSC on P.IdPublicacion = PSC.IdPublicacion
-				INNER JOIN SubCategorias SC on PSC.IdSubCategoria = SC.IdSubCategoria
                 INNER JOIN Estados E on P.IdEstado = E.IdEstado
+                INNER JOIN Usuarios U on P.IdUsuario = U.IdUsuario
                 ORDER BY IdPublicacion ASC
             ";
 
@@ -408,10 +415,12 @@ namespace LlamaTech.DA
         {
 
             const string sqlQuery = @"
-            SELECT P.IdPublicacion, Titulo, Descripcion, Imagen, FORMAT( FechaPublicacion, 'dd/MM/yyyy', 'en-US' ) AS 'Date',
-                FORMAT( FechaPublicacion, 'dd', 'en-US' ) AS 'Day', DATENAME(MONTH, FechaPublicacion) AS 'Month', Slug, IdUsuario FROM Publicaciones P
+                SELECT P.IdPublicacion, Titulo, Descripcion, Imagen, FORMAT( FechaPublicacion, 'dd/MM/yyyy', 'en-US' ) AS 'Date',
+                FORMAT( FechaPublicacion, 'dd', 'en-US' ) AS 'Day', DATENAME(MONTH, FechaPublicacion) AS 'Month', Slug, U.Nombre as 'Usuario' , U.FotoPerfil
+                FROM Publicaciones P
                 inner join PublicacionCategoria PC on P.IdPublicacion = PC.IdPublicacion
                 inner join Categorias C on PC.IdCategoria = C.IdCategoria
+                INNER JOIN Usuarios U on P.IdUsuario = U.IdUsuario
                 WHERE P.IdEstado = 1 and C.IdCategoria = @IdCategoria ORDER BY P.IdPublicacion DESC
             ";
 
@@ -477,5 +486,44 @@ namespace LlamaTech.DA
 
         }
 
+
+        // FILTRAR POSTS
+        public DataTable getPostName(string name)
+        {
+            const string sqlQuery = @"
+            SELECT P.IdPublicacion, Titulo, Descripcion, Imagen, FORMAT( FechaPublicacion, 'dd/MM/yyyy', 'en-US' ) AS 'Date',
+                FORMAT( FechaPublicacion, 'dd', 'en-US' ) AS 'Day', DATENAME(MONTH, FechaPublicacion) AS 'Month', Slug, U.Nombre as 'Usuario' , U.FotoPerfil
+                FROM Publicaciones P
+                inner join PublicacionCategoria PC on P.IdPublicacion = PC.IdPublicacion
+                inner join Categorias C on PC.IdCategoria = C.IdCategoria
+                INNER JOIN Usuarios U on P.IdUsuario = U.IdUsuario
+                where Titulo like '%'+@Titulo+'%' ORDER BY P.IdPublicacion DESC
+            ";
+
+            DataTable dt = new DataTable();
+            SqlConnection conn = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand(sqlQuery, conn);
+            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@Titulo", name);
+
+            try
+            {
+                conn.Open();
+                adp.Fill(dt);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return dt;
+
+
+        }
     }
 }

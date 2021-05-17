@@ -6,7 +6,14 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+.about {
+    height: 100vh;
+}
 
+.blog,
+.contact{
+    padding: 50px 0;
+}
 
 .about,
 .blog,
@@ -15,7 +22,6 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 100vh;
 }
 
 .about__content {
@@ -65,7 +71,7 @@ body {
     background-color: #ffffff;
     margin: 25px;
     box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.5);
-    height: 500px;
+    height: auto;
 }
 
     .blog-item .blog-img {
@@ -146,8 +152,7 @@ body {
             color: #1c1c1c;
             font-size: 14px;
             font-weight: 300;
-            margin: 8px 10px 8px 0;
-            text-align: right;
+            margin: 8px 0 8px 0;
         }
 
     .blog-content p {
@@ -174,6 +179,87 @@ body {
             background: none;
         }
 
+/* CARD BLOG */
+.card-blog {
+    overflow: hidden;
+    box-shadow: 0 2px 20px rgba(89, 89, 83, 0.7);
+    background: #ffffff;
+    border-radius: 0.5rem;
+    position: relative;
+    width: 350px;
+    margin: 1rem;
+    padding: 0;
+}
+
+.banner-img{
+    position: absolute;
+    object-fit: cover;
+    height: 14rem;
+    width: 100%;
+}
+
+.card-time {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: white;
+    background: var(--color-primary);
+    height: 60px;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 60px;
+    padding: 10px;
+    z-index: 10;
+}
+.card-time span {
+    display: block;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.card-body{
+    margin: 15rem 0 0 0;
+}
+
+.blog-category {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--color-primary);
+}
+
+.blog-title{
+    line-height: 1.5rem;
+    margin: 1rem 0 0.5rem;
+}
+
+.blog-description{
+    color: gray;
+    font-size: 0.9rem
+}
+
+.card-profile{
+    display:flex;
+    margin-top: 2rem;
+    align-items: center;
+}
+
+.profile-img{
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.card-profile-info{
+    margin-left: 0.5rem;
+}
+
+.profile-name{
+    font-size: 0.8rem;
+}
 /* OWL CAROUSEL */
 .owl-controls .owl-buttons {
     position: relative;
@@ -321,7 +407,7 @@ iframe {
     }
 
     .posts__container .row__content--blog {
-        min-height: 100vh;
+        padding-top: 30px;
         height: auto;
         display: flex;
         justify-content: center;
@@ -469,9 +555,11 @@ iframe {
 @media only screen and (max-width: 768px) {
     .blog {
         height: 100%;
+        flex-direction: column;
     }
 
     iframe {
         height: auto;
     }
+
 }

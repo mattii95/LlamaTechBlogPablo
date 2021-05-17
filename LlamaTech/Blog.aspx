@@ -48,13 +48,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.aspx">Inicio</a>
+                            <a class="nav-link" href="index.aspx">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Blog.aspx">Blog</a>
+                            <a class="nav-link" href="Blog.aspx">Blogs</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.aspx#contact">Contacto</a>
+                            <a class="nav-link" href="index.aspx#contact">Contact Me</a>
                         </li>
                     </ul>
                 </div>
@@ -84,7 +84,7 @@
                                         <div class="col-md-3 mt-3">
                                             <div class="input-group mb-3">
                                                 <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control"></asp:TextBox>
-                                                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary" />
+                                                <asp:Button ID="btnBuscar" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="btnBuscar_Click" />
                                             </div>
                                         </div>
                                         <!-- End Buscador -->
@@ -95,31 +95,34 @@
                                 <!-- End Filtro -->
                                 <!-- Cards -->
                                 <div>
-                                    <asp:Image ID="imgError" runat="server" CssClass="img__error" ImageUrl="images/no-data-found.png"  style="width: 200px; height: auto;" Visible="false"/>
+                                    <asp:Image ID="imgError" runat="server" CssClass="img__error" ImageUrl="images/no-data-found.png" Style="width: 200px; height: auto;" Visible="false" />
                                 </div>
                                 <asp:Repeater ID="rptEntradas" runat="server" OnItemDataBound="rptEntradas_ItemDataBound">
                                     <ItemTemplate>
                                         <div class="col-md-4">
-                                            <div class="blog-item">
-                                                <div class="blog-img">
-                                                    <img src="<%# Eval("Imagen") %>" alt="">
-                                                    <div class="box">
-                                                        <span><%# Eval("Day") %></span>
+                                            <div class="card-blog">
+                                                <div class="card-banner">
+                                                    <p class="card-time">
+                                                        <%# Eval("Day") %>
                                                         <span>
-                                                            <asp:Label ID="lblMes" runat="server" Text='<%# Eval("Month") %>'></asp:Label></span>
-                                                    </div>
-                                                </div>
-                                                <div class="blog-content d-flex flex-column">
-                                                    <span>Tecnologia</span>
-                                                    <h2><%# Eval("Titulo") %></h2>
-                                                    <p class="text-start">
-                                                        <asp:Label ID="lblDesc" runat="server" Text='<%# Eval("Descripcion") %>' ForeColor="#333333" CssClass="text-left"></asp:Label>
+                                                            <asp:Label ID="lblMes" runat="server" Text='<%# Eval("Month") %>'>
+                                                            </asp:Label></span>
                                                     </p>
-                                                    <a href="<%# GetRouteUrl("Article", new { id = Eval("IdPublicacion"), slug = Eval("Slug")}) %>" style="width: 115px;" target="_blank">Ver mas...</a>
-                                                    <ul class=" align-self-end">
-                                                        <li><i class="fa fa-calendar" aria-hidden="true"></i><%# Eval("Date") %></li>
-                                                        <li><i class="fa fa-user" aria-hidden="true"></i>Pablo</li>
-                                                    </ul>
+                                                    <img src="<%# Eval("Imagen") %>" class="banner-img" alt="" />
+                                                </div>
+                                                <div class="card-body">
+                                                    <p class="blog-category"><%# Eval("Titulo") %></p>
+                                                    <h2 class="blog-title"><%# Eval("Titulo") %></h2>
+                                                    <p class="blog-description">
+                                                        <asp:Label ID="lblDesc" runat="server" Text='<%# Eval("Descripcion") %>' ForeColor="#333333"></asp:Label>
+                                                    </p>
+                                                    <a href="<%# GetRouteUrl("Article", new { id = Eval("IdPublicacion"), slug = Eval("Slug")}) %>" target="_blank">See more</a>
+                                                    <div class="card-profile">
+                                                        <img class="profile-img" src="<%# Eval("FotoPerfil") %>" alt="" />
+                                                        <div class="card-profile-info">
+                                                            <h3 class="profile-name"><%# Eval("Usuario") %></h3>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -182,7 +185,7 @@
                             <img src="images/LlamaTech_Alpha.png" class="img-fluid" width="150px" alt=""></a>
                     </div>
                     <div class="col-md-4">
-                        <a href="#">
+                        <a href="https://courrouxdigital.com/" target="_blank">
                             <img src="images/logoCD-white.png" alt="" class="img-fluid" width="60px"></a>
                     </div>
                 </div>

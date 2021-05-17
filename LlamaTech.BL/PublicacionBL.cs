@@ -19,6 +19,7 @@ namespace LlamaTech.BL
         public DataSet getFechaPublicacion(int id) => _publicacionDA.getFechaPublicacion(id);
         public DataSet top9Posts() => _publicacionDA.getTop9Posts();
         public DataSet countEntradas() => _publicacionDA.countEntradas();
+        public DataTable getPostName(string name) => _publicacionDA.getPostName(name);
         public DataSet verDataGrilla() => _publicacionDA.getEntradas();
         public bool addPost(PublicacionBE publicacionBE, PublicacionCategoriaBE publicacionCategoriaBE, PublicacionSubCategoriaBE publicacionSubCategoriaBE)
         {

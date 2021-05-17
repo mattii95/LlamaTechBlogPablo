@@ -222,6 +222,49 @@ namespace LlamaTech
             }
         }
 
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            PublicacionBL publicacionBL = new PublicacionBL();
+            DataTable dt = new DataTable();
+
+            dt = publicacionBL.getPostName(txtBuscar.Text);
+
+            if (txtBuscar.Text == "")
+            {
+                rpEntradas();
+                rptEntradas.Visible = true;
+                imgError.Visible = false;
+                doPaging();
+            } else if (dt.Rows.Count > 0)
+            {
+                _PagedDataSource.DataSource = dt.DefaultView;
+                _PagedDataSource.AllowPaging = true;
+                _PagedDataSource.PageSize = 9;
+                _PagedDataSource.CurrentPageIndex = CurrentPage;
+                ViewState["TotalPages"] = _PagedDataSource.PageCount;
+
+                if (dt.Rows.Count < 10)
+                    divPaging.Visible = false;
+
+                lbtnPrevious.Visible = !_PagedDataSource.IsFirstPage;
+                lbtnNext.Visible = !_PagedDataSource.IsLastPage;
+                lbtnFirst.Visible = !_PagedDataSource.IsFirstPage;
+                lbtnLast.Visible = !_PagedDataSource.IsLastPage;
+
+                rptEntradas.DataSource = _PagedDataSource;
+                rptEntradas.DataBind();
+
+                doPaging();
+                imgError.Visible = false;
+                rptEntradas.Visible = true;
+            }
+            else
+            {
+                imgError.Visible = true;
+                rptEntradas.Visible = false;
+            }
+        }
+
         private void llenarCat()
         {
             DataSet ds = new DataSet();
@@ -235,14 +278,17 @@ namespace LlamaTech
                 ddlCategorias.DataValueField = "ID";
                 ddlCategorias.DataTextField = "Categoria";
                 ddlCategorias.DataBind();
-                ddlCategorias.Items.Insert(0, new ListItem("Selecciona la categoria", "0"));
+                ddlCategorias.Items.Insert(0, new ListItem("Select Category", "0"));
+                ddlCategorias.Attributes["style"] = "";
             }
             else
             {
                 ddlCategorias.DataBind();
-                ddlCategorias.Items.Insert(0, new ListItem("No existen categorias", "0"));
+                ddlCategorias.Attributes["style"] = "display: none;";
             }
         }
+
+        
 
     }
 }
