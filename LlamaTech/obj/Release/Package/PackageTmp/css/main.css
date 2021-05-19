@@ -407,7 +407,7 @@ iframe {
     }
 
     .posts__container .row__content--blog {
-        min-height: 100vh;
+        padding-top: 30px;
         height: auto;
         display: flex;
         justify-content: center;

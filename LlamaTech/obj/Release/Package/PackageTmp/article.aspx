@@ -39,7 +39,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="https://llamatech.com.ar/index.aspx">
-                    <img src="https://llamatech.com.ar/LlamaTech_Alpha.png" alt="" class="img-fluid"
+                    <img src="https://llamatech.com.ar/images/LlamaTech_Alpha.png" alt="" class="img-fluid"
                         width="200px"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -49,13 +49,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="https://llamatech.com.ar/index.aspx">Inicio</a>
+                            <a class="nav-link" href="https://llamatech.com.ar/index.aspx">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="https://llamatech.com.ar/Blog.aspx">Blog</a>
+                            <a class="nav-link" href="https://llamatech.com.ar/Blog.aspx">Blogs</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="https://llamatech.com.ar/index.aspx#contact">Contacto</a>
+                            <a class="nav-link" href="https://llamatech.com.ar/index.aspx#contact">Contact Me</a>
                         </li>
                     </ul>
                 </div>
@@ -72,7 +72,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-9">
+                                    <div class="col">
                                         <h1 runat="server" id="hTitle"></h1>
                                     </div>
                                     <div runat="server" id="divDate" class="col-md-3 date">

@@ -46,7 +46,7 @@ namespace LlamaTech.DA
 
             const string sqlQuery = @"
             SELECT P.IdPublicacion, Titulo, Descripcion, Imagen, FORMAT( FechaPublicacion, 'dd/MM/yyyy', 'en-US' ) AS 'Date',
-                FORMAT( FechaPublicacion, 'dd', 'en-US' ) AS 'Day', DATENAME(MONTH, FechaPublicacion) AS 'Month', Slug, U.Nombre as 'Usuario' , U.FotoPerfil
+                FORMAT( FechaPublicacion, 'dd', 'en-US' ) AS 'Day', DATENAME(MONTH, FechaPublicacion) AS 'Month', Slug, C.Nombre as 'Categoria', U.Nombre as 'Usuario' , U.FotoPerfil
                 FROM Publicaciones P
                 inner join PublicacionCategoria PC on P.IdPublicacion = PC.IdPublicacion
                 inner join Categorias C on PC.IdCategoria = C.IdCategoria
@@ -309,11 +309,13 @@ namespace LlamaTech.DA
         {
 
             const string sqlQuery = @"
-            SELECT TOP 9 IdPublicacion, Titulo, Descripcion, Imagen, FORMAT( FechaPublicacion, 'dd/MM/yyyy', 'en-US' ) AS 'Date',
-                FORMAT( FechaPublicacion, 'dd', 'en-US' ) AS 'Day', DATENAME(MONTH, FechaPublicacion) AS 'Month', Slug, U.Nombre as 'Usuario', U.FotoPerfil
+            SELECT TOP 9 P.IdPublicacion, Titulo, Descripcion, Imagen, FORMAT( FechaPublicacion, 'dd/MM/yyyy', 'en-US' ) AS 'Date',
+                FORMAT( FechaPublicacion, 'dd', 'en-US' ) AS 'Day', DATENAME(MONTH, FechaPublicacion) AS 'Month', Slug, C.Nombre as 'Categoria', U.Nombre as 'Usuario', U.FotoPerfil
                 FROM Publicaciones P
+                inner join PublicacionCategoria PC on P.IdPublicacion = PC.IdPublicacion
+                inner join Categorias C on PC.IdCategoria = C.IdCategoria
                 INNER JOIN Usuarios U on P.IdUsuario = U.IdUsuario
-                WHERE idEstado = 1 ORDER BY IdPublicacion DESC
+                WHERE idEstado = 1 ORDER BY P.IdPublicacion DESC
             ";
 
             DataSet ds = new DataSet();

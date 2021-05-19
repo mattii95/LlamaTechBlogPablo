@@ -29,7 +29,7 @@
 
     <title>Llamatech</title>
 </head>
-<body>
+<body runat="server" id="body">
     <!-- Boton volver arriba -->
     <span class="up"><i class="fa  fa-angle-double-up"></i></span>
     <!-- End boton volver arriba -->
@@ -49,13 +49,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.aspx">Inicio</a>
+                            <a class="nav-link" href="index.aspx">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Blog.aspx">Blog</a>
+                            <a class="nav-link" href="Blog.aspx">Blogs</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#contact">Contacto</a>
+                            <a class="nav-link" href="#contact">Contact me</a>
                         </li>
                     </ul>
                 </div>
@@ -64,7 +64,7 @@
         <!-- End Navbar -->
 
         <!-- About Us -->
-        <section runat="server" class="about" id="about" style="background-size: cover;">
+        <section runat="server" class="about" id="about">
             <div class="container">
                 <div class="row">
                     <div class="col-12 pt-5 about__content">
@@ -72,7 +72,7 @@
                         <h2 runat="server" id="hTitle"></h2>
                         <p class="p-5" runat="server" id="pDesc">
                         </p>
-                        <a href="#contact" class="button-contact">Contacto</a>
+                        <a href="#contact" class="button-contact">Contact me</a>
                     </div>
                 </div>
             </div>
@@ -84,7 +84,7 @@
             <div class="container">
                 <div class="row ">
                     <div class="col-12">
-                        <h2 style="color: #ffffff;" class="pt-3">Entradas Recientes</h2>
+                        <h2 style="color: #ffffff;" class="pt-3">Recent Entries</h2>
                     </div>
                     <div class="blog-slider">
 
@@ -100,11 +100,11 @@
                                         <img src="<%# Eval("Imagen") %>" class="banner-img" alt="" />
                                     </div>
                                     <div class="card-body">
-                                        <p class="blog-category"><%# Eval("Titulo") %></p>
+                                        <p class="blog-category"><%# Eval("Categoria") %></p>
                                         <h2 class="blog-title"><%# Eval("Titulo") %></h2>
                                         <p class="blog-description">
                                             <asp:Label ID="lblDesc" runat="server" Text='<%# Eval("Descripcion") %>' ForeColor="#333333"></asp:Label></p>
-                                        <a href="<%# GetRouteUrl("Article", new { id = Eval("IdPublicacion"), slug = Eval("Slug")}) %>" target="_blank">Ver mas...</a>
+                                        <a href="<%# GetRouteUrl("Article", new { id = Eval("IdPublicacion"), slug = Eval("Slug")}) %>" target="_blank">See more</a>
                                         <div class="card-profile">
                                             <img class="profile-img" src="<%# Eval("FotoPerfil") %>" alt="" />
                                             <div class="card-profile-info">
@@ -117,7 +117,7 @@
                         </asp:Repeater>
                     </div>
                     <div class="col-md-12 mb-5 mt-5 text-center">
-                        <a href="Blog.aspx" class="button-contact">Ver todos..</a>
+                        <a href="Blog.aspx" class="button-contact">See more</a>
                     </div>
 
 
@@ -131,12 +131,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h2>Contacto</h2>
+                        <h2></h2>
                     </div>
                 </div>
                 <div class="row contact__row">
                     <div class="col-md-6 mt-2">
-                        <h4>Formulario</h4>
+                        <h4>Contact me</h4>
                         <div class="mb-3 row">
                             <label for="txtEmail" class="col-sm-2 col-form-label">Email:</label>
                             <div class="col-sm-10">
@@ -144,13 +144,13 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="txtAsunto" class="col-sm-2 col-form-label">Asunto:</label>
+                            <label for="txtAsunto" class="col-sm-2 col-form-label">Subject:</label>
                             <div class="col-sm-10">
                                 <asp:TextBox ID="txtAsunto" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="txtMensaje" class="col-sm-2 col-form-label">Mensaje:</label>
+                            <label for="txtMensaje" class="col-sm-2 col-form-label">Message:</label>
                             <div class="col-sm-10">
                                 <textarea runat="server" class="form-control textarea" id="txtMensaje"></textarea>
                             </div>
@@ -160,9 +160,9 @@
                         </div>
                     </div>
                     <div class="col-md-6 mt-2">
-                        <h4>Ubicacion</h4>
+                        <h4>Location</h4>
                         <div class="mapa">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d13599.587333210657!2d-63.5216022!3d-31.5544458!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2sar!4v1610310699942!5m2!1ses-419!2sar" frameborder="0" style="border: 0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d13599.587333210657!2d-64.1785605772305!3d-31.418716044586027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2sar!4v1610310699942!5m2!1ses-419!2sar" frameborder="0" style="border: 0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                         </div>
                     </div>
                 </div>

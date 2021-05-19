@@ -48,13 +48,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.aspx">Inicio</a>
+                            <a class="nav-link" href="index.aspx">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Blog.aspx">Blog</a>
+                            <a class="nav-link" href="Blog.aspx">Blogs</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.aspx#contact">Contacto</a>
+                            <a class="nav-link" href="index.aspx#contact">Contact Me</a>
                         </li>
                     </ul>
                 </div>
@@ -84,7 +84,7 @@
                                         <div class="col-md-3 mt-3">
                                             <div class="input-group mb-3">
                                                 <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control"></asp:TextBox>
-                                                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary" OnClick="btnBuscar_Click" />
+                                                <asp:Button ID="btnBuscar" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="btnBuscar_Click" />
                                             </div>
                                         </div>
                                         <!-- End Buscador -->
@@ -116,7 +116,7 @@
                                                     <p class="blog-description">
                                                         <asp:Label ID="lblDesc" runat="server" Text='<%# Eval("Descripcion") %>' ForeColor="#333333"></asp:Label>
                                                     </p>
-                                                    <a href="<%# GetRouteUrl("Article", new { id = Eval("IdPublicacion"), slug = Eval("Slug")}) %>" target="_blank">Ver mas...</a>
+                                                    <a href="<%# GetRouteUrl("Article", new { id = Eval("IdPublicacion"), slug = Eval("Slug")}) %>" target="_blank">See more</a>
                                                     <div class="card-profile">
                                                         <img class="profile-img" src="<%# Eval("FotoPerfil") %>" alt="" />
                                                         <div class="card-profile-info">

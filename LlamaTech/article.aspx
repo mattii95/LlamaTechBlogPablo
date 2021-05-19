@@ -72,25 +72,32 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-md-9">
                                         <h1 runat="server" id="hTitle"></h1>
                                     </div>
                                     <div runat="server" id="divDate" class="col-md-3 date">
-                                        
                                     </div>
                                 </div>
                             </div>
-                            <hr>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+
+                    <div class="post__header">
+                        <div class="row">
                             <div class="col-md-12">
                                 <h5 class="post_category" runat="server" id="hCategory"></h5>
                             </div>
                             <div class="col-md-12">
                                 <div class="widget widget_socials">
                                     <div class="socials">
-                                        <asp:HyperLink ID="hlFace" runat="server" Target="_blank" style="cursor:pointer;"><i class="fa fa-facebook"></i></asp:HyperLink>
-                                        <asp:HyperLink ID="hlTwitter" runat="server" Target="_blank" style="cursor:pointer;"><i class="fa fa-twitter"></i></asp:HyperLink>
-                                        <asp:HyperLink ID="hlLinkedin" runat="server" Target="_blank" style="cursor:pointer;"><i class="fa fa-linkedin"></i></asp:HyperLink>
-                                        <asp:HyperLink ID="hlWhatsapp" runat="server" Target="_blank" style="cursor:pointer;"><i class="fa fa-whatsapp"></i></asp:HyperLink>
+                                        <asp:HyperLink ID="hlFace" runat="server" Target="_blank" Style="cursor: pointer;"><i class="fa fa-facebook"></i></asp:HyperLink>
+                                        <asp:HyperLink ID="hlTwitter" runat="server" Target="_blank" Style="cursor: pointer;"><i class="fa fa-twitter"></i></asp:HyperLink>
+                                        <asp:HyperLink ID="hlLinkedin" runat="server" Target="_blank" Style="cursor: pointer;"><i class="fa fa-linkedin"></i></asp:HyperLink>
+                                        <asp:HyperLink ID="hlWhatsapp" runat="server" Target="_blank" Style="cursor: pointer;"><i class="fa fa-whatsapp"></i></asp:HyperLink>
                                     </div>
                                 </div>
                             </div>
@@ -109,9 +116,13 @@
                     </div>
                     <!-- End Post Content -->
                     <!-- Post footer -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <hr>
+                        </div>
+                    </div>
                     <div class="post__footer">
                         <div class="row">
-                            <hr>
                             <div class="col-md-6">
                             </div>
                             <div class="col-md-6 admin">
