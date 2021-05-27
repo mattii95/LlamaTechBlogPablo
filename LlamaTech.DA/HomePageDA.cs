@@ -388,7 +388,7 @@ namespace LlamaTech.DA
         }
         public DataSet getRSActivo()
         {
-            const string sqlQuery = "SELECT RS.IdRedSocial, RS.Nombre, RS.Url, I.Icono as 'Icono', Activo FROM RedesSociales RS " +
+            const string sqlQuery = "SELECT RS.IdRedSocial, RS.Nombre as 'Titulo', RS.Url, I.Icono as 'Icono', Activo FROM RedesSociales RS " +
                 "INNER JOIN Iconos I on RS.IdIcono = I.IdIcono WHERE Activo = 1 ORDER BY IdRedSocial ASC";
 
             DataSet ds = new DataSet();

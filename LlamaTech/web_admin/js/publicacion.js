@@ -93,10 +93,6 @@ $(function () {
 
         if (id == "" || id == 0 || $("#txtId").val() == "" || $("#txtId").val() == 0) {
 
-            if (validar() == false) {
-                alertError('Todos los campos son obligatorios.');
-                return false;
-            } else {
                 var _txtTitulo = $("#txtTitulo").val();
                 var _txtDescripcion = $("#txtDescripcion").val();
                 var _txtImagen = $("#txtImgPortada").val();
@@ -106,7 +102,7 @@ $(function () {
                 var _txtSlug = $("#txtSlug").val();
                 var _status = 2;
                 addDataAjax(_txtTitulo, _txtDescripcion, _txtImagen, _txtContenido, _status, _txtSlug, _subCategoria, _categoria);
-            }
+            
 
         } else {
             showModalEditar();
@@ -359,10 +355,6 @@ $(function () {
             success: function (data) {
                 dataJson = JSON.parse(data.d);
                 ddlCategoria.empty();
-                ddlCategoria.append('<option value="' + 0 + '">' + 'Seleccione la categoria' +
-                    '</option>');
-                ddlSubCategoria.append('<option value="' + 0 + '">' + 'Seleccione la subcategoria' +
-                    '</option>');
 
                 ddlSubCategoria.prop('disabled', true);
 
@@ -564,8 +556,6 @@ $(function () {
             success: function (data) {
                 dataJson = JSON.parse(data.d);
                 ddlCategoriaAddSC.empty();
-                ddlCategoriaAddSC.append('<option value="' + 0 + '">' + 'Seleccione la categoria' +
-                    '</option>');
 
                 $(dataJson).each(function (index, item) {
                     ddlCategoriaAddSC.append('<option value="' + item.IdCategoria + '">' + item.Nombre +

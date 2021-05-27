@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head runat="server">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -97,7 +97,8 @@
                                             <span><asp:Label ID="lblMes" runat="server" Text='<%# Eval("Month") %>'>
                                             </asp:Label></span>
                                         </p>
-                                        <img src="<%# Eval("Imagen") %>" class="banner-img" alt="" />
+                                        <a href="<%# GetRouteUrl("Article", new { id = Eval("IdPublicacion"), slug = Eval("Slug")}) %>" target="_blank">
+                                        <img src="<%# Eval("Imagen") %>" class="banner-img" alt="" /></a>
                                     </div>
                                     <div class="card-body">
                                         <p class="blog-category"><%# Eval("Categoria") %></p>
@@ -173,7 +174,7 @@
                             <div class="socials">
                                 <asp:Repeater ID="rpRs" runat="server">
                                     <ItemTemplate>
-                                        <a target="_blank" href='<%# Eval("Url") %>'><i class='<%# Eval("Icono") %>'></i></a>
+                                        <a target="_blank" title='<%# Eval("Titulo") %>' href='<%# Eval("Url") %>'><i class='<%# Eval("Icono") %>'></i></a>
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </div>

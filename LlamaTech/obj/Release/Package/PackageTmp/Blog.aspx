@@ -111,7 +111,7 @@
                                                     <img src="<%# Eval("Imagen") %>" class="banner-img" alt="" />
                                                 </div>
                                                 <div class="card-body">
-                                                    <p class="blog-category"><%# Eval("Titulo") %></p>
+                                                    <p class="blog-category"><%# Eval("Categoria") %></p>
                                                     <h2 class="blog-title"><%# Eval("Titulo") %></h2>
                                                     <p class="blog-description">
                                                         <asp:Label ID="lblDesc" runat="server" Text='<%# Eval("Descripcion") %>' ForeColor="#333333"></asp:Label>

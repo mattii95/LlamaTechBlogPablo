@@ -54,7 +54,7 @@ namespace LlamaTech.DA
                 WHERE IdEstado = 1 ORDER BY IdPublicacion DESC
             ";
 
-            
+
             SqlConnection conn = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand(sqlQuery, conn);
             SqlDataAdapter adp = new SqlDataAdapter(cmd);

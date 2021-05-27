@@ -117,7 +117,6 @@ namespace LlamaTech.web_admin
             }
 
 
-
             PublicacionBE publicacionBE = new PublicacionBE()
             {
                 IdPublicacion = Convert.ToInt32(id),
@@ -153,7 +152,7 @@ namespace LlamaTech.web_admin
             PublicacionBL publicacionBL = new PublicacionBL();
 
             string idUser = HttpContext.Current.Session["IdUsuario"].ToString();
-            
+
 
             DateTime hoy = DateTime.Now;
             DateTime? fechaPublicacion = null;
@@ -162,6 +161,7 @@ namespace LlamaTech.web_admin
                 fechaPublicacion = DateTime.Parse(hoy.ToString("yyyy/MM/dd HH:mm"));
             else
                 fechaPublicacion = null;
+
 
             PublicacionBE publicacionBE = new PublicacionBE()
             {

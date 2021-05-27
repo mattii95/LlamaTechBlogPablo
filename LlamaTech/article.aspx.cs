@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace LlamaTech
@@ -40,6 +41,9 @@ namespace LlamaTech
         {
             DataSet ods = new DataSet();
             PublicacionBL publicacionBL = new PublicacionBL();
+            HtmlMeta tagTitle = new HtmlMeta();
+            HtmlMeta tagUrl = new HtmlMeta();
+            HtmlMeta tagImg = new HtmlMeta();
 
             ods = publicacionBL.getPostId(id);
 
@@ -62,6 +66,18 @@ namespace LlamaTech
 
                 string dirUrl = BaseSiteUrl;
                 string dirFullPath = dirUrl + "article/" + id + "/" + slug;
+
+                tagTitle.Attributes.Add("property", "og:title");
+                tagTitle.Content = ods.Tables[0].Rows[0]["Titulo"].ToString();
+                Page.Header.Controls.Add(tagTitle);
+
+                tagUrl.Attributes.Add("property", "og:url");
+                tagUrl.Content = dirFullPath;
+                Page.Header.Controls.Add(tagUrl);
+
+                tagImg.Attributes.Add("property", "og:image");
+                tagImg.Content = ods.Tables[0].Rows[0]["Imagen"].ToString();
+                Page.Header.Controls.Add(tagImg);
 
                 hlFace.NavigateUrl = $"https://www.facebook.com/sharer/sharer.php?u={dirFullPath}";
                 hlTwitter.NavigateUrl = $"https://twitter.com/intent/tweet?text={tituloTwitter}&url={dirFullPath}";

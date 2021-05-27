@@ -2,8 +2,18 @@
     --color-primary: #05b310;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    border: none;
+    outline: none;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
+    font-size: 16px;
 }
 
 .about {
@@ -12,7 +22,7 @@ body {
 
 .blog,
 .contact{
-    padding: 50px 0;
+    padding: 3.125em 0;
 }
 
 .about,
@@ -186,7 +196,6 @@ body {
     background: #ffffff;
     border-radius: 0.5rem;
     position: relative;
-    width: 350px;
     margin: 1rem;
     padding: 0;
 }
@@ -444,7 +453,6 @@ iframe {
 /* Página Post */
 .post__header {
     padding: 0 50px;
-    display: flex;
 }
 
     .post__header .date {
@@ -452,12 +460,11 @@ iframe {
         text-align: right;
         align-self: flex-end;
         color: #999999;
-        padding: .5rem 0;
     }
 
 .post_category {
     color: var(--color-primary);
-    font-size: 14px;
+    font-size: 0.87em;
 }
 
 .post__content {
@@ -560,6 +567,27 @@ iframe {
 
     iframe {
         height: auto;
+    }
+
+    .posts__container {
+        width: 100%;
+        margin: 0;
+        padding-bottom: 2em;
+    }
+
+    .post__header{
+        padding: 0;
+    }
+    .post__content {
+        padding: 0;
+    }
+    .post__footer {
+        padding: 0;
+        margin: 0;
+    }
+    .post__header .date {
+        text-align: left;
+        align-self: flex-end;
     }
 
 }

@@ -9,6 +9,6 @@ namespace LlamaTech.BE
     public class PublicacionCategoriaBE : CategoriaBE
     {
         public int IdPublicacion { get; set; }
-        public new int IdCategoria { get; set; }
+        public new int? IdCategoria { get; set; }
     }
 }
