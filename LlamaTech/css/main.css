@@ -1,5 +1,5 @@
 :root {
-    --color-primary: #05b310;
+    --color-primary: #19c7ff;
 }
 
 * {
@@ -14,9 +14,10 @@
 body {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
+    background-color: #343a40;
 }
 
-.about {
+section {
     height: 100vh;
 }
 
@@ -26,7 +27,7 @@ body {
 }
 
 .glow-text:hover {
-    color: rgba(25, 199, 255, 1);
+    color: #19c7ff;
     text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #19c7ff, 0 0 8px #19c7ff, 0 0 10px #19c7ff, 0 0 12px #19c7ff, 0 0 14px #19c7ff;
 }
 
@@ -49,7 +50,7 @@ body {
     padding: 18px;
     background: var(--color-primary);
     font-size: 26px;
-    color: #ffffff;
+    color: white;
     cursor: pointer;
     position: fixed;
     bottom: 55px;
@@ -63,22 +64,23 @@ body {
 
 /* Boton contacto */
 .button-contact {
-    color: #ffffff;
-    background: #05b310;
-    border: #05b310 solid 1px;
+    color: whitesmoke;
+    background: #19c7ff;
+    border: #19c7ff solid 1px;
     padding: 8px 20px;
     font-size: 18px;
+    font-weight: bold;
     text-transform: uppercase;
-    font-weight: 300;
     line-height: 30px;
     text-decoration-line: none;
     transition: .3s ease-out;
 }
 
     .button-contact:hover {
-        background: none;
-        color: #05b310;
-        border: #05b310 solid 1px;
+        background: #19c7ff55;
+        color: #fff;
+        text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #19c7ff, 0 0 8px #19c7ff, 0 0 10px #19c7ff, 0 0 12px #19c7ff, 0 0 14px #19c7ff;
+        border: #19c7ff solid 1px;
     }
 
 /* blog */

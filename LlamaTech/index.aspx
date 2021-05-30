@@ -140,23 +140,23 @@
                 </div>
                 <div class="row contact__row">
                     <div class="col-md-6 mt-2">
-                        <h4>Contact me</h4>
+                        <h4 style="color: whitesmoke">Contact me</h4>
                         <div class="mb-3 row">
-                            <label for="txtEmail" class="col-sm-2 col-form-label">Email:</label>
+                            <label style="color: whitesmoke" for="txtEmail" class="col-sm-2 col-form-label">Email:</label>
                             <div class="col-sm-10">
-                                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control bg-dark text-info"></asp:TextBox>
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="txtAsunto" class="col-sm-2 col-form-label">Subject:</label>
+                            <label style="color: whitesmoke" for="txtAsunto" class="col-sm-2 col-form-label">Subject:</label>
                             <div class="col-sm-10">
-                                <asp:TextBox ID="txtAsunto" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox ID="txtAsunto" runat="server" CssClass="form-control bg-dark text-info"></asp:TextBox>
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="txtMensaje" class="col-sm-2 col-form-label">Message:</label>
+                            <label style="color: whitesmoke" for="txtMensaje" class="col-sm-2 col-form-label">Message:</label>
                             <div class="col-sm-10">
-                                <textarea runat="server" class="form-control textarea" id="txtMensaje"></textarea>
+                                <textarea runat="server" class="form-control textarea bg-dark text-info" id="txtMensaje"></textarea>
                             </div>
                         </div>
                         <div class="col-12">
@@ -164,7 +164,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 mt-2">
-                        <h4>Location</h4>
+                        <h4 style="color: whitesmoke">Location</h4>
                         <div class="mapa">
                             <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d13599.587333210657!2d-64.1785605772305!3d-31.418716044586027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2sar!4v1610310699942!5m2!1ses-419!2sar" frameborder="0" style="border: 0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                         </div>
@@ -188,7 +188,7 @@
                     <div class="col-md-6">
                         <asp:Repeater ID="rpContacto" runat="server">
                             <ItemTemplate>
-                                <p><i class='<%# Eval("Icono") %>'>   </i><%# Eval("Nombre") %></p>
+                                <p style="color: whitesmoke" ><i class='<%# Eval("Icono") %>'>   </i><%# Eval("Nombre") %></p>
                             </ItemTemplate>
                         </asp:Repeater>
                     </div>
