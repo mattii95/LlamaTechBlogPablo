@@ -3,3 +3,8 @@ LlamaTech/bin/
 LlamaTech.BE/bin/
 LlamaTech.BL/bin/
 LlamaTech.DA/bin/
+
+#files extensions
+*.dll
+*.pdb
+*.cache
