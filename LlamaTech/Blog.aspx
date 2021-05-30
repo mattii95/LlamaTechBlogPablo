@@ -35,7 +35,7 @@
     <!-- End boton volver arriba -->
     <form id="form1" runat="server">
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="index.aspx">
                     <img src="images/LlamaTech_Alpha.png" alt="" class="img-fluid"
@@ -63,7 +63,6 @@
         <!-- End Navbar -->
 
         <!-- Posts -->
-
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
@@ -169,7 +168,6 @@
                         </div>
                     </div>
                 </section>
-
             </ContentTemplate>
         </asp:UpdatePanel>
         <!-- EndP Posts -->
