@@ -27,6 +27,9 @@
     <!-- Custom css -->
     <link rel="stylesheet" href="css/main.css">
 
+    <!-- Tab Icon -->
+    <link rel="icon" href="images/llama_logo.png">
+
     <title>Llamatech</title>
 </head>
 <body runat="server" id="body">
@@ -39,7 +42,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    <img src="images/LlamaTech_Alpha.png" alt="" class="img-fluid"
+                    <img src="images/llama_isologo_alpha.png" alt="" class="img-fluid"
                         width="200px"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -48,13 +51,13 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
+                        <li class="nav-item glow-text">
                             <a class="nav-link" href="index.aspx">Home</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item glow-text">
                             <a class="nav-link" href="Blog.aspx">Blogs</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item glow-text">
                             <a class="nav-link" href="#contact">Contact me</a>
                         </li>
                     </ul>

@@ -25,6 +25,11 @@ body {
     padding: 3.125em 0;
 }
 
+.glow-text:hover {
+    color: rgba(25, 199, 255, 1);
+    text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #19c7ff, 0 0 8px #19c7ff, 0 0 10px #19c7ff, 0 0 12px #19c7ff, 0 0 14px #19c7ff;
+}
+
 .about,
 .blog,
 .contact {
