@@ -8,3 +8,5 @@ LlamaTech.DA/bin/
 *.dll
 *.pdb
 *.cache
+*.dll
+*.dll
