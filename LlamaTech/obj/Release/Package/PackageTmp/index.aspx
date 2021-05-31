@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head runat="server">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -93,17 +93,20 @@
                                 <div class="card-blog">
                                     <div class="card-banner">
                                         <p class="card-time">
-                                            <%# Eval("Day") %> 
-                                            <span><asp:Label ID="lblMes" runat="server" Text='<%# Eval("Month") %>'>
-                                            </asp:Label></span>
+                                            <%# Eval("Day") %>
+                                            <span>
+                                                <asp:Label ID="lblMes" runat="server" Text='<%# Eval("Month") %>'>
+                                                </asp:Label></span>
                                         </p>
-                                        <img src="<%# Eval("Imagen") %>" class="banner-img" alt="" />
+                                        <a href="<%# GetRouteUrl("Article", new { id = Eval("IdPublicacion"), slug = Eval("Slug")}) %>" target="_blank">
+                                            <img src="<%# Eval("Imagen") %>" class="banner-img" alt="" /></a>
                                     </div>
                                     <div class="card-body">
                                         <p class="blog-category"><%# Eval("Categoria") %></p>
                                         <h2 class="blog-title"><%# Eval("Titulo") %></h2>
                                         <p class="blog-description">
-                                            <asp:Label ID="lblDesc" runat="server" Text='<%# Eval("Descripcion") %>' ForeColor="#333333"></asp:Label></p>
+                                            <asp:Label ID="lblDesc" runat="server" Text='<%# Eval("Descripcion") %>' ForeColor="#333333"></asp:Label>
+                                        </p>
                                         <a href="<%# GetRouteUrl("Article", new { id = Eval("IdPublicacion"), slug = Eval("Slug")}) %>" target="_blank">See more</a>
                                         <div class="card-profile">
                                             <img class="profile-img" src="<%# Eval("FotoPerfil") %>" alt="" />
@@ -173,7 +176,10 @@
                             <div class="socials">
                                 <asp:Repeater ID="rpRs" runat="server">
                                     <ItemTemplate>
-                                        <a target="_blank" href='<%# Eval("Url") %>'><i class='<%# Eval("Icono") %>'></i></a>
+                                        <div class="tooltip">
+                                            <a target="_blank" href='<%# Eval("Url") %>'><i class='<%# Eval("Icono") %>'></i></a>
+                                            <span class="tooltiptext"><%# Eval("Titulo") %></span>
+                                        </div>
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </div>
@@ -184,7 +190,7 @@
                     <div class="col-md-6">
                         <asp:Repeater ID="rpContacto" runat="server">
                             <ItemTemplate>
-                                <p><i class='<%# Eval("Icono") %>'>   </i><%# Eval("Nombre") %></p>
+                                <p><i class='<%# Eval("Icono") %>'></i><%# Eval("Nombre") %></p>
                             </ItemTemplate>
                         </asp:Repeater>
                     </div>

@@ -108,7 +108,8 @@
                                                             <asp:Label ID="lblMes" runat="server" Text='<%# Eval("Month") %>'>
                                                             </asp:Label></span>
                                                     </p>
-                                                    <img src="<%# Eval("Imagen") %>" class="banner-img" alt="" />
+                                                    <a href="<%# GetRouteUrl("Article", new { id = Eval("IdPublicacion"), slug = Eval("Slug")}) %>" target="_blank">
+                                                        <img src="<%# Eval("Imagen") %>" class="banner-img" alt="" /></a>
                                                 </div>
                                                 <div class="card-body">
                                                     <p class="blog-category"><%# Eval("Categoria") %></p>
