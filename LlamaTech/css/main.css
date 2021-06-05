@@ -18,7 +18,7 @@ body {
     background-color: #343a40;
 }
 
-section {
+.about{
     height: 100vh;
 }
 
@@ -421,6 +421,7 @@ iframe {
     .posts__container .posts__filter {
         display: flex;
         justify-content: flex-end;
+        margin: 70px 0;
         padding: 0 25px;
     }
 
@@ -637,4 +638,18 @@ iframe {
         align-self: flex-end;
     }
 
+}
+
+@media screen and (min-width: 1920px) {
+    /*/For Projectors or Higher Resolution Screens (Full HD)*/
+    .container {
+        width: 1890px;
+    }
+}
+
+@media screen and (min-width: 3840px) {
+    /*For 4K Displays (Ultra HD)*/
+    .container {
+        width: 3810px;
+    }
 }
