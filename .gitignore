@@ -1,0 +1,4 @@
+#files extensions
+*.dll
+*.pdb
+*.cache

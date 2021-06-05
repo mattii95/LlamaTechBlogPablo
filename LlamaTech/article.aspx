@@ -6,6 +6,9 @@
 <head runat="server">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="Technology blog, breaking news and tutorials." />
+    <meta name="keywords" content="Technology blog, technology, programmers, developers, software" />
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -26,8 +29,12 @@
 
     <!-- Custom css -->
     <link rel="stylesheet" href="css/main.css">
+    
+    <!-- Tab Icon -->
+    <link rel="icon" href="images/llama_logo.png">
 
-    <title>Llamatech</title>
+    <title></title>
+
 </head>
 <body>
     <form id="form1" runat="server">
@@ -39,7 +46,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="https://llamatech.com.ar/index.aspx">
-                    <img src="https://llamatech.com.ar/images/LlamaTech_Alpha.png" alt="" class="img-fluid"
+                    <img src="https://llamatech.com.ar/images/llama_isologo_alpha.png" alt="" class="img-fluid"
                         width="200px"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -48,13 +55,13 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
+                        <li class="nav-item glow-text">
                             <a class="nav-link" href="https://llamatech.com.ar/index.aspx">Home</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item glow-text">
                             <a class="nav-link" href="https://llamatech.com.ar/Blog.aspx">Blogs</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item glow-text">
                             <a class="nav-link" href="https://llamatech.com.ar/index.aspx#contact">Contact Me</a>
                         </li>
                     </ul>
@@ -198,7 +205,7 @@
                     </div>
                     <div class="col-md-4">
                         <a href="#">
-                            <img src="https://llamatech.com.ar/images/LlamaTech_Alpha.png" class="img-fluid" width="150px" alt=""></a>
+                            <img src="https://llamatech.com.ar/images/llama_isologo_alpha.png" class="img-fluid" width="150px" alt=""></a>
                     </div>
                     <div class="col-md-4">
                         <a href="https://courrouxdigital.com/" target="_blank">

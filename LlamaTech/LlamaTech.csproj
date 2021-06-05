@@ -121,6 +121,7 @@
     <Content Include="js\alerts.js" />
     <Content Include="js\app.js" />
     <Content Include="images\pexels-pixabay-373543.jpg" />
+    <Content Include="robots.txt" />
     <Content Include="web_admin\js\homePage.js" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />

@@ -67,6 +67,8 @@ namespace LlamaTech
                 string dirUrl = BaseSiteUrl;
                 string dirFullPath = dirUrl + "article/" + id + "/" + slug;
 
+                Page.Title = string.Format(titulo);
+
                 tagTitle.Attributes.Add("property", "og:title");
                 tagTitle.Content = ods.Tables[0].Rows[0]["Titulo"].ToString();
                 Page.Header.Controls.Add(tagTitle);
