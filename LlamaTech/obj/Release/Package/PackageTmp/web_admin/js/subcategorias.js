@@ -8,14 +8,15 @@ $(document).ready(function () {
 });
 
 $(function () {
-
-    // MOSTRAR / OCULTAR BOTON BORRAR
-    if ($("#txtIdSC").val() == "")
-        $("#btnEliminarSC").hide();
-    else {
-        $("#btnEliminarSC").show();
-        id = $("#txtId").val();
-    }
+    $("#txtIdSC").change(function () {
+        // MOSTRAR / OCULTAR BOTON BORRAR
+        if (id == "" || id == 0 || $("#txtIdSC").val() == "" || $("#txtIdSC").val() == 0)
+            $("#btnEliminarSC").hide();
+        else {
+            $("#btnEliminarSC").show();
+            id = $("#txtIdSC").val();
+        }
+    });
 
     $("#txtIdSC").val("");
     $("#txtIdSC").change();

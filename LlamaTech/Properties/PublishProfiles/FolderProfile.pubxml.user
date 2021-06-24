@@ -5,38 +5,38 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\mcour\Desktop\ltweb</_PublishTargetUrl>
-    <History>True|2021-06-05T01:42:56.0021347Z;True|2021-06-04T22:37:52.2930738-03:00;True|2021-06-04T22:07:31.9238103-03:00;False|2021-06-04T22:05:58.5730897-03:00;True|2021-05-27T13:25:27.9968418-03:00;True|2021-05-17T13:43:52.2845204-03:00;True|2021-05-17T13:36:59.3638126-03:00;True|2021-05-14T13:20:05.4354972-03:00;True|2021-05-13T11:14:58.6452084-03:00;True|2021-05-10T21:25:33.1900925-03:00;True|2021-05-10T19:39:45.6452965-03:00;True|2021-05-08T19:42:33.5798234-03:00;True|2021-05-08T19:41:35.5911778-03:00;True|2021-05-08T19:37:46.5142550-03:00;True|2021-05-08T19:09:21.1556722-03:00;True|2021-05-08T19:06:33.7290864-03:00;True|2021-05-08T16:11:23.0542232-03:00;False|2021-05-08T16:10:50.7920543-03:00;False|2021-05-08T16:08:03.9487561-03:00;False|2021-05-08T16:07:42.4478924-03:00;False|2021-05-08T16:07:05.0587036-03:00;False|2021-05-08T16:06:35.7677773-03:00;False|2021-05-08T16:04:31.1362927-03:00;False|2021-05-08T16:03:44.5970442-03:00;False|2021-05-08T15:55:21.4371414-03:00;False|2021-05-08T15:54:24.6414099-03:00;False|2021-05-08T15:51:15.0146308-03:00;</History>
+    <History>True|2021-06-23T23:52:04.0615464Z;True|2021-06-23T20:50:50.5776988-03:00;True|2021-06-04T22:42:56.0021347-03:00;True|2021-06-04T22:37:52.2930738-03:00;True|2021-06-04T22:07:31.9238103-03:00;False|2021-06-04T22:05:58.5730897-03:00;True|2021-05-27T13:25:27.9968418-03:00;True|2021-05-17T13:43:52.2845204-03:00;True|2021-05-17T13:36:59.3638126-03:00;True|2021-05-14T13:20:05.4354972-03:00;True|2021-05-13T11:14:58.6452084-03:00;True|2021-05-10T21:25:33.1900925-03:00;True|2021-05-10T19:39:45.6452965-03:00;True|2021-05-08T19:42:33.5798234-03:00;True|2021-05-08T19:41:35.5911778-03:00;True|2021-05-08T19:37:46.5142550-03:00;True|2021-05-08T19:09:21.1556722-03:00;True|2021-05-08T19:06:33.7290864-03:00;True|2021-05-08T16:11:23.0542232-03:00;False|2021-05-08T16:10:50.7920543-03:00;False|2021-05-08T16:08:03.9487561-03:00;False|2021-05-08T16:07:42.4478924-03:00;False|2021-05-08T16:07:05.0587036-03:00;False|2021-05-08T16:06:35.7677773-03:00;False|2021-05-08T16:04:31.1362927-03:00;False|2021-05-08T16:03:44.5970442-03:00;False|2021-05-08T15:55:21.4371414-03:00;False|2021-05-08T15:54:24.6414099-03:00;False|2021-05-08T15:51:15.0146308-03:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="article.aspx">
-      <publishTime>06/04/2021 21:03:30</publishTime>
+      <publishTime>06/23/2021 20:49:53</publishTime>
     </File>
     <File Include="bin/AjaxControlToolkit.dll">
       <publishTime>04/06/2021 15:41:59</publishTime>
     </File>
     <File Include="bin/LlamaTech.BE.dll">
-      <publishTime>05/27/2021 13:25:25</publishTime>
+      <publishTime>06/23/2021 20:50:48</publishTime>
     </File>
     <File Include="bin/LlamaTech.BE.pdb">
-      <publishTime>05/27/2021 13:25:25</publishTime>
+      <publishTime>06/23/2021 20:50:48</publishTime>
     </File>
     <File Include="bin/LlamaTech.BL.dll">
-      <publishTime>06/04/2021 22:05:57</publishTime>
+      <publishTime>06/23/2021 20:50:49</publishTime>
     </File>
     <File Include="bin/LlamaTech.BL.pdb">
-      <publishTime>06/04/2021 22:05:57</publishTime>
+      <publishTime>06/23/2021 20:50:49</publishTime>
     </File>
     <File Include="bin/LlamaTech.DA.dll">
-      <publishTime>06/04/2021 22:05:57</publishTime>
+      <publishTime>06/23/2021 20:50:49</publishTime>
     </File>
     <File Include="bin/LlamaTech.DA.pdb">
-      <publishTime>06/04/2021 22:05:57</publishTime>
+      <publishTime>06/23/2021 20:50:49</publishTime>
     </File>
     <File Include="bin/LlamaTech.dll">
-      <publishTime>06/04/2021 22:42:55</publishTime>
+      <publishTime>06/23/2021 20:52:03</publishTime>
     </File>
     <File Include="bin/LlamaTech.pdb">
-      <publishTime>06/04/2021 22:42:55</publishTime>
+      <publishTime>06/23/2021 20:52:03</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.FriendlyUrls.dll">
       <publishTime>04/06/2021 15:41:59</publishTime>
@@ -216,55 +216,55 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/06/2021 15:41:59</publishTime>
     </File>
     <File Include="Blog.aspx">
-      <publishTime>06/04/2021 21:03:35</publishTime>
+      <publishTime>04/06/2021 21:03:35</publishTime>
     </File>
     <File Include="css/main.css">
-      <publishTime>06/04/2021 22:42:28</publishTime>
+      <publishTime>04/06/2021 22:45:23</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>04/06/2021 15:41:59</publishTime>
     </File>
     <File Include="images/Background.png">
-      <publishTime>06/04/2021 22:07:18</publishTime>
+      <publishTime>04/06/2021 22:07:18</publishTime>
     </File>
     <File Include="images/bg-llamatech.jpg">
       <publishTime>05/17/2021 12:27:52</publishTime>
     </File>
     <File Include="images/espana.png">
-      <publishTime>06/04/2021 22:07:18</publishTime>
+      <publishTime>04/06/2021 22:07:18</publishTime>
     </File>
     <File Include="images/LlamaTech.png">
       <publishTime>04/06/2021 15:41:59</publishTime>
     </File>
     <File Include="images/LlamaTech_Alpha.png">
-      <publishTime>06/04/2021 22:07:18</publishTime>
+      <publishTime>04/06/2021 22:07:18</publishTime>
     </File>
     <File Include="images/logoCD-white.png">
       <publishTime>04/06/2021 15:41:59</publishTime>
     </File>
     <File Include="images/pexels-andrew-neel-3178744.jpg">
-      <publishTime>06/04/2021 22:07:18</publishTime>
+      <publishTime>04/06/2021 22:07:18</publishTime>
     </File>
     <File Include="images/pexels-djordje-petrovic-2102416.jpg">
-      <publishTime>06/04/2021 22:07:18</publishTime>
+      <publishTime>04/06/2021 22:07:18</publishTime>
     </File>
     <File Include="images/pexels-negative-space-34600.jpg">
-      <publishTime>06/04/2021 22:07:18</publishTime>
+      <publishTime>04/06/2021 22:07:18</publishTime>
     </File>
     <File Include="images/pexels-picjumbocom-196644.jpg">
-      <publishTime>06/04/2021 22:07:18</publishTime>
+      <publishTime>04/06/2021 22:07:18</publishTime>
     </File>
     <File Include="images/pexels-picjumbocom-196645.jpg">
-      <publishTime>06/04/2021 22:07:18</publishTime>
+      <publishTime>04/06/2021 22:07:18</publishTime>
     </File>
     <File Include="images/pexels-pixabay-373543.jpg">
-      <publishTime>06/04/2021 22:07:18</publishTime>
+      <publishTime>04/06/2021 22:07:18</publishTime>
     </File>
     <File Include="images/retrato-joven-sonriente-gafas_171337-4842.jpg">
-      <publishTime>06/04/2021 22:07:18</publishTime>
+      <publishTime>04/06/2021 22:07:18</publishTime>
     </File>
     <File Include="index.aspx">
-      <publishTime>06/04/2021 20:58:26</publishTime>
+      <publishTime>04/06/2021 20:58:26</publishTime>
     </File>
     <File Include="js/alerts.js">
       <publishTime>04/06/2021 15:41:59</publishTime>
@@ -273,7 +273,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/31/2021 12:55:10</publishTime>
     </File>
     <File Include="robots.txt">
-      <publishTime>06/04/2021 20:58:24</publishTime>
+      <publishTime>04/06/2021 20:58:24</publishTime>
     </File>
     <File Include="Site.Mobile.Master">
       <publishTime>04/06/2021 15:41:59</publishTime>
@@ -291,7 +291,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/06/2021 15:41:59</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/04/2021 22:05:58</publishTime>
+      <publishTime>06/23/2021 20:52:03</publishTime>
     </File>
     <File Include="web_admin/css/bootstrap-social.css">
       <publishTime>04/06/2021 15:42:01</publishTime>
@@ -360,7 +360,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/06/2021 15:42:01</publishTime>
     </File>
     <File Include="web_admin/frmCategorias.aspx">
-      <publishTime>01/05/2021 20:55:45</publishTime>
+      <publishTime>06/23/2021 20:00:11</publishTime>
     </File>
     <File Include="web_admin/frmHomePage.aspx">
       <publishTime>01/05/2021 20:56:37</publishTime>
@@ -378,7 +378,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/06/2021 15:42:01</publishTime>
     </File>
     <File Include="web_admin/js/categorias.js">
-      <publishTime>04/27/2021 23:21:27</publishTime>
+      <publishTime>06/23/2021 20:12:38</publishTime>
     </File>
     <File Include="web_admin/js/dataTables/dataTables.bootstrap.min.js">
       <publishTime>04/06/2021 15:42:01</publishTime>
@@ -465,7 +465,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/06/2021 15:42:01</publishTime>
     </File>
     <File Include="web_admin/js/publicacion.js">
-      <publishTime>05/27/2021 01:02:09</publishTime>
+      <publishTime>06/23/2021 20:10:40</publishTime>
     </File>
     <File Include="web_admin/js/raphael.min.js">
       <publishTime>04/06/2021 15:42:01</publishTime>
@@ -474,7 +474,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/06/2021 15:42:01</publishTime>
     </File>
     <File Include="web_admin/js/subcategorias.js">
-      <publishTime>04/27/2021 23:24:50</publishTime>
+      <publishTime>06/23/2021 20:12:36</publishTime>
     </File>
     <File Include="web_admin/js/usuarios.js">
       <publishTime>05/13/2021 11:13:08</publishTime>

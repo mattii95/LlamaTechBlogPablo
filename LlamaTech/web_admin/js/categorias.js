@@ -10,14 +10,15 @@ $(document).ready(function () {
 $(function () {
 
     
-
-    // MOSTRAR / OCULTAR BOTON BORRAR
-    if ($("#txtId").val() == "")
-        $("#btnEliminar").hide();
-    else {
-        $("#btnEliminar").show();
-        id = $("#txtId").val();
-    }
+    $("#txtId").change(function () {
+        // MOSTRAR / OCULTAR BOTON BORRAR
+        if ($("#txtId").val() == "")
+            $("#btnEliminar").hide();
+        else {
+            $("#btnEliminar").show();
+            id = $("#txtId").val();
+        }
+    });
 
     $("#txtId").val("");
     $("#txtId").change();
@@ -30,10 +31,19 @@ $(function () {
         e.preventDefault();
         var id = $(this).closest('tr').find('td:eq(1)').text();
         var nombre = $(this).closest('tr').find('td:eq(2)').text();
+        var activo = $(this).closest('tr').find('td:eq(3)').text();
 
         $('#txtId').val(id);
         $("#txtId").change();
         $('#txtCategoria').val(nombre);
+
+
+        if (activo == 'True') {
+            $('#chkStatus').prop('checked', true);
+        } else {
+            $('#chkStatus').prop('checked', false);
+        }
+
 
     });
 
@@ -97,8 +107,17 @@ $(function () {
     }
 
     function addDataAjax() {
+        var status;
+
+        if ($('#chkStatus').prop('checked')) {
+            status = true;
+        } else {
+            status = false;
+        }
+
         var obj = {
-            nombre: $("#txtCategoria").val()
+            nombre: $("#txtCategoria").val(),
+            activo: status
         };
 
         $.ajax({
@@ -125,9 +144,19 @@ $(function () {
     }
 
     function updateDataAjax() {
+
+        var status;
+
+        if ($('#chkStatus').prop('checked')) {
+            status = true;
+        } else {
+            status = false;
+        }
+
         var obj = {
             id: $("#txtId").val(),
-            nombre: $("#txtCategoria").val()
+            nombre: $("#txtCategoria").val(),
+            activo: status
         };
 
         $.ajax({

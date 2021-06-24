@@ -14,7 +14,7 @@ $(function () {
 
     $("#txtId").change(function () {
         // MOSTRAR / OCULTAR BOTON BORRAR
-        if ($("#txtId").val() == "") {
+        if (id == "" || id == 0 || $("#txtId").val() == "" || $("#txtId").val() == 0) {
             $("#btnEliminarPost").hide();
         }
         else {

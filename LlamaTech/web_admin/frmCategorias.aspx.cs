@@ -85,7 +85,7 @@ namespace LlamaTech.web_admin
         }
 
         [WebMethod]
-        public static bool AgregarCategoria(string nombre)
+        public static bool AgregarCategoria(string nombre, bool activo)
         {
             bool ok = false;
             CategoriaBL categoriaBL = new CategoriaBL();
@@ -104,7 +104,8 @@ namespace LlamaTech.web_admin
                 {
                     CategoriaBE objCategoria = new CategoriaBE()
                     {
-                        Nombre = nombre
+                        Nombre = nombre,
+                       Activo = activo
                     };
                     bool rep = categoriaBL.agregarCategoria(objCategoria);
                     ok = true;
@@ -120,7 +121,7 @@ namespace LlamaTech.web_admin
         }
 
         [WebMethod]
-        public static bool ModificarCategoria(string id, string nombre)
+        public static bool ModificarCategoria(string id, string nombre, bool activo)
         {
             bool ok = false;
             CategoriaBL categoriaBL = new CategoriaBL();
@@ -132,7 +133,8 @@ namespace LlamaTech.web_admin
                 CategoriaBE objCategoria = new CategoriaBE()
                 {
                     IdCategoria = Convert.ToInt32(id),
-                    Nombre = nombre
+                    Nombre = nombre,
+                    Activo = activo
                 };
 
                 bool obj = categoriaBL.modificarCategoria(objCategoria);

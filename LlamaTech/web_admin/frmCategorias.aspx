@@ -120,6 +120,13 @@
                                 <asp:TextBox ID="txtCategoria" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Status:</label>
+                                <br />
+                                <asp:CheckBox ID="chkStatus" runat="server" Text="  Activa o desactiva la categoria" CssClass="form-control"/>
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-success" Text="Guardar" />
@@ -146,6 +153,7 @@
                                                     <th></th>
                                                     <th>ID</th>
                                                     <th>Categoria</th>
+                                                    <th>Activo</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -155,6 +163,7 @@
                                                             <td><a href="#" class="select">Seleccionar</a></td>
                                                             <td><%# Eval("ID") %></td>
                                                             <td><%# Eval("Categoria") %></td>
+                                                            <td><%# Eval("Activo") %></td>
                                                         </tr>
                                                     </ItemTemplate>
                                                 </asp:Repeater>

@@ -24,7 +24,8 @@ namespace LlamaTech
             ImagenBL imagenBL = new ImagenBL();
             DataSet ds = new DataSet();
 
-            string path = "../images/server/";
+            string url = "https://llamatech.com.ar/";
+            string path = "images/server/";
             string archive = null;
             string alt = context.Request.QueryString["desc"];
             
@@ -38,7 +39,7 @@ namespace LlamaTech
                 {
                     HttpPostedFile file = files[i];
 
-                    ds = imagenBL.getImagesPath("../images/server/" + file.FileName);
+                    ds = imagenBL.getImagesPath(url + "images/server/" + file.FileName);
 
                     if (ds.Tables[0].Rows.Count > 0)
                     {
@@ -67,7 +68,7 @@ namespace LlamaTech
                     
                 }
 
-                string fullPath = path + archive;
+                string fullPath = url + path + archive;
 
                 ImagenBE objImg = new ImagenBE()
                 {

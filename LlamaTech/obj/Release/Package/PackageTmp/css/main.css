@@ -639,3 +639,17 @@ iframe {
     }
 
 }
+
+@media screen and (min-width: 1920px) {
+    /*/For Projectors or Higher Resolution Screens (Full HD)*/
+    .container {
+        width: 1890px;
+    }
+}
+
+@media screen and (min-width: 3840px) {
+    /*For 4K Displays (Ultra HD)*/
+    .container {
+        width: 3810px;
+    }
+}
